@@ -1,0 +1,33 @@
+
+Case de uso, formato breve.
+01 O utilizador indica ao sistema que pretende fazer uma reserva.
+02 O sistema pergunta a data.
+03 O utilizador indica a data.
+04 O sistema pergunta o tipo de refeicao.
+05 O utilizador indica o tipo de refeicao.
+06 O sistema mostra os pratos disponiveis para aquela date e tipo de refeicao.
+07 O ulizador indica um prato.
+08 O sistema mosta os alergenicos e informa se alergico.
+09 O sistema mostra a informacao nutricional e consumo calorico semanal.
+10 O sistema pede para confirmar.
+11 O utilizador confirma.
+
+Nota: No final.
+O sistema actualiza o saldo do utilizador.
+O sistema actualiza o numero de refeicoes disponiveis.
+
+
+
+Controller 1  Selecao
+
+pede data e tipo de refeicao, mostra pratos e pede para escolher o prato. Devolve um prato.
+
+Controller 2 Visualização. Hugo+Pedro
+
+Recebe o prato, mostra a informacao do prato. Alergenicos e info nutricional.
+
+Controller 3 reserva.
+
+Recebe prato, pede confirmacao, reserva prato e actualiza saldo.
+
+
