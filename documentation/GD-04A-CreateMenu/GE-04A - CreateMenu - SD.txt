@@ -1,0 +1,45 @@
+title GE-04A - Create Menu 
+
+
+
+User <--> MainMenuUI: ...
+
+User -> MainMenuUI: choose Create Menu option
+
+
+
+MainMenuUI --> *CreateMenuUI: create()
+
+CreateMenuUI --> *CreateMenuController: create()
+
+CreateMenuController -> PersistenceContext: menus()
+
+PersistenceContext --> *MenuRepository: create()
+
+PersistenceContext --> CreateMenuController: Menu Repository
+
+
+
+CreateMenuUI --> User: ask Menu Name
+
+User -> CreateMenuUI: insert Menu Name
+
+CreateMenuUI --> User: ask Beginning Date 
+
+User -> CreateMenuUI: insert Beginning Date 
+
+CreateMenuUI --> User: ask End Date 
+
+User -> CreateMenuUI: insert End Date 
+
+
+
+CreateMenuUI -> CreateMenuController: newMenu(name, beginningDate, endDate)
+
+CreateMenuController -> *Menu: create(name, beginningDate, endDate)
+
+CreateMenuController -> MenuRepository: save(newmenu)
+
+
+
+CreateMenuUI --> User: Success
