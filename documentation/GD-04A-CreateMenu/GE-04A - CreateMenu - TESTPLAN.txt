@@ -1,0 +1,13 @@
+	
+
+	TEST PLAN
+
+	_______________________________
+	CASO #: Create Menu
+	_______________________________
+
+	1. Fazer o login como chef/Password1
+	2. Escolher a opção Menu
+	3. Escolher a opção Create Menu
+	4. Inserir os dados requeridos pelo sistema
+	5. Confirmar criação de Menu com os dados inseridos
