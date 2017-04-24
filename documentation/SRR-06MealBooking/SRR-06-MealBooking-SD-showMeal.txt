@@ -1,0 +1,26 @@
+
+title ShowMealInfoBooking SRR-06 use case
+
+CafeteriaUser->BookingUi: chose meal
+
+BookingUi->*ShowMealInfoBookingController: create()
+BookingUi->ShowMealInfoBookingController: obtainNutricionalInfo(meal)
+ShowMealInfoBookingController->Meal: getDish()
+ShowMealInfoBookingController->Dish: nutricionalInfo()
+ShowMealInfoBookingController-->>BookingUi: NutricionalInfo [final]
+BookingUi->BookingUi: print(nutricionalInfo)
+
+BookingUi->ShowMealInfoBookingController: obtainListAllergen(meal)
+ShowMealInfoBookingController->Meal: getDish()
+ShowMealInfoBookingController->Dish: dishAllergens() ????
+ShowMealInfoBookingController-->>BookingUi: List <DishAllergens>
+BookingUi->BookingUi: print(listDishAllergens)
+
+BookingUi->ShowMealInfoBookingController: isAllergic(meal)
+ShowMealInfoBookingController->AllergyDetectionService: isAllergic(meal)
+AllergyDetectionService-->>ShowMealInfoBookingController: boolean answer
+BookingUi->BookingUi: showAlert(answer)
+BookingUi-->>CafeteriaUser: prompt confirmation
+
+CafeteriaUser->BookingUi: confirmation
+BookingUi->ShowMealInfoBookingController: bookingMeal(meal)
