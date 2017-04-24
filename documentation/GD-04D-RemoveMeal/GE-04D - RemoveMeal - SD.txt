@@ -1,0 +1,75 @@
+title GE-04D - Remove Meal
+
+
+
+User <--> MainMenuUI: ...
+
+User -> MainMenuUI: choose Remove Meal option
+
+MainMenuUI --> *RemoveMealUI: create()
+
+
+
+RemoveMealUI --> *RemoveMealController: create()
+
+
+
+RemoveMealController --> *ListMenuService: create()
+
+ListMenuService -> PersistenceContext: menus()
+
+PersistenceContext --> *MenuRepository: create()
+
+PersistenceContext  --> ListMenuService: Menu Repository
+
+
+
+RemoveMealController -> PersistenceContext: meals()
+
+PersistenceContext --> *MealRepository: create()
+
+PersistenceContext --> RemoveMealController: Meal Repository
+
+
+
+RemoveMealUI -> RemoveMealController: listEditableMenus()
+
+RemoveMealController -> ListMenuService: editableMenus()
+
+ListMenuService -> MenuRepository: editableMenus()
+
+MenuRepository --> ListMenuService: Editable Menus
+
+ListMenuService --> RemoveMealController: Editable Menus
+
+RemoveMealController --> RemoveMealUI: Editable Menus
+
+
+
+RemoveMealUI --> User: Show Editable Menu List
+
+User -> RemoveMealUI: Select Menu  
+
+
+
+RemoveMealUI -> RemoveMealController: mealsByMenu(menu)
+RemoveMealController -> MealRepository: mealsByMenu(menu)
+
+
+MealRepository --> RemoveMealController: Menu Meal List
+RemoveMealController --> RemoveMealUI: Menu Meal List
+
+
+
+RemoveMealUI --> User: Show Menu Meal List
+
+User -> RemoveMealUI: Select Meal 
+
+
+
+RemoveMealUI -> RemoveMealController: removeMeal(meal)
+
+RemoveMealController -> MealRepository: delete(meal)
+
+
+RemoveMealUI --> User: Success
