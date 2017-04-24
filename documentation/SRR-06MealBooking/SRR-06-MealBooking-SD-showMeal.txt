@@ -14,6 +14,7 @@ BookingUi->ShowMealInfoBookingController: obtainListAllergen(meal)
 ShowMealInfoBookingController->Meal: getDish()
 ShowMealInfoBookingController->Dish: dishAllergens() ????
 ShowMealInfoBookingController-->>BookingUi: List <DishAllergens>
+BookingUi->BookingUi: print(listDishAllergens)
 
 BookingUi->ShowMealInfoBookingController: isAllergic(meal)
 ShowMealInfoBookingController->AllergyDetectionService: isAllergic(meal)
