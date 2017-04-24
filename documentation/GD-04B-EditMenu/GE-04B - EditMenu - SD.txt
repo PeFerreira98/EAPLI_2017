@@ -1,0 +1,61 @@
+title GE-04B - Edit Menu
+
+
+
+User <--> MainMenuUI: ...
+
+User -> MainMenuUI: choose Edit Menu option
+
+
+
+MainMenuUI --> *EditMenuUI: create()
+
+EditMenuUI --> *EditMenuController: create()
+
+EditMenuController -> PersistenceContext: menus()
+
+PersistenceContext --> *MenuRepository: create()
+
+PersistenceContext --> EditMenuController: Menu Repository
+
+
+EditMenuController -> MenuRepository: editableMenus()
+
+
+MenuRepository --> EditMenuController: Editable Menus
+
+EditMenuController --> EditMenuUI: Editable Menus
+
+
+
+EditMenuUI --> User: ask to select Menu
+
+User -> EditMenuUI: select Menu
+
+
+
+EditMenuUI --> User: ask new Menu Name
+
+User -> EditMenuUI: insert new Menu Name
+
+EditMenuUI --> User: ask new Beginning Date 
+
+User -> EditMenuUI: insert new Beginning Date 
+
+EditMenuUI --> User: ask new End Date 
+
+User -> EditMenuUI: insert new End Date
+
+
+
+EditMenuUI -> EditMenuController: updateMenu(Menu, newName, newBeginningDate, newEndDate)
+
+EditMenuController -> Menu: updateMenu(newName, newBeginningDate, newEndDate)
+
+#add verification here
+
+EditMenuController -> MenuRepository: save(newMenu)
+
+
+
+EditMenuUI --> User: Success
