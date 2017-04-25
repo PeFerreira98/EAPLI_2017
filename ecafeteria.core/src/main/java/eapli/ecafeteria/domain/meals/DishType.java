@@ -59,7 +59,7 @@ public class DishType implements AggregateRoot<String>, Serializable {
 	 */
 	private void setDescription(String newDescription) {
 		if (descriptionMeetsMinimumRequirements(newDescription)) {
-			this.description = description;
+			this.description = newDescription;
 		} else {
 			throw new IllegalArgumentException("Invalid Description");
 		}
