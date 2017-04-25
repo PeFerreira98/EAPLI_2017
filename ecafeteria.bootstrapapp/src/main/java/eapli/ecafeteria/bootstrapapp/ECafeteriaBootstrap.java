@@ -28,7 +28,9 @@ public class ECafeteriaBootstrap implements Action {
             new OrganicUnitBootstraper(),
             new CafeteriaUserBootstraper(),
             new DishBootstraper(),
-            new MaterialsBootstraper(),};
+            new MaterialsBootstraper(),
+            new MenuBootstraper()
+        };
 
         // authenticate a super user to be able to register new users, ...
         // in this case we will inject the session but we shouldn't do this

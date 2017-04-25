@@ -3,6 +3,7 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.OrganicUnitRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
@@ -47,5 +48,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public MaterialRepository materials() {
         return new JpaMaterialRepository();
+    }
+
+    @Override
+    public MenuRepository menus() {
+        return new JpaMenuRepository();
     }
 }
