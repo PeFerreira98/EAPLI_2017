@@ -23,6 +23,17 @@ public class AppSettings {
     public AppSettings() {
         loadProperties();
     }
+    
+     // use lazy holder idiom
+    // https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom
+    private static class LazyHolder {
+
+        public static final AppSettings INSTANCE = new AppSettings();
+    }
+
+    public static AppSettings instance() {
+        return LazyHolder.INSTANCE;
+    }
 
     private void loadProperties() {
         InputStream propertiesStream = null;
