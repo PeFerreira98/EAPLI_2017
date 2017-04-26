@@ -5,11 +5,8 @@
  */
 package eapli.ecafeteria.application.booking;
 
-import eapli.ecafeteria.AppSettings;
-import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.ecafeteria.domain.meals.*;
-import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
@@ -40,8 +37,8 @@ public class BookingController implements Controller {
 
     public Iterable<Meal> listAllMealsFromMenu(Menu menu) {
        //final Iterable<Meal> allMeals = menu.menuMeals();
-       //return allMeals;
-       return null;
+        //return allMeals;
+        return null;
     }
 
     public Booking bookingMeal(Meal meal) throws DataIntegrityViolationException {
