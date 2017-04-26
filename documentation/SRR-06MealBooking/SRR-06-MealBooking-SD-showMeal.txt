@@ -3,7 +3,7 @@ title ShowMealInfoBooking SRR-06 use case
 
 CafeteriaUser->BookingUi: chose meal
 
-BookingUi->*ShowMealInfoBookingController: create()
+BookingUi-->*ShowMealInfoBookingController: create()
 BookingUi->ShowMealInfoBookingController: obtainNutricionalInfo(meal)
 ShowMealInfoBookingController->Meal: getDish()
 ShowMealInfoBookingController->Dish: nutricionalInfo()
@@ -18,9 +18,29 @@ BookingUi->BookingUi: print(listDishAllergens)
 
 BookingUi->ShowMealInfoBookingController: isAllergic(meal)
 ShowMealInfoBookingController->AllergyDetectionService: isAllergic(meal)
+note right of AllergyDetectionService: TO DO
 AllergyDetectionService-->>ShowMealInfoBookingController: boolean answer
 BookingUi->BookingUi: showAlert(answer)
 BookingUi-->>CafeteriaUser: prompt confirmation
+
+BookingUi->ShowMealInfoBookingController: returnWeekInfo(meal)
+ShowMealInfoBookingController->WeeklyNutritionalInfoMealBookingDetectionService: returnWeekInfo(meal)
+WeeklyNutritionalInfoMealBookingDetectionService-->>ShowMealInfoBookingController: NutricionalInfo [final]
+note right of WeeklyNutritionalInfoMealBookingDetectionService
+Obter todos os booking do 
+CafeteriaUser que ocorrem 
+na semana da meal que 
+estamos a fazer booking
+
+Obter lista de nutricionalInfo de
+cada um deles e da meal que queremos
+reservar.
+
+Adicionar os valores, criar um novo
+nutricionalInfo com a soma destes
+valores que devolvemos.
+end note
+ShowMealInfoBookingController-->>BookingUi: NutricionalInfo [final]
 
 CafeteriaUser->BookingUi: confirmation
 BookingUi->ShowMealInfoBookingController: bookingMeal(meal)
