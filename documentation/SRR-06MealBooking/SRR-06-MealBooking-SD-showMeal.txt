@@ -8,20 +8,20 @@ BookingUi->ShowMealInfoBookingController: obtainNutricionalInfo(meal)
 ShowMealInfoBookingController->Meal: getDish()
 ShowMealInfoBookingController->Dish: nutricionalInfo()
 ShowMealInfoBookingController-->>BookingUi: NutricionalInfo [final]
-BookingUi->BookingUi: print(nutricionalInfo)
+BookingUi-->>CafeteriaUser: show nutricionalInfo
 
 BookingUi->ShowMealInfoBookingController: obtainListAllergen(meal)
 ShowMealInfoBookingController->Meal: getDish()
 ShowMealInfoBookingController->Dish: dishAllergens() ????
 ShowMealInfoBookingController-->>BookingUi: List <DishAllergens>
-BookingUi->BookingUi: print(listDishAllergens)
+BookingUi-->>CafeteriaUser: show all DishAllergens
 
 BookingUi->ShowMealInfoBookingController: isAllergic(meal)
 ShowMealInfoBookingController->AllergyDetectionService: isAllergic(meal)
-note right of AllergyDetectionService: TO DO
+note right of AllergyDetectionService: TO DO: waiting allergen implementation
 AllergyDetectionService-->>ShowMealInfoBookingController: boolean answer
-BookingUi->BookingUi: showAlert(answer)
-BookingUi-->>CafeteriaUser: prompt confirmation
+ShowMealInfoBookingController-->>BookingUi: boolean answer
+BookingUi-->>CafeteriaUser: show Allergen warning
 
 BookingUi->ShowMealInfoBookingController: returnWeekInfo(meal)
 ShowMealInfoBookingController->WeeklyNutritionalInfoMealBookingDetectionService: returnWeekInfo(meal)
@@ -32,15 +32,17 @@ CafeteriaUser que ocorrem
 na semana da meal que 
 estamos a fazer booking
 
-Obter lista de nutricionalInfo de
-cada um deles e da meal que queremos
-reservar.
+Obter lista de nutricionalInfo
+de cada um deles e da meal que
+queremos reservar.
 
-Adicionar os valores, criar um novo
-nutricionalInfo com a soma destes
-valores que devolvemos.
+Adicionar os valores, criar um 
+novo nutricionalInfo com a soma
+destes valores que devolvemos.
 end note
 ShowMealInfoBookingController-->>BookingUi: NutricionalInfo [final]
+BookingUi-->>CafeteriaUser: show weakNitricionalInfo [final]
 
+BookingUi-->>CafeteriaUser: prompt confirmation
 CafeteriaUser->BookingUi: confirmation
 BookingUi->ShowMealInfoBookingController: bookingMeal(meal)
