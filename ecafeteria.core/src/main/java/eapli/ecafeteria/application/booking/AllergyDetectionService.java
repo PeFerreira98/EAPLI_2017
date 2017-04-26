@@ -7,6 +7,7 @@ package eapli.ecafeteria.application.booking;
 
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -19,14 +20,14 @@ import java.util.List;
  */
 public class AllergyDetectionService {
     
-//    public boolean isAllergic(Meal meal){
-//        CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers();
-//        CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
+    public boolean isAllergic(Meal meal){
+        CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers();
+        CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
 //        
 //        //List<DishAllergen> dishAllergenList = dish.dishAllergens();
-//        System.out.println("FALTA IMPLEMENTAR ALLERGYDETECTIONSERVICE");
-//        return false;
-//    }
+        System.out.println("FALTA IMPLEMENTAR ALLERGYDETECTIONSERVICE");
+        return false;
+    }
     
     
 }

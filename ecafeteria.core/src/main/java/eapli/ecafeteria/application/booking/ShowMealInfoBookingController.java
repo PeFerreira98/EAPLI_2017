@@ -6,6 +6,7 @@
 package eapli.ecafeteria.application.booking;
 
 import eapli.ecafeteria.domain.meals.Dish;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
 import java.util.List;
 
@@ -16,21 +17,21 @@ import java.util.List;
 public class ShowMealInfoBookingController {
     
     
-//    public obtainNutricionalInfo(Meal meal){
-//        Dish dish = meal.getDish();
-//        NutricionalInfo nutricionalInfo = dish.nutricionalInfo();
-//    }
-//    
+    public void obtainNutricionalInfo(Meal meal){
+        Dish dish = meal.dish();
+        NutricionalInfo nutricionalInfo = dish.nutricionalInfo();
+    }
+    
 //    public List<DishAllergen> obtainListAllergen(Meal meal){
-//        Dish dish = meal.getDish();
+//        Dish dish = meal.dish();
 //        List<DishAllergen> dishAllergenList = dish.dishAllergens();
 //        
 //        return dishAllergenList;
 //    }
-//    
-//    public boolean isAllergic(Meal meal){
-//        AllergyDetectionService svc = new AllergyDetectionService();
-//        
-//        return svc.isAllergic(meal);
-//    }
+    
+    public boolean isAllergic(Meal meal){
+        AllergyDetectionService svc = new AllergyDetectionService();
+        System.out.println("Not implemented yet");
+        return false;
+    }
 }
