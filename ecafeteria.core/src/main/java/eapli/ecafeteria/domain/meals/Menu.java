@@ -9,6 +9,7 @@ import eapli.framework.domain.AggregateRoot;
 import eapli.framework.domain.range.TimePeriod;
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ import javax.persistence.Version;
  * @author zero_
  */
 @Entity
-public class Menu implements AggregateRoot<Long>, Serializable {
+public class Menu implements AggregateRoot<String>, Serializable {
 
     @Id
     @GeneratedValue
@@ -27,9 +28,11 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     @Version
     private Long version;
 
+    // business ID
+    @Column(unique = true)
     private String name;
     private TimePeriod timePeriod;
-    private boolean isPublished = false;
+    private boolean isPublished;
 
     protected Menu() {
         // ORM
@@ -46,22 +49,7 @@ public class Menu implements AggregateRoot<Long>, Serializable {
 
         this.name = name;
         this.timePeriod = timePeriod;
-    }
-
-    @Override
-    public Long id() {
-        return id;
-    }
-
-    @Override
-    public boolean sameAs(Object other) {
-        final Menu menu = (Menu) other;
-        return this.equals(menu) && name().equals(menu.name()) && isPublished() == menu.isPublished();
-    }
-
-    @Override
-    public boolean is(Long id) {
-        return id.equals(this.id);
+        this.isPublished = false;
     }
 
     public String name() {
@@ -81,6 +69,22 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     }
 
     @Override
+    public String id() {
+        return this.name;
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        final Menu menu = (Menu) other;
+        return this.equals(menu) && name().equals(menu.name()) && isPublished() == menu.isPublished();
+    }
+
+    @Override
+    public boolean is(String id) {
+        return id.equalsIgnoreCase(this.name);
+    }
+
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
@@ -88,21 +92,16 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Menu)) {
+    public boolean equals(Object o) {
+
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Menu)) {
             return false;
         }
-        Menu other = (Menu) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
 
-    @Override
-    public String toString() {
-        return "eapli.ecafeteria.domain.meals.Menu[ id=" + id + " ]";
+        final Menu other = (Menu) o;
+        return id().equals(other.id());
     }
-
 }
