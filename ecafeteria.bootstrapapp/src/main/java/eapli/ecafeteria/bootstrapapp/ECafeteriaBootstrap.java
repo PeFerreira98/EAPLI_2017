@@ -28,9 +28,7 @@ public class ECafeteriaBootstrap implements Action {
             new OrganicUnitBootstraper(),
             new CafeteriaUserBootstraper(),
             new DishBootstraper(),
-            new MaterialsBootstraper(),
-            new MenuBootstraper(),
-            new MealTypeBootstraper()
+            new MaterialsBootstraper()
         };
 
         // authenticate a super user to be able to register new users, ...
