@@ -9,10 +9,7 @@ import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
-import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
-import eapli.framework.domain.Repository;
-import java.util.List;
 
 /**
  *
@@ -21,7 +18,7 @@ import java.util.List;
 public class AllergyDetectionService {
     
     public boolean isAllergic(Meal meal){
-        CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers();
+        CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(true);
         CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
 //        
 //        //List<DishAllergen> dishAllergenList = dish.dishAllergens();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.bootstrapapp;
+package eapli.ecafeteria.bootstrapers;
 
 import eapli.ecafeteria.application.meals.RegisterMenuController;
 import eapli.framework.actions.Action;
@@ -36,7 +36,7 @@ public class MenuBootstraper implements Action {
         try {
             controller.createMenu(name, beginning, ending);
         } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
-            Logger.getLogger(ECafeteriaBootstrap.class.getSimpleName())
+            Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
                     .info("EAPLI-DI001: bootstrapping existing record");
         }
     }
