@@ -1,9 +1,11 @@
 
-title ShowMealInfoBooking SRR-06 use case
+title SRR-06-MealBooking-SD-showMeal-v5
+
 
 CafeteriaUser->BookingUi: chose meal
+note over BookingUi: <<interface: observer>> 
 
-BookingUi-->*ShowMealInfoBookingController: create()
+BookingUi-->*ShowMealInfoBookingController: create(Observer ui)
 BookingUi->ShowMealInfoBookingController: obtainNutricionalInfo(meal)
 ShowMealInfoBookingController->Meal: getDish()
 ShowMealInfoBookingController->Dish: nutricionalInfo()
@@ -16,17 +18,25 @@ ShowMealInfoBookingController->Dish: dishAllergens() ????
 ShowMealInfoBookingController-->>BookingUi: List <DishAllergens>
 BookingUi-->>CafeteriaUser: show all DishAllergens
 
+
+
 BookingUi->ShowMealInfoBookingController: isAllergic(meal)
-ShowMealInfoBookingController->AllergyDetectionService: isAllergic(meal)
+note over AllergyDetectionService: <<interface: Obserbable>>
+ShowMealInfoBookingController->>ShowMealInfoBookingController: obtainCurrentCafeteriaUser()
+ShowMealInfoBookingController->AllergyDetectionService: addObserver(ui)
+ShowMealInfoBookingController->AllergyDetectionService: isCafeteriaUserAllergicToMeal(cafeteriaUser , meal)
+AllergyDetectionService->>AllergyDetectionService: setChanged()
+AllergyDetectionService->>AllergyDetectionService: notifyObservers() 
 note right of AllergyDetectionService: TO DO: waiting allergen implementation
 AllergyDetectionService-->>ShowMealInfoBookingController: boolean answer
 ShowMealInfoBookingController-->>BookingUi: boolean answer
 BookingUi-->>CafeteriaUser: show Allergen warning
 
 BookingUi->ShowMealInfoBookingController: returnWeekInfo(meal)
-ShowMealInfoBookingController->WeeklyNutritionalInfoMealBookingDetectionService: returnWeekInfo(meal)
-WeeklyNutritionalInfoMealBookingDetectionService-->>ShowMealInfoBookingController: NutricionalInfo [final]
-note right of WeeklyNutritionalInfoMealBookingDetectionService
+ShowMealInfoBookingController->MealNutritionalConsumptionService: planedWeekConsumption(cafeteriaUser, meal)
+MealNutritionalConsumptionService->>MealNutritionalConsumptionService: planedDayConsumption(cateferiaUser, day)
+MealNutritionalConsumptionService-->>ShowMealInfoBookingController: NutricionalInfo [final]
+note right of MealNutritionalConsumptionService
 Obter todos os booking do 
 CafeteriaUser que ocorrem 
 na semana da meal que 
