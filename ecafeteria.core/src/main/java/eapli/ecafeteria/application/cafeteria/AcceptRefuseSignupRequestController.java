@@ -23,12 +23,25 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 /**
  *
  * Created by AJS on 08/04/2016.
+ *
+ * @FIXME this controller has lots of logic that should be moved to a domain
+ * service
+ *
+ * @TODO there is some code duplication to create and add the system user
+ *
+ * @TODO following the guideline that a controller should only change one
+ * Aggregate, we shouldn't be changing all these entities here, but should
+ * instead use asynchronous events. However in this case we will take advantage
+ * of TransactionalContext
  */
 public class AcceptRefuseSignupRequestController implements Controller {
 
-    private final UserRepository userRepository = PersistenceContext.repositories().users();
-    private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers();
-    private final SignupRequestRepository signupRequestsRepository = PersistenceContext.repositories().signupRequests();
+    private final UserRepository userRepository
+            = PersistenceContext.repositories().users(false);
+    private final CafeteriaUserRepository cafeteriaUserRepository
+            = PersistenceContext.repositories().cafeteriaUsers(false);
+    private final SignupRequestRepository signupRequestsRepository
+            = PersistenceContext.repositories().signupRequests(false);
 
     public SignupRequest acceptSignupRequest(SignupRequest theSignupRequest)
             throws DataIntegrityViolationException, DataConcurrencyException {
@@ -38,15 +51,39 @@ public class AcceptRefuseSignupRequestController implements Controller {
             throw new IllegalStateException();
         }
 
-        // FIXME this controller has lots of logic that should be moved to a
-        // domain service
+        // explicitly begin a transaction
+        userRepository.beginTransaction();
+
+        SystemUser newUser = createSystemUserForCafeteriaUser(theSignupRequest);
+        createCafeteriaUser(theSignupRequest, newUser);
+        theSignupRequest = acceptTheSignupRequest(theSignupRequest);
+
+        // explicitly commit the transaction
+        userRepository.commit();
+
+        return theSignupRequest;
+    }
+
+    private SignupRequest acceptTheSignupRequest(SignupRequest theSignupRequest) throws DataConcurrencyException, DataIntegrityViolationException {
         //
-        // TODO there is some code duplication to create and add the system
-        // user
+        // modify Signup Request to accepted
         //
-        // TODO following the guideline that a controller should only change one
-        // Aggregate, we shouldn't be changing all these entities here, but
-        // should instead use asynchronous events.
+        theSignupRequest.accept();
+        theSignupRequest = this.signupRequestsRepository.save(theSignupRequest);
+        return theSignupRequest;
+    }
+
+    private void createCafeteriaUser(SignupRequest theSignupRequest, SystemUser newUser) throws DataConcurrencyException, DataIntegrityViolationException {
+        //
+        // add cafeteria user
+        //
+        final CafeteriaUserBuilder cafeteriaUserBuilder = new CafeteriaUserBuilder();
+        cafeteriaUserBuilder.withMecanographicNumber(theSignupRequest.mecanographicNumber())
+                .withOrganicUnit(theSignupRequest.organicUnit()).withSystemUser(newUser);
+        this.cafeteriaUserRepository.save(cafeteriaUserBuilder.build());
+    }
+
+    private SystemUser createSystemUserForCafeteriaUser(SignupRequest theSignupRequest) throws DataConcurrencyException, DataIntegrityViolationException {
         //
         // add system user
         //
@@ -56,20 +93,7 @@ public class AcceptRefuseSignupRequestController implements Controller {
         // TODO error checking if the username is already in the persistence
         // store
         final SystemUser newUser = this.userRepository.save(userBuilder.build());
-
-        //
-        // add cafeteria user
-        //
-        final CafeteriaUserBuilder cafeteriaUserBuilder = new CafeteriaUserBuilder();
-        cafeteriaUserBuilder.withMecanographicNumber(theSignupRequest.mecanographicNumber())
-                .withOrganicUnit(theSignupRequest.organicUnit()).withSystemUser(newUser);
-        this.cafeteriaUserRepository.save(cafeteriaUserBuilder.build());
-
-        //
-        // modify Signup Request to accepted
-        //
-        theSignupRequest.accept();
-        return this.signupRequestsRepository.save(theSignupRequest);
+        return newUser;
     }
 
     public SignupRequest refuseSignupRequest(SignupRequest theSignupRequest)
@@ -80,8 +104,16 @@ public class AcceptRefuseSignupRequestController implements Controller {
             throw new IllegalStateException();
         }
 
+        // explicitly begin a transaction
+        userRepository.beginTransaction();
+
         theSignupRequest.refuse();
-        return this.signupRequestsRepository.save(theSignupRequest);
+        theSignupRequest = this.signupRequestsRepository.save(theSignupRequest);
+
+        // explicitly commit the transaction
+        userRepository.commit();
+
+        return theSignupRequest;
     }
 
     /**
