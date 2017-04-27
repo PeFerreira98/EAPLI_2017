@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.domain.mealbooking;
 
-import eapli.ecafeteria.domain.authz.SystemUser;
+import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 
 /**
@@ -13,22 +13,43 @@ import eapli.ecafeteria.domain.meals.Meal;
  * @author Alexandra Ferreira 1140388 - Nuno Costa 1131106
  */
 public class BookingBuilder {
-    
+
     private Meal meal;
-    private SystemUser systemUser;
-    
-    public BookingBuilder withMeal(Meal meal){
+
+    /**
+     * Cafeteria user.
+     */
+    private CafeteriaUser cafeteriaUser;
+
+    /**
+     * Adds the cafeteria user to the builder object.
+     *
+     * @param cafeteriaUser cafeteria user
+     * @return the current object
+     */
+    public BookingBuilder withCafeteriaUser(CafeteriaUser cafeteriaUser) {
+        this.cafeteriaUser = cafeteriaUser;
+        return this;
+    }
+
+    /**
+     * Adds the meal to the builder object.
+     *
+     * @param meal meal
+     * @return the current object
+     */
+    public BookingBuilder withMeal(Meal meal) {
         this.meal = meal;
         return this;
     }
-    
-    public BookingBuilder withCafeteriaUser(SystemUser systemUser){
-        this.systemUser = systemUser;
-        return this;
-    }
-    
+
+    /**
+     * Creates the reservation object.
+     *
+     * @return the reservation created
+     */
     public Booking build() {
-        return new Booking(this.meal, null);
+        return new Booking(this.meal, this.cafeteriaUser);
     }
-    
+
 }

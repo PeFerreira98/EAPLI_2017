@@ -12,6 +12,11 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.application.booking.ShowMealInfoBookingController;
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
 import eapli.framework.application.Controller;
+import eapli.framework.persistence.DataIntegrityViolationException;
+import eapli.framework.presentation.console.SelectWidget;
+import eapli.util.DateTime;
+import eapli.util.io.Console;
+import java.util.Calendar;
 
 /**
  * SRR-06 Classe do UI de escolha e booking de uma unica refeicao SRR-06
@@ -29,17 +34,25 @@ public class BookingUI extends AbstractUI {
     @Override
     protected boolean doShow() {
 
-        //        final Iterable<Meal> listMeals = this.controller.listAllMeals();
-//        System.out.println("Meal List:\n");
-//        final SelectWidget<Meal> selector = new SelectWidget<>(listMeals, new MealPrinter());
-//        selector.show();
-//        final Meal meal = selector.selectedElement();
-//
-//        try {
-//            this.controller.bookingMeal(meal);
-//        } catch (DataIntegrityViolationException e) {
-//            System.out.println("This Meal is already booked for this User");
-//        }
+        final String dateOnString = Console.readLine("Insert Date (EX.: 02-10-2000): "); //"January 2, 2010";
+        
+        Calendar date = DateTime.parseDate(dateOnString);
+        
+        final Iterable<Meal> listMeals = this.controller.listMeals(date);
+        
+
+//        final Iterable<Meal> listMeals = this.controller.listAllMeals();
+        System.out.println("Meal List:\n");
+
+        
+        final Meal meal = //selector.selectedElement();
+                null;
+
+        try {
+            this.controller.bookingMeal(meal);
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("This Meal is already booked for this User");
+        }
         
         
         
