@@ -1,0 +1,12 @@
+title SRR-04 Create/Edit Nutricional Profile
+
+CafeteriaUser->NutricionalProfileUI: create/edit profile
+
+NutricionalProfileUI->*NutricionalProfileController: create()
+NutricionalProfileUI-->CafeteriaUser: ask for desired salt and calories
+CafeteriaUser->NutricionalProfileUI: inserts info
+NutricionalProfileUI->NutricionalProfileController: addNutricionalProfile(saltMeal,caloriesMeal, saltWeek, caloriesWeek, allergen)
+NutricionalProfileController ->* NutricionalProfile: create(saltMeal,caloriesMeal, saltWeek, caloriesWeek, allergen)
+
+NutricionalProfileController-->>NutricionalProfileUI: NutricionalInfo [final]
+NutricionalProfileUI-->>CafeteriaUser: show nutricionalProfile
