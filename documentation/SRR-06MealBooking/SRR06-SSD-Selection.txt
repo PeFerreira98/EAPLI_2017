@@ -1,0 +1,39 @@
+title Meal Selection
+
+User->BookingUI:BookingRequest
+BookingUI-->*BookingController:create()
+BookingUI->User:Ask a day
+User->BookingUI:Insert date 
+BookingUI->User:Ask a type of meal
+User->BookingUI:Insert meal type
+
+BookingUI->BookingController:insertData(day, meal)
+BookingController->BookingController:validate(day, meal)
+
+
+
+BookingController->PersistenceContext:repositories()
+PersistenceContext->RepositoryFactory:create()
+BookingController-> RepositoryFactory:showMealListByDay(day,meal)
+BookingController-> BookingUI:list
+BookingUI->User:show the meals list
+User->BookingUI:choose meal
+BookingUI->BookingController:bookingMeal(meal)
+BookingController->BookingBuilder:create()
+BookingController->BookingBuilder:setMeal(meal)
+BookingController->BookingBuilder:createBooking()
+BookingBuilder->Booking:create(meal)
+Booking->BookingBuilder:booking
+BookingBuilder->BookingController:booking
+
+BookingController->RepositoryFactory:bookings()
+
+RepositoryFactory->BookingRepository:create()
+
+RepositoryFactory->BookingController:BookingRepository
+
+BookingController->BookingRepository:save(booking)
+
+PersistenceContext->BookingController:booking
+
+BookingUI->User:displayBookingInfo
