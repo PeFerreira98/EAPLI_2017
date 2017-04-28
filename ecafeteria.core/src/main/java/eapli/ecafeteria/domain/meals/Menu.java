@@ -63,6 +63,12 @@ public class Menu implements AggregateRoot<String>, Serializable {
     public void publishMenu() {
         this.isPublished = true;
     }
+    
+    public void update(String newName, Calendar newBeginningDate, Calendar newEndDate){
+        this.name = newName;
+        this.timePeriod.start().setTime(newBeginningDate.getTime());
+        this.timePeriod.end().setTime(newEndDate.getTime());
+    }
 
     public boolean isInBetween(Calendar date) {
         return this.timePeriod.includes(date);
