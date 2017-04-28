@@ -3,6 +3,7 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MealTypeRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.OrganicUnitRepository;
@@ -59,5 +60,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public MealTypeRepository mealTypes() {
         return new JpaMealTypeRepository();
+    }
+
+    @Override
+    public MealRepository meals() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -6,6 +6,7 @@ import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MealTypeRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.OrganicUnitRepository;
@@ -68,5 +69,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public MealTypeRepository mealTypes() {
         return new InMemoryMealTypeRepository();
+    }
+
+    @Override
+    public MealRepository meals() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
