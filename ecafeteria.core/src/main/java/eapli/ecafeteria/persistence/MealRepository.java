@@ -9,6 +9,7 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.Menu;
 import eapli.framework.persistence.repositories.DataRepository;
 import eapli.framework.persistence.repositories.TransactionalContext;
+import java.util.Calendar;
 
 /**
  *
@@ -17,5 +18,7 @@ import eapli.framework.persistence.repositories.TransactionalContext;
 public interface MealRepository extends DataRepository<Meal, Long>, TransactionalContext{
  
     Iterable<Meal> mealsByMenu(Menu menu);
+    
+    Iterable<Meal> mealsOfCertainDate(Calendar date);
     
 }

@@ -6,15 +6,13 @@
 package eapli.ecafeteria.user.consoleapp.presentation.meals;
 
 import eapli.ecafeteria.application.booking.BookingController;
-import eapli.ecafeteria.application.booking.ShowMealInfoBookingController;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.application.booking.ShowMealInfoBookingController;
-import eapli.ecafeteria.domain.meals.NutricionalInfo;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.framework.application.Controller;
+import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.SelectWidget;
-import eapli.util.DateTime;
 import eapli.util.io.Console;
 import java.util.Calendar;
 
@@ -34,34 +32,46 @@ public class BookingUI extends AbstractUI {
     @Override
     protected boolean doShow() {
 
-        final String dateOnString = Console.readLine("Insert Date (EX.: 02-10-2000): "); //"January 2, 2010";
-        
-        Calendar date = DateTime.parseDate(dateOnString);
-        
-        final Iterable<Meal> listMeals = this.controller.listMeals(date);
-        
+        /* Meal section */
+        Calendar date = Console.readCalendar("Insert meal date: (dd-MM-yyyy)");
 
-//        final Iterable<Meal> listMeals = this.controller.listAllMeals();
-        System.out.println("Meal List:\n");
+        /* Meal type section */
+        final Iterable<MealType> mealType = this.controller.listMealType(date);
 
-        
-        final Meal meal = //selector.selectedElement();
-                null;
+        final SelectWidget<MealType> mealTypeSelector = new SelectWidget<>(mealType, new MealTypePrinter());
+        mealTypeSelector.show();
+
+        final MealType mealTypeChosen = mealTypeSelector.selectedElement();
+
+        if (mealTypeChosen == null) {
+            return false;
+        }
+
+        final Iterable<Meal> meals = this.controller.listMeals(date, mealTypeChosen);
+
+        if (meals == null) {
+            System.out.println("There are no meals available!");
+            return false;
+        }
+
+        final SelectWidget<Meal> mealSelector = new SelectWidget<>(meals, new MealPrinter());
+        mealSelector.show();
+
+        final Meal mealChosen = mealSelector.selectedElement();
+
+        if (mealChosen != null) {
+            
+        }
 
         try {
-            this.controller.bookingMeal(meal);
+            this.controller.bookingMeal(null,null);
         } catch (DataIntegrityViolationException e) {
             System.out.println("This Meal is already booked for this User");
+        } catch (DataConcurrencyException e) {
+            System.out.println("");
         }
-        
-        
-        
-        
+
         //------------------------------------------------------
-        
-        
-        
-        
         //INSERIR codigo do bookingUI aqui.
         //Codigo da parte de mostrar info da Meal indicada pelo user. Hugo & Pedro        
         Meal mealSelecionada = null;  //meal que o utilizador indicou no codigo acima.

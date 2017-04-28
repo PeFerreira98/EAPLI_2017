@@ -34,23 +34,27 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
     @ManyToOne
     private CafeteriaUser cafeteriaUser;
-    private String description;
 
     protected Booking() {
 
     }
 
-    public Booking(Meal meal, CafeteriaUser cafeteriaUser) {
+    public Booking(CafeteriaUser user, Meal meal) {
+
+        if (user == null || meal == null) {
+            throw new IllegalArgumentException();
+        }
+
+        this.cafeteriaUser = user;
         this.meal = meal;
-        this.cafeteriaUser = cafeteriaUser;
     }
 
-    public Calendar mealDate() {
-        return this.meal.date();
+    public CafeteriaUser user() {
+        return cafeteriaUser;
     }
 
     public Meal meal() {
-        return this.meal;
+        return meal;
     }
 
     @Override
@@ -90,10 +94,6 @@ public class Booking implements AggregateRoot<String>, Serializable {
         }
 
         return true;
-    }
-
-    public String description() {
-        return this.description;
     }
 
     @Override

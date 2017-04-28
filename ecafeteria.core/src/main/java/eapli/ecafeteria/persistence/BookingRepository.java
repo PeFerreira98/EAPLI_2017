@@ -5,7 +5,6 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.framework.domain.Repository;
 
@@ -15,6 +14,6 @@ import eapli.framework.domain.Repository;
  */
 public interface BookingRepository extends Repository<Booking, Long>{
     
-    public Iterable<Booking> listBookingsByUser(SystemUser systemUser);
+
     
 }

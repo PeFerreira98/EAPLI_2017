@@ -88,6 +88,10 @@ public class Meal implements Serializable {
     public Calendar date(){
         return this.date;
     }
+    
+    public MealType mealType(){
+        return this.mealType;
+    }
 
     @Override
     public boolean equals(Object o) {

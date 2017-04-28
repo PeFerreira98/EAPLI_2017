@@ -5,13 +5,17 @@
  */
 package eapli.ecafeteria.application.booking;
 
+import eapli.ecafeteria.application.meals.ListMenuService;
+import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.ecafeteria.domain.meals.*;
-import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
+import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -19,29 +23,29 @@ import java.util.Calendar;
  */
 public class BookingController implements Controller {
 
-    public Iterable<Meal> listMeals(Calendar date) {
-        //Find a way to search meals by date...
-        //return mealsByDate(date);
+    public Iterable<MealType> listMealType(Calendar date) {
+        Set<MealType> listMealTypes = new HashSet();
+        for (Meal meal : PersistenceContext.repositories().meals().
+                mealsOfCertainDate(date)) {
+            listMealTypes.add(meal.mealType());
+        }
+        return listMealTypes;
+    }
+
+    public Iterable<Meal> listMeals(Calendar date, MealType mealType) {
+        Iterable<Menu> menu = new ListMenuService().findMenuByDate(date);
+
+        if (!menu.iterator().hasNext()) {
+            return null;
+        }
+
+        /**
+         * TO DO
+         */
         return null;
     }
 
-    public Iterable<Meal> listAllMeals() {
-        //return allMeals();
-        return null;
-    }
-
-    public Iterable<Menu> listAllMenu() {
-        final MenuRepository menuRepository = PersistenceContext.repositories().menus();
-        return menuRepository.findAll();
-    }
-
-    public Iterable<Meal> listAllMealsFromMenu(Menu menu) {
-       //final Iterable<Meal> allMeals = menu.menuMeals();
-        //return allMeals;
-        return null;
-    }
-
-    public Booking bookingMeal(Meal meal) throws DataIntegrityViolationException {
+    public Booking bookingMeal(SystemUser user, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
         return null;
     }
 }

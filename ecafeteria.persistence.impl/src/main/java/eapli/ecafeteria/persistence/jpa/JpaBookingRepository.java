@@ -6,7 +6,9 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.authz.SystemUser;
+import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.mealbooking.Booking;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Iterator;
@@ -16,11 +18,6 @@ import java.util.Optional;
  * @author Alexandra Ferreira 1140388 - Nuno Costa 1131106
  */
 public class JpaBookingRepository implements BookingRepository {
-
-    @Override
-    public Iterable<Booking> listBookingsByUser(SystemUser systemUser) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
     @Override
     public Iterable<Booking> first(int n) {
