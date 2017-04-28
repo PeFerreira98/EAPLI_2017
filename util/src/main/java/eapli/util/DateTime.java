@@ -7,9 +7,11 @@ package eapli.util;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -209,5 +211,22 @@ public final class DateTime {
         String dayNames[] = new DateFormatSymbols().getWeekdays();
 
         return dayNames[calendar.get(Calendar.DAY_OF_WEEK)];
+    }
+    
+    /**
+     * Retorna uma lista com os dias da semana que contem o dia indicado
+     * @param originalDay dia indicado
+     * @return lista com 7 dias
+     */
+    public static List<Calendar> listDaysOfWeekOfGivenDay(Calendar originalDay){
+        int year = originalDay.get(Calendar.YEAR);
+        int calendarWeek = weekNumber(originalDay);
+        Calendar sunday = beginningOfWeek(year, calendarWeek);
+        List<Calendar> daysInWeek = new ArrayList<>();
+        for(int i = 0; i < 7; i++){
+            daysInWeek.add( (Calendar) sunday.clone());
+            sunday.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        return daysInWeek;
     }
 }

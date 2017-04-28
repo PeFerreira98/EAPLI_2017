@@ -5,7 +5,11 @@
  */
 package eapli.util;
 
+import static eapli.util.DateTime.beginningOfWeek;
+import static eapli.util.DateTime.weekNumber;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -128,4 +132,25 @@ public class DateTimeTest {
     // Calendar result = DateTime.parseDate(aDateString, format);
     // assertEquals(expResult, result);
     // }
+    
+    @Test
+    public void testListDaysOfWeekOfGivenDay(){
+        
+        List<Calendar> result;
+        
+        int year = DateTime.newCalendar(2017, 04, 25).get(Calendar.YEAR);
+        int calendarWeek = weekNumber(DateTime.newCalendar(2017, 04, 25));
+        Calendar dayTest = beginningOfWeek(year, calendarWeek);
+        List<Calendar> expResult = new ArrayList<>();
+        for(int i = 0; i < 7; i++){
+            expResult.add( (Calendar) dayTest.clone());
+            dayTest.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        
+        Calendar date = DateTime.newCalendar(2017, 04, 25);
+        
+        
+        result = DateTime.listDaysOfWeekOfGivenDay(date);
+        assertEquals(expResult, result);
+    }
 }
