@@ -1,0 +1,23 @@
+-----------------
+ANÁLISE
+-----------------
+reunião com cliente em 2017.04.28
+
+chef quer registar lote de um material utilizado na confecção de uma refeição
+chef vê as refeições
+chef escolhe uma refeição
+chef indica material e o lote proveniente
+se lote não existir, regista-se um novo lote
+novo lote tem codigo, data e uma descricao
+
+
+-----------------
+REGRAS DE NEGÓCIO
+-----------------
+
+uma matéria prima tem um acrónimo
+uma matéria prima pode ou não ter um descritivo
+um lote tem um código
+o codigo do lote tem de ser único para todos os lotes registados
+um lote tem uma data
+um lote tem ou não uma descricao
