@@ -153,11 +153,11 @@ public class Allergen implements AggregateRoot<String>, Serializable {
 		if (this == o) {
 			return true;
 		}
-		if (!(o instanceof DishType)) {
+		if (!(o instanceof Allergen)) {
 			return false;
 		}
 
-		final DishType other = (DishType) o;
+		final Allergen other = (Allergen) o;
 		return id().equals(other.id());
 	}
 }
