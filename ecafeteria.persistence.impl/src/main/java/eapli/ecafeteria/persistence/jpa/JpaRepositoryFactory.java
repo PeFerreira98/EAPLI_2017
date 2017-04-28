@@ -1,5 +1,6 @@
 package eapli.ecafeteria.persistence.jpa;
 
+import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
@@ -65,5 +66,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public MealRepository meals() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public AllergenRepository allergens() {
+        return new JpaAllergenRepository();
     }
 }

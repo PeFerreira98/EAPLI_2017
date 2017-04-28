@@ -2,6 +2,7 @@ package eapli.ecafeteria.persistence.inmemory;
 
 //import eapli.ecafeteria.bootstrapers.ECafeteriaBootstraper;
 import eapli.ecafeteria.bootstrapers.ECafeteriaBootstraper;
+import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
@@ -74,5 +75,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public MealRepository meals() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public AllergenRepository allergens() {
+        return new InMemoryAllergenRepository();
     }
 }
