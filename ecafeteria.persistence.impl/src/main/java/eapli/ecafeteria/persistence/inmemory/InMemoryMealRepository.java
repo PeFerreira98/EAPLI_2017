@@ -14,7 +14,7 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
  *
  * @author Marcos
  */
-public class InMemoryRepositoryMeal extends InMemoryRepositoryWithLongPK<Meal> implements MealRepository{
+public class InMemoryMealRepository extends InMemoryRepositoryWithLongPK<Meal> implements MealRepository{
 
     @Override
     public Iterable<Meal> mealsByMenu(Menu menu) {
