@@ -32,7 +32,7 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, String> 
 
     @Override
     public Iterable<Menu> findByDate(Calendar date) {
-        // TO DO
+        // TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

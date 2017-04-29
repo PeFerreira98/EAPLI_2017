@@ -13,6 +13,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 /**
@@ -22,7 +24,9 @@ import javax.persistence.Version;
 @Entity
 public class Menu implements AggregateRoot<String>, Serializable {
 
-    @Id
+	private static final long serialVersionUID = 1L;
+	
+	@Id
     @GeneratedValue
     private Long id;
     @Version
@@ -31,6 +35,12 @@ public class Menu implements AggregateRoot<String>, Serializable {
     // business ID
     @Column(unique = true)
     private String name;
+    
+    @Temporal(TemporalType.DATE)
+    private Calendar beginningDate;
+    @Temporal(TemporalType.DATE)
+    private Calendar endingDate;
+    
     private TimePeriod timePeriod;
     private boolean isPublished;
 
@@ -39,41 +49,15 @@ public class Menu implements AggregateRoot<String>, Serializable {
     }
 
     public Menu(String name, Calendar beginningDate, Calendar endingDate) {
-        this(name, new TimePeriod(beginningDate, endingDate));
-    }
-
-    public Menu(String name, TimePeriod timePeriod) {
-        if (name == null || timePeriod == null) {
-            throw new IllegalStateException();
-        }
+    	parameterValidation(name, beginningDate, endingDate);
 
         this.name = name;
-        this.timePeriod = timePeriod;
+        this.beginningDate = beginningDate;
+        this.endingDate = endingDate;
+        this.timePeriod = new TimePeriod(beginningDate, endingDate);
         this.isPublished = false;
     }
-
-    public String name() {
-        return name;
-    }
-
-    public boolean isPublished() {
-        return this.isPublished;
-    }
-
-    public void publishMenu() {
-        this.isPublished = true;
-    }
     
-    public void update(String newName, Calendar newBeginningDate, Calendar newEndDate){
-        this.name = newName;
-        this.timePeriod.start().setTime(newBeginningDate.getTime());
-        this.timePeriod.end().setTime(newEndDate.getTime());
-    }
-
-    public boolean isInBetween(Calendar date) {
-        return this.timePeriod.includes(date);
-    }
-
     @Override
     public String id() {
         return this.name;
@@ -110,4 +94,49 @@ public class Menu implements AggregateRoot<String>, Serializable {
         final Menu other = (Menu) o;
         return id().equals(other.id());
     }
+    
+    private boolean parameterValidation(String name, Calendar beginningDate, Calendar endingDate){
+    	if (name == null || beginningDate == null || endingDate == null) {
+            throw new IllegalStateException();
+        }
+    	if(beginningDate.after(endingDate)){
+    		throw new IllegalArgumentException("begin must be lower than end");
+    	}
+    	return true;
+    }
+    
+    public void update(String newName, Calendar newBeginningDate, Calendar newEndingDate){
+    	parameterValidation(newName, newBeginningDate, newEndingDate);
+    	
+    	this.name = newName;
+        this.beginningDate = newBeginningDate;
+        this.endingDate = newEndingDate;
+        this.timePeriod = new TimePeriod(newBeginningDate, newEndingDate);
+    }
+
+    public String name() {
+        return name;
+    }
+    
+    public Calendar beginningDate(){
+    	return this.beginningDate;
+    }
+    
+    public Calendar endingDate(){
+    	return this.endingDate;
+    }
+
+    public boolean isPublished() {
+        return this.isPublished;
+    }
+
+    public void publishMenu() {
+        this.isPublished = true;
+    }
+    
+    public boolean isInBetween(Calendar date) {
+        return this.timePeriod.includes(date);
+    }
+
+
 }

@@ -24,6 +24,8 @@ import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ChangeDishPrice
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ChangeDishTypeAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListDishAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListDishTypeAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListMealAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListMenuAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterDishAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterDishTypeAction;
 import eapli.ecafeteria.domain.authz.ActionRight;
@@ -82,7 +84,24 @@ public class MainMenu extends AbstractUI {
     // MATERIALS
     private static final int MATERIAL_REGISTER_OPTION = 1;
     private static final int MATERIAL_LIST_OPTION = 2;
-
+    
+    // MENUS
+    private static final int MENU_REGISTER_OPTION = 1;
+    private static final int MENU_LIST_OPTION = 2;
+    private static final int MENU_CHANGE_OPTION = 3;
+    private static final int MENU_PUBLISH_OPTION = 4;
+    
+    // MEALS
+    private static final int MEAL_TYPE_OPTION = 1;
+    private static final int MEAL_REGISTER_OPTION = 2;
+    private static final int MEAL_LIST_OPTION = 3;
+    
+    // MEAL TYPES
+    private static final int MEAL_TYPE_REGISTER_OPTION = 1;
+    private static final int MEAL_TYPE_LIST_OPTION = 2;
+    private static final int MEAL_TYPE_CHANGE_OPTION = 3;
+    private static final int MEAL_TYPE_ACTIVATE_DEACTIVATE_OPTION = 4;
+    
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
@@ -90,6 +109,8 @@ public class MainMenu extends AbstractUI {
     private static final int SETTINGS_OPTION = 4;
     private static final int DISH_TYPES_OPTION = 5;
     private static final int TRACEABILITY_OPTION = 6;
+    private static final int MEAL_OPTION = 7;
+    private static final int MENU_OPTION = 8;
 
     @Override
     public boolean show() {
@@ -143,6 +164,10 @@ public class MainMenu extends AbstractUI {
         if (Application.session().session().authenticatedUser().isAuthorizedTo(ActionRight.MANAGE_MENUS)) {
             final Menu myDishTypeMenu = buildDishMenu();
             mainMenu.add(new SubMenu(DISH_TYPES_OPTION, myDishTypeMenu, new ShowVerticalSubMenuAction(myDishTypeMenu)));
+            final Menu mealsMenu = buildMealMenu();
+            mainMenu.add(new SubMenu(MEAL_OPTION, mealsMenu, new ShowVerticalSubMenuAction(mealsMenu)));
+            final Menu menusMenu = buildMenuMenu();
+            mainMenu.add(new SubMenu(MENU_OPTION, menusMenu, new ShowVerticalSubMenuAction(menusMenu)));
         }
         if (Application.session().session().authenticatedUser().isAuthorizedTo(ActionRight.SALE)) {
             // TODO
@@ -153,7 +178,6 @@ public class MainMenu extends AbstractUI {
         }
 
         mainMenu.add(new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
-
         return mainMenu;
     }
 
@@ -164,8 +188,8 @@ public class MainMenu extends AbstractUI {
                 new ShowMessageAction("Not implemented yet")));
         menu.add(new MenuItem(SET_USER_ALERT_LIMIT_OPTION, "Set users' alert limit",
                 new ShowMessageAction("Not implemented yet")));
+        
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-
         return menu;
     }
 
@@ -182,8 +206,8 @@ public class MainMenu extends AbstractUI {
             return false;
         }));
         // TODO add other options for Organic Unit management
+        
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-
         return menu;
     }
 
@@ -197,8 +221,8 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(DEACTIVATE_USER_OPTION, "Deactivate User", new DeactivateUserAction()));
         menu.add(new MenuItem(ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION, "Accept/Refuse Signup Request",
                 new AcceptRefuseSignupRequestAction()));
+        
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-
         return menu;
     }
 
@@ -219,7 +243,6 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(DISH_CHANGE_OPTION, "Change Dish Information", new ShowVerticalSubMenuAction(changeDishMenu)));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-
         return menu;
     }
 
@@ -230,8 +253,32 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(MATERIAL_LIST_OPTION, "List all materials", new ListMaterialAction()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-
         return menu;
+    }
+    
+    private Menu buildMenuMenu(){
+    	final Menu menu = new Menu("Meals >");
+
+    	final Menu mealTypeMenu = buildMealTypeMenu();
+    	menu.add(new MenuItem(MEAL_TYPE_OPTION, "Meal Type Information", new ShowVerticalSubMenuAction(mealTypeMenu)));
+    	
+    	//menu.add(new MenuItem(MEAL_REGISTER_OPTION, "Register new Meal", new RegisterMealAction()));
+    	menu.add(new MenuItem(MEAL_LIST_OPTION, "List all Meal", new ListMealAction()));
+    	
+    	menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+    	return menu;
+    }
+    
+    private Menu buildMealMenu() {
+    	final Menu menu = new Menu("Menus >");
+    	
+    	//menu.add(new MenuItem(MENU_REGISTER_OPTION, "Register new Menu", new RegisterMenuAction()));
+    	menu.add(new MenuItem(MENU_LIST_OPTION, "List all Menus", new ListMenuAction()));
+    	//menu.add(new MenuItem(MENU_CHANGE_OPTION, "Change Menu period", new ChangeMenuAction()));
+    	//menu.add(new MenuItem(MENU_PUBLISH_OPTION, "Publish Menu", new PublishMenuAction()));
+    	
+    	menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+    	return menu;
     }
 
     private Menu buildChangeDishMenu() {
@@ -241,8 +288,20 @@ public class MainMenu extends AbstractUI {
                 new ChangeDishNutricionalInfoAction()));
         menu.add(new MenuItem(CHANGE_DISH_PRICE_OPTION, "Change Price",
                 new ChangeDishPriceAction()));
+        
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-
+        return menu;
+    }
+    
+    private Menu buildMealTypeMenu(){
+    	final Menu menu = new Menu("Meal Type >");
+    	
+        //menu.add(new MenuItem(MEAL_TYPE_REGISTER_OPTION, "Register new Meal Type", new RegisterMealTypeAction()));
+        //menu.add(new MenuItem(MEAL_TYPE_LIST_OPTION, "List all Meal Type", new ListMealTypeAction()));
+        //menu.add(new MenuItem(MEAL_TYPE_CHANGE_OPTION, "Change Meal Type description", new ChangeMealTypeAction()));
+        //menu.add(new MenuItem(MEAL_TYPE_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Meal Type", new ActivateDeactivateMealTypeAction()));
+        
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }
 }
