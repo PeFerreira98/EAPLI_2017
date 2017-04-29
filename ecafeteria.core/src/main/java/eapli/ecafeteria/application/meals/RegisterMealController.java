@@ -37,9 +37,7 @@ public class RegisterMealController implements Controller{
         
         final Meal newMeal = new Meal(date, dish, mealType, menu, desc);
 
-        this.mealRepository.beginTransaction();
         Meal ret = this.mealRepository.save(newMeal);
-        this.mealRepository.commit();
         
         return ret;
     }

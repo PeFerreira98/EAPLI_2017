@@ -5,6 +5,8 @@
  */
 package eapli.ecafeteria.application.meals;
 
+import eapli.ecafeteria.Application;
+import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
@@ -23,6 +25,7 @@ public class RemoveMealController implements Controller{
     private final MealRepository  mealRepo = PersistenceContext.repositories().meals();
     
     public void removeMeal(Meal meal) throws DataIntegrityViolationException{
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
         this.mealRepo.delete(meal);
     }
     

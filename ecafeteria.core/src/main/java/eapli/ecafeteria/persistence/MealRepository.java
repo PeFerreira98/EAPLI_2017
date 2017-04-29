@@ -5,17 +5,17 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.meals.CompositeIdMeal;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.Menu;
 import eapli.framework.persistence.repositories.DataRepository;
-import eapli.framework.persistence.repositories.TransactionalContext;
 import java.util.Calendar;
 
 /**
  *
  * @author Marcos
  */
-public interface MealRepository extends DataRepository<Meal, Long>, TransactionalContext{
+public interface MealRepository extends DataRepository<Meal, CompositeIdMeal>{
  
     Iterable<Meal> mealsByMenu(Menu menu);
     

@@ -24,7 +24,8 @@ public class ECafeteriaBootstraper implements Action {
             new DishBootstraper(),
             new MaterialsBootstraper(),
             new MenuBootstraper(),
-            new MealTypeBootstraper()
+            new MealTypeBootstraper(),
+            new MealBootstraper(),
         };
 
         // authenticate a super user to be able to register new users, ...
