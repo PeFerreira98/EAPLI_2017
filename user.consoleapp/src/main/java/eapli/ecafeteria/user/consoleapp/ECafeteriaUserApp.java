@@ -1,6 +1,5 @@
 package eapli.ecafeteria.user.consoleapp;
 
-import eapli.ecafeteria.bootstrapapp.ECafeteriaBootstrap;
 import eapli.ecafeteria.user.consoleapp.presentation.FrontMenu;
 
 /**
@@ -17,7 +16,7 @@ public final class ECafeteriaUserApp {
     public static void main(final String[] args) {
 
         // only needed because of the in memory persistence
-        new ECafeteriaBootstrap().execute();
+//        new ECafeteriaBootstrap().execute();
 
         new FrontMenu().show();
     }
