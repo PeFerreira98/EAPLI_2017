@@ -6,14 +6,12 @@
 package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.mealbooking.Booking;
-import eapli.framework.domain.Repository;
+import eapli.framework.persistence.repositories.DataRepository;
 
 /**
  *
  * @author Alexandra Ferreira 1140388 - Nuno Costa 1131106
  */
-public interface BookingRepository extends Repository<Booking, Long>{
-    
-
+public interface BookingRepository extends DataRepository<Booking, Long>{
     
 }
