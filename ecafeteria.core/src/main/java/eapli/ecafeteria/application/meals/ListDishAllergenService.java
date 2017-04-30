@@ -5,11 +5,6 @@
  */
 package eapli.ecafeteria.application.meals;
 
-import eapli.ecafeteria.Application;
-import eapli.ecafeteria.domain.authz.ActionRight;
-import eapli.ecafeteria.domain.meals.DishAllergen;
-import eapli.ecafeteria.persistence.PersistenceContext;
-
 /**
  *
  * @author JoãoPedro

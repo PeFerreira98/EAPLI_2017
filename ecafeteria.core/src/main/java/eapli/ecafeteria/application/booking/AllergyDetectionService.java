@@ -5,11 +5,8 @@
  */
 package eapli.ecafeteria.application.booking;
 
-import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.persistence.CafeteriaUserRepository;
-import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.Observable;
 
 /**

@@ -9,7 +9,6 @@ import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
-import java.util.List;
 
 /**
  *

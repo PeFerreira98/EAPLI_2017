@@ -5,7 +5,6 @@
  */
 package eapli.ecafeteria.user.consoleapp.presentation.meals;
 
-import eapli.ecafeteria.domain.kitchen.Material;
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
 import eapli.framework.visitor.Visitor;
 
