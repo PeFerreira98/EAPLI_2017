@@ -37,9 +37,9 @@ public class Menu implements AggregateRoot<String>, Serializable {
     private String name;
     
     @Temporal(TemporalType.DATE)
-    private Calendar beginningDate;
+    private Calendar beginDate;
     @Temporal(TemporalType.DATE)
-    private Calendar endingDate;
+    private Calendar endDate;
     
     private TimePeriod timePeriod;
     private boolean isPublished;
@@ -48,13 +48,13 @@ public class Menu implements AggregateRoot<String>, Serializable {
         // ORM
     }
 
-    public Menu(String name, Calendar beginningDate, Calendar endingDate) {
-    	parameterValidation(name, beginningDate, endingDate);
+    public Menu(String name, Calendar beginDate, Calendar endDate) {
+    	parameterValidation(name, beginDate, endDate);
 
         this.name = name;
-        this.beginningDate = beginningDate;
-        this.endingDate = endingDate;
-        this.timePeriod = new TimePeriod(beginningDate, endingDate);
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.timePeriod = new TimePeriod(beginDate, endDate);
         this.isPublished = false;
     }
     
@@ -95,23 +95,23 @@ public class Menu implements AggregateRoot<String>, Serializable {
         return id().equals(other.id());
     }
     
-    private boolean parameterValidation(String name, Calendar beginningDate, Calendar endingDate){
-    	if (name == null || beginningDate == null || endingDate == null) {
+    private boolean parameterValidation(String name, Calendar beginDate, Calendar endDate){
+    	if (name == null || beginDate == null || endDate == null) {
             throw new IllegalStateException();
         }
-    	if(beginningDate.after(endingDate)){
+    	if(beginDate.after(endDate)){
     		throw new IllegalArgumentException("begin must be lower than end");
     	}
     	return true;
     }
     
-    public void update(String newName, Calendar newBeginningDate, Calendar newEndingDate){
-    	parameterValidation(newName, newBeginningDate, newEndingDate);
+    public void update(String newName, Calendar newBeginDate, Calendar newEndDate){
+    	parameterValidation(newName, newBeginDate, newEndDate);
     	
     	this.name = newName;
-        this.beginningDate = newBeginningDate;
-        this.endingDate = newEndingDate;
-        this.timePeriod = new TimePeriod(newBeginningDate, newEndingDate);
+        this.beginDate = newBeginDate;
+        this.endDate = newEndDate;
+        this.timePeriod = new TimePeriod(newBeginDate, newEndDate);
     }
 
     public String name() {
@@ -119,11 +119,11 @@ public class Menu implements AggregateRoot<String>, Serializable {
     }
     
     public Calendar beginningDate(){
-    	return this.beginningDate;
+    	return this.beginDate;
     }
     
     public Calendar endingDate(){
-    	return this.endingDate;
+    	return this.endDate;
     }
 
     public boolean isPublished() {

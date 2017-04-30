@@ -30,10 +30,10 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, String> 
         return matchOne("e.name:=name", "name", name);
     }
 
+    // TODO test and validate query 
     @Override
     public Iterable<Menu> findByDate(Calendar date) {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return match("e.beginDate<'" + date + "' and e.endDate>'" + date + "'");
     }
 
 }

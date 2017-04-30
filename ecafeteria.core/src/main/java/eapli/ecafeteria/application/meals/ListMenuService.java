@@ -22,28 +22,22 @@ public class ListMenuService {
 
     public Iterable<Menu> allMenus() {
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-        // TO DO: Check permission (100% sure)
 
         return this.menuRepository.findAll();
     }
 
-    public Iterable<Menu> publishedMenus() {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.SELECT_MEAL);
-        // TO DO: Check permission (100% sure)
-        
+    public Iterable<Menu> publishedMenus() {        
         return this.menuRepository.publishedMenus();
     }
     
     public Iterable<Menu> editableMenus(){
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-        // TO DO: Check permission (100% sure)
         
         return this.menuRepository.editableMenus();
     }
     
-    public Iterable<Menu> findMenuByDate(Calendar date) {
-        final MenuRepository menuRepository = PersistenceContext.repositories().menus();
-        
-        return menuRepository.findByDate(date);
+    // TODO
+    public Iterable<Menu> findMenuByDate(Calendar date) {        
+        return this.menuRepository.findByDate(date);
     }
 }

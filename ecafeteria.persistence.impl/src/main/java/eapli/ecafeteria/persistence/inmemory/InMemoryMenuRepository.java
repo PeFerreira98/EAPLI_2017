@@ -35,11 +35,11 @@ public class InMemoryMenuRepository extends InMemoryRepository<Menu, String> imp
     public Menu findByName(String name) {
         return matchOne(e -> e.name().equals(name));
     }
-
+    
+    // TODO
     @Override
     public Iterable<Menu> findByDate(Calendar date) {
-        //TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return match(e -> e.isInBetween(date));
     }
 
 }
