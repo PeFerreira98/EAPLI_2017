@@ -22,6 +22,7 @@ import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ActivateDeactiv
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ChangeDishNutricionalInfoAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ChangeDishPriceAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ChangeDishTypeAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ChangeMealTypeAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListDishAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListDishTypeAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListMealAction;
@@ -302,7 +303,7 @@ public class MainMenu extends AbstractUI {
     	
         menu.add(new MenuItem(MEAL_TYPE_REGISTER_OPTION, "Register new Meal Type", new RegisterMealTypeAction()));
         menu.add(new MenuItem(MEAL_TYPE_LIST_OPTION, "List all Meal Type", new ListMealTypeAction()));
-        //menu.add(new MenuItem(MEAL_TYPE_CHANGE_OPTION, "Change Meal Type description", new ChangeMealTypeAction()));
+        menu.add(new MenuItem(MEAL_TYPE_CHANGE_OPTION, "Change Meal Type description", new ChangeMealTypeAction()));
         //menu.add(new MenuItem(MEAL_TYPE_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Meal Type", new ActivateDeactivateMealTypeAction()));
         
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
