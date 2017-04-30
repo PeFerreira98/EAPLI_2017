@@ -7,7 +7,7 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.meals.CompositeIdMeal;
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.domain.meals.Menu;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
 import java.util.Calendar;
 

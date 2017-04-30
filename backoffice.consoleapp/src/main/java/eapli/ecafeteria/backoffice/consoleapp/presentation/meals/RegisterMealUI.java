@@ -1,10 +1,11 @@
 package eapli.ecafeteria.backoffice.consoleapp.presentation.meals;
 
+import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.MenuPrinter;
 import java.util.Calendar;
 import eapli.ecafeteria.application.meals.RegisterMealController;
 import eapli.ecafeteria.domain.meals.Dish;
 import eapli.ecafeteria.domain.meals.MealType;
-import eapli.ecafeteria.domain.meals.Menu;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.application.meals;
+package eapli.ecafeteria.application.menus;
 
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.authz.ActionRight;
-import eapli.ecafeteria.domain.meals.Menu;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;

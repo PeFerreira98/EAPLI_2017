@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.persistence.inmemory;
 
-import eapli.ecafeteria.domain.meals.Menu;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 import java.util.Calendar;

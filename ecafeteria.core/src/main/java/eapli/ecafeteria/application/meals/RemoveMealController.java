@@ -5,10 +5,11 @@
  */
 package eapli.ecafeteria.application.meals;
 
+import eapli.ecafeteria.application.menus.ListMenuService;
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.domain.meals.Menu;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;

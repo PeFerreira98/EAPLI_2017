@@ -26,10 +26,12 @@ import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListDishAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListDishTypeAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListMealAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListMealTypeAction;
-import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListMenuAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.ListMenuAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterDishAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterDishTypeAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterMealAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterMealTypeAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.RegisterMenuAction;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.actions.ShowMessageAction;
@@ -274,7 +276,7 @@ public class MainMenu extends AbstractUI {
     private Menu buildMenuMenu() {
     	final Menu menu = new Menu("Menus >");
     	
-    	//menu.add(new MenuItem(MENU_REGISTER_OPTION, "Register new Menu", new RegisterMenuAction()));
+    	menu.add(new MenuItem(MENU_REGISTER_OPTION, "Register new Menu", new RegisterMenuAction()));
     	menu.add(new MenuItem(MENU_LIST_OPTION, "List all Menus", new ListMenuAction()));
     	//menu.add(new MenuItem(MENU_CHANGE_OPTION, "Change Menu period", new ChangeMenuAction()));
     	//menu.add(new MenuItem(MENU_PUBLISH_OPTION, "Publish Menu", new PublishMenuAction()));
@@ -298,7 +300,7 @@ public class MainMenu extends AbstractUI {
     private Menu buildMealTypeMenu(){
     	final Menu menu = new Menu("Meal Type >");
     	
-        //menu.add(new MenuItem(MEAL_TYPE_REGISTER_OPTION, "Register new Meal Type", new RegisterMealTypeAction()));
+        menu.add(new MenuItem(MEAL_TYPE_REGISTER_OPTION, "Register new Meal Type", new RegisterMealTypeAction()));
         menu.add(new MenuItem(MEAL_TYPE_LIST_OPTION, "List all Meal Type", new ListMealTypeAction()));
         //menu.add(new MenuItem(MEAL_TYPE_CHANGE_OPTION, "Change Meal Type description", new ChangeMealTypeAction()));
         //menu.add(new MenuItem(MEAL_TYPE_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Meal Type", new ActivateDeactivateMealTypeAction()));

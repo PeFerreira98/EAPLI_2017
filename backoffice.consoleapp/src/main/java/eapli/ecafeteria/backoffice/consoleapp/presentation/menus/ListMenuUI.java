@@ -1,7 +1,7 @@
-package eapli.ecafeteria.backoffice.consoleapp.presentation.meals;
+package eapli.ecafeteria.backoffice.consoleapp.presentation.menus;
 
-import eapli.ecafeteria.application.meals.ListMenuController;
-import eapli.ecafeteria.domain.meals.Menu;
+import eapli.ecafeteria.application.menus.ListMenuController;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.visitor.Visitor;

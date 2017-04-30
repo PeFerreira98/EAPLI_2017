@@ -1,6 +1,6 @@
-package eapli.ecafeteria.backoffice.consoleapp.presentation.meals;
+package eapli.ecafeteria.backoffice.consoleapp.presentation.menus;
 
-import eapli.ecafeteria.domain.meals.Menu;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.visitor.Visitor;
 
 public class MenuPrinter implements Visitor<Menu> {

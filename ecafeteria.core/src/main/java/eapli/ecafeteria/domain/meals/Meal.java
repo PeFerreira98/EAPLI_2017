@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.domain.meals;
 
+import eapli.ecafeteria.domain.menus.Menu;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.EmbeddedId;

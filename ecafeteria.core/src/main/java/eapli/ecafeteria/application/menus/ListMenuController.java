@@ -1,6 +1,6 @@
-package eapli.ecafeteria.application.meals;
+package eapli.ecafeteria.application.menus;
 
-import eapli.ecafeteria.domain.meals.Menu;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.application.Controller;
 
 public class ListMenuController implements Controller {

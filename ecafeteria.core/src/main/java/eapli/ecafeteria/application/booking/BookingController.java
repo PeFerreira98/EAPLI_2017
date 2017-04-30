@@ -5,7 +5,8 @@
  */
 package eapli.ecafeteria.application.booking;
 
-import eapli.ecafeteria.application.meals.ListMenuService;
+import eapli.ecafeteria.domain.menus.Menu;
+import eapli.ecafeteria.application.menus.ListMenuService;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.ecafeteria.domain.meals.*;

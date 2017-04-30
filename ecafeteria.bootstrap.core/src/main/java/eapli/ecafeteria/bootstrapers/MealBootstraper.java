@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 import eapli.ecafeteria.application.meals.RegisterMealController;
 import eapli.ecafeteria.domain.meals.Dish;
 import eapli.ecafeteria.domain.meals.MealType;
-import eapli.ecafeteria.domain.meals.Menu;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.MealTypeRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
