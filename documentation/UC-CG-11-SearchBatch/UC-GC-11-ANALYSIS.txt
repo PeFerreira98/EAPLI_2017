@@ -1,0 +1,17 @@
+-----------------
+ANÁLISE
+-----------------
+reunião com cliente em 2017.05.01
+
+chef vai pesquisar refeições em que um determinado lote foi usado
+chef recebe todas as datas de refeições em que o lote foi usado
+
+
+-----------------
+REGRAS DE NEGÓCIO
+-----------------
+
+um lote tem um código
+o codigo do lote tem de ser único para todos os lotes registados
+um lote tem ou não uma descricao
+uma refeição tem uma data
