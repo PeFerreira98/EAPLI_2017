@@ -106,9 +106,10 @@ public class BookingUI extends AbstractUI implements Observer{
              // O padrao observador deve mostrar o alerta automaticamente. "isAllergic fica como debug".
             
              
-             /* TODO
+             
              //Mostrar consumo de calorias/sal dos bookings desta semana incluindo a mealSelecionada.
-             NutritionalInfo weekCommulativeNutritional = showController.returnWeakInfoMeal(meal)
+             NutricionalInfo weekCommulativeNutritional = showController.returnWeekInfo(mealChosen);
+             System.out.println("Planed week nutricional consumption:");
              nutricionalInfoPrinter.visit( weekCommulativeNutritional );
              */
         }

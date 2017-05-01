@@ -73,13 +73,29 @@ public class ShowMealInfoBookingController {
     public CafeteriaUser obtainCurrentCafeteriaUser(){
         CafeteriaUser activeCafeteriaUser;
 
-        //  Melhorias: implementar um servico para isto.        
+        //  FIXME: implementar um servico para isto.        
         CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(true);
         CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
         
         return cafeteriaUser;
     } 
    
-    
+    /**
+     * Permite obter o consumo nutricional sob a forma de NutricionalInfo agendado para 
+     * um utilizador para a semana de uma meal que pretende agendar. Inclui o consumo da
+     * meal que indica.
+     * @param meal a meal que se quer fazer booking.
+     * @return um NutricionalInfo que é o somatorio de todas as meals agendadas. + esta.
+     */
+    public NutricionalInfo returnWeekInfo(Meal meal){
+        // O proprio servico lida com nulls, visto o controlador nao saber como lidar.
+        
+        //Obter o cafeteriaUser
+        CafeteriaUser activeCafeteriaUser = this.obtainCurrentCafeteriaUser();
+        
+        MealNutritionalConsumptionService mealNutritionalConsumptionService = new MealNutritionalConsumptionService();
+        
+        return mealNutritionalConsumptionService.planedWeekConsumption(activeCafeteriaUser, meal);
+    }
     
 }

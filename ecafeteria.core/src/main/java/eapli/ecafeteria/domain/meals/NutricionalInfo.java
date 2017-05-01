@@ -77,4 +77,17 @@ public class NutricionalInfo implements ValueObject, Serializable {
     public Integer salt() {
         return this.salt;
     }
+    
+    /**
+     * Metodo que permite retornar a soma de duas Nutricional Infos, retornando uma nova.
+     * @param other a nutricional Info a adicionar a esta.
+     * @return uma nova NutricionalInfo que é a soma das duas.
+     */
+    public NutricionalInfo sumNutricionalInfo(NutricionalInfo other){
+        if (other == null) return new NutricionalInfo(this.calories , this.salt);
+        return new NutricionalInfo( this.calories.intValue() + other.calories.intValue() , this.salt.intValue() + other.salt.intValue() );
+    }
+    
+    
+    
 }

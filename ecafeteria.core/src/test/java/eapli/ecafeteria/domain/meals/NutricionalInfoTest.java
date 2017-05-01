@@ -58,4 +58,21 @@ public class NutricionalInfoTest {
         Integer expResult = 3;
         assertEquals(expResult, instance.calories());
     }
+    
+    
+    @Test
+    public void testSumNutricionalInfo() {      // Hugo & Pedro G3
+        System.out.println("sumNutricionalInfo");
+        NutricionalInfo n1 = new NutricionalInfo(1, 1);
+        NutricionalInfo n2 = new NutricionalInfo(2, 2);
+        NutricionalInfo n3 = new NutricionalInfo(3, 3);
+        
+        NutricionalInfo answer = n1.sumNutricionalInfo(n2).sumNutricionalInfo(n3);
+        
+        Integer expResult = 6;
+        
+        assertEquals(expResult, answer.calories());
+        assertEquals(expResult, answer.salt());
+    }
+    
 }
