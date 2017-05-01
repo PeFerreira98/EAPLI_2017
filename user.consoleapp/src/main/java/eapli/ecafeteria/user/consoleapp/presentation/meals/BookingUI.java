@@ -6,22 +6,28 @@
 package eapli.ecafeteria.user.consoleapp.presentation.meals;
 
 import eapli.ecafeteria.application.booking.BookingController;
+import eapli.ecafeteria.application.booking.ShowMealInfoBookingController;
+import eapli.ecafeteria.domain.meals.Allergen;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
+import eapli.ecafeteria.domain.meals.NutricionalInfo;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.util.io.Console;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * SRR-06 Classe do UI de escolha e booking de uma unica refeicao SRR-06
- *
+ * Observer - de alergias entre o user e uma meal.
  * @author Hugo - Alexandra Ferreira 1140388 - Nuno Costa 1131106
  */
-public class BookingUI extends AbstractUI {
+public class BookingUI extends AbstractUI implements Observer{
 
     private final BookingController controller = new BookingController();
 
@@ -74,29 +80,33 @@ public class BookingUI extends AbstractUI {
         //------------------------------------------------------
         //INSERIR codigo do bookingUI aqui.
         //Codigo da parte de mostrar info da Meal indicada pelo user. Hugo & Pedro        
-        Meal mealSelecionada = null;  //meal que o utilizador indicou no codigo acima.
+        
         {
             /*
              //Instranciacao do controller.
              ShowMealInfoBookingController showController = new ShowMealInfoBookingController();
         
              //Mostrar as cal+sal da meal:
-             NutricionalInfo informacaoNutricionalDaMealSelecionada = showController.obtainNutricionalInfo(mealSelecionada);
+             NutricionalInfo selectedMealNutricionalInfo = showController.obtainNutricionalInfo( mealChosen );
              System.out.println("Meal Nutritional info: ");
              NutricionalInfoPrinter nutricionalInfoPrinter = new NutricionalInfoPrinter();
-             nutricionalInfoPrinter.visit(informacaoNutricionalDaMealSelecionada);
+             nutricionalInfoPrinter.visit( selectedMealNutricionalInfo);
         
              //Mostrar os alegenicos:
              System.out.println("Allergen present in the meal:");
-             //List<DishAllergen> listaDishAlergenicos = showController.obtainListAllergen(Meal meal);
-             DishAllergenPrinter dishAllergenPrinter = new DishAllergenPrinter();
-             for(DishAllergen dishAllergen : listaDishAllergenicos){
-             dishAllergenPrinter.visit(dishAllergen);
+             List<Allergen> listAlergenInMeal = showController.obtainListAllergen(mealChosen);
+             AllergenPrinter dishAllergenPrinter = new AllergenPrinter();
+             for(Allergen dishAllergen : listAlergenInMeal){
+                dishAllergenPrinter.visit(dishAllergen);
              }
+             if( listAlergenInMeal.isEmpty() ) System.out.println(" none ");
             
              //Mostrar warning caso allergico
-             if(showController.isAllergic(mealSelecionada)) System.out.println("WARNING you are allergic to some meal contents!!!");
+             boolean isAllergic = showController.isAllergic(mealChosen, this);
+             // O padrao observador deve mostrar o alerta automaticamente. "isAllergic fica como debug".
             
+             
+             /* TODO
              //Mostrar consumo de calorias/sal dos bookings desta semana incluindo a mealSelecionada.
              NutritionalInfo weekCommulativeNutritional = showController.returnWeakInfoMeal(meal)
              nutricionalInfoPrinter.visit( weekCommulativeNutritional );
@@ -110,6 +120,12 @@ public class BookingUI extends AbstractUI {
     @Override
     public String headline() {
         return "Booking Process ";
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        //Padrao Observador , usado para emetir alerta caso detectada alergia Meal-CafeteriaUser
+        System.out.println("WARNING: You are allergic to this meal.");
     }
 
 }

@@ -5,10 +5,16 @@
  */
 package eapli.ecafeteria.application.booking;
 
+import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
+import eapli.ecafeteria.domain.meals.Allergen;
 import eapli.ecafeteria.domain.meals.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
+import eapli.ecafeteria.persistence.CafeteriaUserRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
+import java.util.List;
+import java.util.Observer;
 
 /**
  *
@@ -27,30 +33,37 @@ public class ShowMealInfoBookingController {
         return mealNutricionalInfo;   
     }
     
-//    public List<DishAllergen> obtainListAllergen(Meal meal){
-//        Dish dish = meal.dish();
-//        List<DishAllergen> dishAllergenList = dish.dishAllergens();
-//        
-//        return dishAllergenList;
-//    }
+    /**
+     * Devolve todos os alergenicos de uma meal.
+     * @param meal meal a obter os allergenicos
+     * @return List com todos os alergenicos de uma meal
+     */
+    public List<Allergen> obtainListAllergen(Meal meal){
+        
+        return new AllergyDetectionService().listAllergen(meal);
+    }
     
     /**
      * Verifica (se possivel) se o user logado e alegico a uma meal
      * @param meal meal a verificar.
      * @return se e alergico. Se imposivel determinar retorna falso.
      */
-    public boolean isAllergic(Meal meal){
+    public boolean isAllergic( Meal meal, Observer ui){
         if(meal == null) return false;
-        AllergyDetectionService svc = new AllergyDetectionService();
         
+        //Obter o cafeteriaUser
         CafeteriaUser activeCafeteriaUser = this.obtainCurrentCafeteriaUser();
         if(activeCafeteriaUser == null) return false;
         
-        svc.isCafeteriaUserAllergicToMeal(activeCafeteriaUser, meal);
         
-        //TODO
-        System.out.println("Not implemented yet");
-        return false;
+        AllergyDetectionService allergyDetectionService = new AllergyDetectionService();    //Criar servico
+        if (ui != null) allergyDetectionService.addObserver(ui);                                            //Adicionar observador
+        
+        boolean isAllergic = allergyDetectionService.isCafeteriaUserAllergicToMeal(activeCafeteriaUser, meal);
+        
+        if (ui != null) allergyDetectionService.deleteObserver(ui);                                         //Remover Observador
+        
+        return isAllergic;
     }
     
     /**
@@ -59,14 +72,12 @@ public class ShowMealInfoBookingController {
      */
     public CafeteriaUser obtainCurrentCafeteriaUser(){
         CafeteriaUser activeCafeteriaUser;
-//      Estamos a pensar implementar um servico para isto.        
-//      CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(true);
-//      CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
-//        
-//        return activeCafeteriaUser;
-        //TODO
-        System.out.println("Not implemented yet");
-        return null;
+
+        //  Melhorias: implementar um servico para isto.        
+        CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(true);
+        CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
+        
+        return cafeteriaUser;
     } 
    
     
