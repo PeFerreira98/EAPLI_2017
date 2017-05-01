@@ -1,11 +1,11 @@
 
-title SRR-06-MealBooking-SD-showMeal-v5
+title SRR-06-MealBooking-SD-showMeal-v6
 
 
 CafeteriaUser->BookingUi: chose meal
 note over BookingUi: <<interface: observer>> 
 
-BookingUi-->*ShowMealInfoBookingController: create(Observer ui)
+BookingUi-->*ShowMealInfoBookingController: create()
 BookingUi->ShowMealInfoBookingController: obtainNutricionalInfo(meal)
 ShowMealInfoBookingController->Meal: getDish()
 ShowMealInfoBookingController->Dish: nutricionalInfo()
@@ -13,29 +13,40 @@ ShowMealInfoBookingController-->>BookingUi: NutricionalInfo [final]
 BookingUi-->>CafeteriaUser: show nutricionalInfo
 
 BookingUi->ShowMealInfoBookingController: obtainListAllergen(meal)
-ShowMealInfoBookingController->Meal: getDish()
-ShowMealInfoBookingController->Dish: dishAllergens() ????
+ShowMealInfoBookingController->AllergyDetectionService: listAllergen(meal)
 ShowMealInfoBookingController-->>BookingUi: List <DishAllergens>
 BookingUi-->>CafeteriaUser: show all DishAllergens
 
 
 
-BookingUi->ShowMealInfoBookingController: isAllergic(meal)
+BookingUi->ShowMealInfoBookingController: isAllergic(meal , Observer bookingUi)
 note over AllergyDetectionService: <<interface: Obserbable>>
 ShowMealInfoBookingController->>ShowMealInfoBookingController: obtainCurrentCafeteriaUser()
-ShowMealInfoBookingController->AllergyDetectionService: addObserver(ui)
+ShowMealInfoBookingController->AllergyDetectionService: addObserver(bookingUi)
 ShowMealInfoBookingController->AllergyDetectionService: isCafeteriaUserAllergicToMeal(cafeteriaUser , meal)
+
+AllergyDetectionService->>AllergyDetectionService: listAllergen(meal)
+AllergyDetectionService->>AllergyDetectionService: listAllergen(cafeteriaUser)
 AllergyDetectionService->>AllergyDetectionService: setChanged()
 AllergyDetectionService->>AllergyDetectionService: notifyObservers() 
-note right of AllergyDetectionService: TO DO: waiting allergen implementation
-AllergyDetectionService-->>ShowMealInfoBookingController: boolean answer
-ShowMealInfoBookingController-->>BookingUi: boolean answer
+AllergyDetectionService-->BookingUi: update()
 BookingUi-->>CafeteriaUser: show Allergen warning
+
+AllergyDetectionService-->>ShowMealInfoBookingController: boolean answer
+ShowMealInfoBookingController->AllergyDetectionService: removeObserver(bookingUi);
+ShowMealInfoBookingController-->>BookingUi: boolean answer
+
 
 BookingUi->ShowMealInfoBookingController: returnWeekInfo(meal)
 ShowMealInfoBookingController->MealNutritionalConsumptionService: planedWeekConsumption(cafeteriaUser, meal)
-MealNutritionalConsumptionService->>MealNutritionalConsumptionService: planedDayConsumption(cateferiaUser, day)
-MealNutritionalConsumptionService-->>ShowMealInfoBookingController: NutricionalInfo [final]
+MealNutritionalConsumptionService -> Meal : date()
+MealNutritionalConsumptionService -> DateTime: listDaysOfWeekOfGivenDay( day)
+MealNutritionalConsumptionService -> MealNutritionalConsumptionService: plannedDayConsumption(cafeteriaUser , day)
+MealNutritionalConsumptionService -> Meal : Dish()
+MealNutritionalConsumptionService -> Dish : NutricionalInfo()
+MealNutritionalConsumptionService -> NutricionalInfo : sumNutricionalInfo(nutricionalInfo)
+NutricionalInfo -->> MealNutritionalConsumptionService : nutricionalInfo [final]
+MealNutritionalConsumptionService-->>ShowMealInfoBookingController: nutricionalInfo [final]
 note right of MealNutritionalConsumptionService
 Obter todos os booking do 
 CafeteriaUser que ocorrem 
