@@ -10,6 +10,7 @@ import eapli.framework.domain.range.TimePeriod;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -41,6 +42,7 @@ public class Menu implements AggregateRoot<String>, Serializable {
     @Temporal(TemporalType.DATE)
     private Calendar endDate;
     
+    @Embedded
     private TimePeriod timePeriod;
     private boolean isPublished;
 
@@ -135,7 +137,10 @@ public class Menu implements AggregateRoot<String>, Serializable {
     }
     
     public boolean isInBetween(Calendar date) {
-        return this.timePeriod.includes(date);
+    	if(beginDate.compareTo(date) <= 0 && endDate.compareTo(date) >=0){
+    		return true;
+    	}
+        return false;
     }
 
 

@@ -36,7 +36,6 @@ public class InMemoryMenuRepository extends InMemoryRepository<Menu, String> imp
         return matchOne(e -> e.name().equals(name));
     }
     
-    // TODO
     @Override
     public Iterable<Menu> findByDate(Calendar date) {
         return match(e -> e.isInBetween(date));
