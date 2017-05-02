@@ -48,4 +48,6 @@ public interface RepositoryFactory {
     MealRepository meals();
     
     AllergenRepository allergens();
+    
+    DishAllergenRepository dishAllergens();
 }

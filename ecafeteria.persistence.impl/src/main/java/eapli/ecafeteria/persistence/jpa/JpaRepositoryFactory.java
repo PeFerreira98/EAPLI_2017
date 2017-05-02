@@ -1,6 +1,7 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.persistence.AllergenRepository;
+import eapli.ecafeteria.persistence.DishAllergenRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
@@ -71,5 +72,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public AllergenRepository allergens() {
         return new JpaAllergenRepository();
+    }
+    
+    @Override
+    public DishAllergenRepository dishAllergens() {
+        return (DishAllergenRepository) new JpaDishAllergenRepository();
     }
 }

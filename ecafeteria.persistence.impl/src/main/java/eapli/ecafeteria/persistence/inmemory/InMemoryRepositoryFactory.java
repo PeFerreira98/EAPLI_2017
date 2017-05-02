@@ -4,6 +4,7 @@ package eapli.ecafeteria.persistence.inmemory;
 import eapli.ecafeteria.bootstrapers.ECafeteriaBootstraper;
 import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
+import eapli.ecafeteria.persistence.DishAllergenRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
@@ -80,5 +81,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public AllergenRepository allergens() {
         return new InMemoryAllergenRepository();
+    }
+    
+    @Override
+    public DishAllergenRepository dishAllergens() {
+        return (DishAllergenRepository) new InMemoryDishAllergenRepository();
     }
 }
