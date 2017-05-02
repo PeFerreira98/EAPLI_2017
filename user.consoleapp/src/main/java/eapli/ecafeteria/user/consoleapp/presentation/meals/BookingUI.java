@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.user.consoleapp.presentation.meals;
 
+import eapli.ecafeteria.AppSettings;
 import eapli.ecafeteria.application.booking.BookingController;
 import eapli.ecafeteria.application.booking.ShowMealInfoBookingController;
 import eapli.ecafeteria.domain.meals.Allergen;
@@ -73,11 +74,15 @@ public class BookingUI extends AbstractUI implements Observer {
 
         if (mealChosen != null) {
             try {
-                this.controller.bookingMeal(null, null);
-            } catch (DataIntegrityViolationException e) {
-                System.out.println("This Meal is already booked for this User");
-            } catch (DataConcurrencyException e) {
-                System.out.println("");
+                if (this.controller.bookingMeal(null, mealChosen) == null) {
+                    System.out.println("Reserve not registered.");
+                } else {
+                    System.out.println("Reserve registerd.");
+                }
+            } catch (DataConcurrencyException ex) {
+                System.out.println("Data was changed meanwhile. Please try again.");
+            } catch (DataIntegrityViolationException ex) {
+                System.out.println("Reservation already registered!");
             }
         }
 

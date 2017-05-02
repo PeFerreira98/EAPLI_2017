@@ -10,6 +10,7 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
+import java.sql.Date;
 import java.util.Calendar;
 
 /**
@@ -25,12 +26,12 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Composit
 
     @Override
     public Iterable<Meal> mealsOfPublishedMenuFromCertainDate(Calendar date) {
-        return match("e.date='" + date +"'");
+        return match("e.date='" + new Date(date.getTimeInMillis()) +"'");
     }
 
     @Override
     public Iterable<Meal> mealsOfMenuByDateMealType(Calendar date, MealType mealType, Menu menu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return match("e.date='" + new Date(date.getTimeInMillis()) +" AND e.mealType="+mealType+" AND e.menu="+menu+" '");
     }
     
 }

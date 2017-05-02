@@ -7,6 +7,7 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MenuRepository;
+import java.sql.Date;
 import java.util.Calendar;
 
 /**
@@ -33,7 +34,7 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, String> 
     // TODO test and validate query 
     @Override
     public Iterable<Menu> findByDate(Calendar date) {
-        return match("e.beginDate<'" + date + "' and e.endDate>'" + date + "'");
+        return match("e.beginDate<'" + new Date(date.getTimeInMillis()) + "' and e.endDate>'" + new Date(date.getTimeInMillis()) + "'");
     }
 
 }

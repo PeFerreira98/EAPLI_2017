@@ -9,6 +9,7 @@ import eapli.ecafeteria.application.meals.ListMealService;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.application.menus.ListMenuService;
 import eapli.ecafeteria.domain.authz.SystemUser;
+import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.ecafeteria.domain.meals.*;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -44,7 +45,8 @@ public class BookingController implements Controller {
         return new ListMealService().mealsOfMenuByDateMealType(date, mealType, menu.iterator().next());
     }
 
-    public Booking bookingMeal(SystemUser user, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
+    public Booking bookingMeal(CafeteriaUser user, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
+
         return null;
     }
 }

@@ -17,12 +17,10 @@ public class MealPrinter implements Visitor<Meal> {
 
     @Override
     public void visit(Meal visitee) {
-        System.out.
-                printf("%11s%-12s%-20s-%6s\n", DateTime.format(visitee.date()), visitee.
-                        dish().dishType(), visitee.
-                        dish().
-                        name(), visitee.
-                        mealType().description());
+        System.out.println(DateTime.format(visitee.date()) + "   " 
+                        + visitee.dish().dishType().description() + "   " 
+                        + visitee.dish().name() + "   " 
+                        + visitee.mealType().description());
     }
 
     public void beforeVisiting(Meal visitee) {
