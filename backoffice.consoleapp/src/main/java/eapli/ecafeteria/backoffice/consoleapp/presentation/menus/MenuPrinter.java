@@ -9,7 +9,7 @@ public class MenuPrinter implements Visitor<Menu> {
 
 	@Override
 	public void visit(Menu visitee) {
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
 		System.out.printf("%-30s%-6s%-12s to %-12s\n", 
 				visitee.name(), 
 				String.valueOf(visitee.isPublished()),
