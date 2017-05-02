@@ -50,4 +50,6 @@ public interface RepositoryFactory {
     AllergenRepository allergens();
     
     DishAllergenRepository dishAllergens();
+    
+    BookingRepository reserves();
 }

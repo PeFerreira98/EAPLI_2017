@@ -2,6 +2,7 @@ package eapli.ecafeteria.domain.cafeteria;
 
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.framework.domain.AggregateRoot;
+import eapli.framework.domain.Money;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
@@ -106,5 +107,9 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
 
     public OrganicUnit organicUnit() {
         return this.organicUnit;
+    }
+
+    public boolean hasSufficientBalance(Money expenseValue) {
+        return false;
     }
 }

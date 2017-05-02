@@ -47,6 +47,24 @@ public class BookingController implements Controller {
 
     public Booking bookingMeal(CafeteriaUser user, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
 
+        /* Check if user has enough balance to reserve meal */
+        if (user.hasSufficientBalance(meal.dish().currentPrice())) {
+            /* Check if time limit not exceeded and if there are available meals
+             * If positive add reservation to meal
+             */
+            if (meal.registerReservation()) {
+                Booking reserve = new Booking(user, meal);
+                PersistenceContext.repositories().reserves().save(reserve);
+                //retirar o dinheiro
+                return reserve;
+            } else {
+                System.out.
+                        println("Reservation time limit exceed or there are no available meals to reserve!");
+            }
+        } else {
+            System.out.println("Your current balance is not enough!");
+        }
+        
         return null;
     }
 }

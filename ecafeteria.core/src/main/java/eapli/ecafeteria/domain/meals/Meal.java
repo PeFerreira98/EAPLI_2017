@@ -27,7 +27,7 @@ public class Meal implements AggregateRoot<CompositeIdMeal>, Serializable {
 
     @Version
     private Long version;
-    
+
     @EmbeddedId
     private CompositeIdMeal id;
     @ManyToOne
@@ -58,9 +58,9 @@ public class Meal implements AggregateRoot<CompositeIdMeal>, Serializable {
         if (menu == null || mealType == null || dish == null || date == null) {
             throw new IllegalArgumentException();
         }
-        if (!menu.isInBetween(date)){
-			throw new IllegalArgumentException("Meal date does not correspond to menu");
-		}
+        if (!menu.isInBetween(date)) {
+            throw new IllegalArgumentException("Meal date does not correspond to menu");
+        }
 
         this.dish = dish;
         this.mealType = mealType;
@@ -79,10 +79,10 @@ public class Meal implements AggregateRoot<CompositeIdMeal>, Serializable {
         final Meal other = (Meal) o;
         return this.id.equals(other.id);
     }
-    
-	@Override
-	public boolean sameAs(Object other) {
-		if (!(other instanceof Meal)) {
+
+    @Override
+    public boolean sameAs(Object other) {
+        if (!(other instanceof Meal)) {
             return false;
         }
 
@@ -91,36 +91,73 @@ public class Meal implements AggregateRoot<CompositeIdMeal>, Serializable {
             return true;
         }
 
-        return id().equals(that.id()); 
-	}
-
-	@Override
-	public boolean is(CompositeIdMeal id) {
-		return id().equals(id);
-	}
-    
-    public CompositeIdMeal id(){
-    	return this.id;
+        return id().equals(that.id());
     }
-    
+
+    @Override
+    public boolean is(CompositeIdMeal id) {
+        return id().equals(id);
+    }
+
+    public CompositeIdMeal id() {
+        return this.id;
+    }
+
     public String description() {
         return this.description;
     }
-    
-    public Menu menu(){
+
+    public Menu menu() {
         return this.menu;
     }
-    
-    public Dish dish(){
+
+    public Dish dish() {
         return this.dish;
     }
-    
-    public Calendar date(){
+
+    public Calendar date() {
         return this.date;
     }
-    
-    public MealType mealType(){
+
+    public MealType mealType() {
         return this.mealType;
     }
 
+    /**
+     * verify if exists available meals only if quantity reserved it´s inferior
+     * quantity planned
+     *
+     * @return boolean
+     */
+    protected boolean areThereAvailableMeals() {
+        return false;
+    }
+
+    /**
+     * verify if current date it´s lower in relation of limit date for
+     * reservation
+     *
+     * @return boolean
+     */
+    protected boolean isTimeForReserveNotExceed() {
+        return false;
+    }
+
+    private boolean isMealAvailableToReserve() {
+        return (areThereAvailableMeals() && isTimeForReserveNotExceed());
+    }
+
+    /**
+     * verify if a meal is available to reserve and add a reserve if true
+     *
+     * @return boolean
+     */
+    public boolean registerReservation() {
+        if (isMealAvailableToReserve()) {
+           //reservo
+           return false;
+        } else {
+            return false;
+        }
+    }
 }
