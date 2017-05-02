@@ -25,9 +25,10 @@ import java.util.Observer;
 /**
  * SRR-06 Classe do UI de escolha e booking de uma unica refeicao SRR-06
  * Observer - de alergias entre o user e uma meal.
+ *
  * @author Hugo - Alexandra Ferreira 1140388 - Nuno Costa 1131106
  */
-public class BookingUI extends AbstractUI implements Observer{
+public class BookingUI extends AbstractUI implements Observer {
 
     private final BookingController controller = new BookingController();
 
@@ -43,6 +44,11 @@ public class BookingUI extends AbstractUI implements Observer{
 
         /* Meal type section */
         final Iterable<MealType> mealType = this.controller.listMealType(date);
+
+        if (!mealType.iterator().hasNext()) {
+            System.out.println("There are no meal types defined!");
+            return false;
+        }
 
         final SelectWidget<MealType> mealTypeSelector = new SelectWidget<>(mealType, new MealTypePrinter());
         mealTypeSelector.show();
@@ -66,21 +72,18 @@ public class BookingUI extends AbstractUI implements Observer{
         final Meal mealChosen = mealSelector.selectedElement();
 
         if (mealChosen != null) {
-            
-        }
-
-        try {
-            this.controller.bookingMeal(null,null);
-        } catch (DataIntegrityViolationException e) {
-            System.out.println("This Meal is already booked for this User");
-        } catch (DataConcurrencyException e) {
-            System.out.println("");
+            try {
+                this.controller.bookingMeal(null, null);
+            } catch (DataIntegrityViolationException e) {
+                System.out.println("This Meal is already booked for this User");
+            } catch (DataConcurrencyException e) {
+                System.out.println("");
+            }
         }
 
         //------------------------------------------------------
         //INSERIR codigo do bookingUI aqui.
         //Codigo da parte de mostrar info da Meal indicada pelo user. Hugo & Pedro        
-        
         {
             /*
              //Instranciacao do controller.

@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.application.booking;
 
+import eapli.ecafeteria.application.meals.ListMealService;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.application.menus.ListMenuService;
 import eapli.ecafeteria.domain.authz.SystemUser;
@@ -27,7 +28,7 @@ public class BookingController implements Controller {
     public Iterable<MealType> listMealType(Calendar date) {
         Set<MealType> listMealTypes = new HashSet();
         for (Meal meal : PersistenceContext.repositories().meals().
-                mealsOfCertainDate(date)) {
+                mealsOfPublishedMenuFromCertainDate(date)) {
             listMealTypes.add(meal.mealType());
         }
         return listMealTypes;
@@ -40,10 +41,7 @@ public class BookingController implements Controller {
             return null;
         }
 
-        /**
-         * TO DO
-         */
-        return null;
+        return new ListMealService().mealsOfMenuByDateMealType(date, mealType, menu.iterator().next());
     }
 
     public Booking bookingMeal(SystemUser user, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {

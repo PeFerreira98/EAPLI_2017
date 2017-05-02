@@ -7,6 +7,7 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.meals.CompositeIdMeal;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
 import java.util.Calendar;
@@ -23,8 +24,13 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Composit
     }
 
     @Override
-    public Iterable<Meal> mealsOfCertainDate(Calendar date) {
+    public Iterable<Meal> mealsOfPublishedMenuFromCertainDate(Calendar date) {
         return match("e.date='" + date +"'");
+    }
+
+    @Override
+    public Iterable<Meal> mealsOfMenuByDateMealType(Calendar date, MealType mealType, Menu menu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

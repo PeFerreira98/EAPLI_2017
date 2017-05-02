@@ -1,39 +1,47 @@
 title Meal Selection
 
-User->BookingUI:BookingRequest
-BookingUI-->*BookingController:create()
-BookingUI->User:Ask a day
-User->BookingUI:Insert date 
-BookingUI->User:Ask a type of meal
-User->BookingUI:Insert meal type
+User->BookingUI: Initiates the process of meal reservation
 
-BookingUI->BookingController:insertData(day, meal)
+BookingUI->*BookingController:create()
+
+
+BookingUI-->User:Ask a date
+User->BookingUI:Insert a date
+
+BookingUI->BookingController:listMealType(day)
+BookingController->PersistenceContext: RepositoryFactory=repositories()
+PersistenceContext->RepositoryFactory:create()
+PersistenceContext-> RepositoryFactory: mealTypes()
+RepositoryFactory-->BookingController:listMealTypes
+BookingController-->BookingUI:listMealTypes
+BookingUI-->User: show type meal
+User -> BookingUI: selects a type meal
+
+
+BookingUI->BookingController:listMeals(day, mealType)
 BookingController->BookingController:validate(day, meal)
 
 
 
-BookingController->PersistenceContext:repositories()
-PersistenceContext->RepositoryFactory:create()
-BookingController-> RepositoryFactory:showMealListByDay(day,meal)
-BookingController-> BookingUI:list
-BookingUI->User:show the meals list
-User->BookingUI:choose meal
-BookingUI->BookingController:bookingMeal(meal)
-BookingController->BookingBuilder:create()
-BookingController->BookingBuilder:setMeal(meal)
-BookingController->BookingBuilder:createBooking()
-BookingBuilder->Booking:create(meal)
-Booking->BookingBuilder:booking
-BookingBuilder->BookingController:booking
+BookingController -> ListMenuService: findMenuByDate(date)
+BookingController -> PersistenceContext: RepositoryFactory=repositories()
+PersistenceContext -> RepositoryFactory: repositories()
+RepositoryFactory -> MenuRepository: menus()
 
-BookingController->RepositoryFactory:bookings()
 
-RepositoryFactory->BookingRepository:create()
+MenuRepository -> MenuRepository: mealsOfPublishedMenuFromCertainDate(Calendar date)
+BookingController -> ListMealService: mealsOfMenuByDateMealType(Calendar date, MealType mealType, Menu menu)
+BookingController -> PersistenceContext: RepositoryFactory=repositories()
+PersistenceContext -> RepositoryFactory: repositories()
+RepositoryFactory -> MealRepository: meals()
 
-RepositoryFactory->BookingController:BookingRepository
 
-BookingController->BookingRepository:save(booking)
+MealRepository -> MealRepository: mealsOfMenuByDateMealType(date, mealType, menu)
+MealRepository --> BookingController : listMeals
+BookingController --> BookingUI: listMeals
 
-PersistenceContext->BookingController:booking
+BookingUI-->User:show a list of meals
+User->BookingUI:Choose a meal
 
-BookingUI->User:displayBookingInfo
+BookingUI --> User: confirms?
+User -> BookingUI: user confirms
