@@ -50,19 +50,17 @@ PersistenceContext  --> ListMealTypeService: Meal Type Repository
 
 
 
-CreateMealUI -> CreateMealController: listPublishedMenus()
+CreateMealUI -> CreateMealController: listEditableMenus()
 
-CreateMealController -> ListMenuService: publishedMenus()
+CreateMealController -> ListMenuService: editableMenus()
 
-ListMenuService -> MenuRepository: publishedMenus()
+ListMenuService -> MenuRepository: editableMenus()
 
-MenuRepository --> ListMenuService: Published Menus
+MenuRepository --> ListMenuService: Editable Menus
 
-ListMenuService --> CreateMealController: Published Menus
+ListMenuService --> CreateMealController: Editable Menus
 
-CreateMealController --> CreateMealUI: Published Menus
-
-
+CreateMealController --> CreateMealUI: Editable Menus
 
 CreateMealUI --> User: Show Menu List
 
@@ -113,9 +111,14 @@ CreateMealUI --> User: Request Meal Date
 User -> CreateMealUI: Input Date 
 
 
+CreateMealUI --> User: Request Meal Description
 
-CreateMealUI -> CreateMealController: createMeal(menu, dish, mealtype, date)
-CreateMealController -> *Meal: create(menu, dish, mealtype, date)
+User -> CreateMealUI: Input Description
+
+
+
+CreateMealUI -> CreateMealController: createMeal(menu, dish, mealtype, date, description)
+CreateMealController -> *Meal: create(menu, dish, mealtype, date, description)
 
 CreateMealController -> MealRepository: save(newMeal)
 

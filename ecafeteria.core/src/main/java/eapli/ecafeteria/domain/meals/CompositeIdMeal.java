@@ -5,6 +5,7 @@ package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.menus.Menu;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.persistence.Embeddable;
 import eapli.framework.domain.ValueObject;
@@ -21,7 +22,7 @@ public class CompositeIdMeal implements ValueObject, Serializable{
 	private String menu;
 	private String dish;
 	private String mealType;
-	private Calendar calendar;
+	private String calendar;
 	
 	protected CompositeIdMeal(){
 		// for ORM
@@ -34,10 +35,12 @@ public class CompositeIdMeal implements ValueObject, Serializable{
 		if (!menu.isInBetween(calendar)){
 			throw new IllegalArgumentException("Meal date does not correspond to menu");
 		}
+		SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+		
 		this.dish = dish.id().toString();
         this.mealType = mealType.id();
         this.menu = menu.id();
-        this.calendar = calendar;
+        this.calendar = format1.format(calendar.getTime());
 	}
 	
 	@Override
@@ -65,6 +68,12 @@ public class CompositeIdMeal implements ValueObject, Serializable{
 
         return this.calendar.equals(other.calendar);
     }
+	
+	@Override
+	public String toString() {
+		return "CompositeIdMeal [menu=" + menu + ", dish=" + dish + ", mealType=" + mealType + ", calendar=" + calendar
+				+ "]";
+	}
 	
 	@Override
     public int hashCode() {

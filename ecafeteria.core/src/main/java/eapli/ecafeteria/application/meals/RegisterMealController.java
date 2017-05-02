@@ -44,7 +44,7 @@ public class RegisterMealController implements Controller{
     }
 
     public Iterable<Menu> listMenus() {
-        return this.menuSvc.publishedMenus();
+        return this.menuSvc.editableMenus();
     }
     
     public Iterable<Dish> listDish() {

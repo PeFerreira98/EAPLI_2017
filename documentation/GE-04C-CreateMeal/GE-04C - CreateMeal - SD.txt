@@ -1,0 +1,122 @@
+title GE-04C - Create 
+
+Meal
+
+User <--> MainMenuUI: ...
+
+User -> MainMenuUI: choose Create Meal option
+
+MainMenuUI --> *CreateMealUI: create()
+
+
+
+CreateMealUI --> *CreateMealController: create()
+
+CreateMealController -> PersistenceContext: meals()
+
+PersistenceContext --> *MealRepository: create()
+
+PersistenceContext --> CreateMealController: Meal Repository
+
+
+
+CreateMealController --> *ListMenuService: create()
+
+ListMenuService -> PersistenceContext: menus()
+
+PersistenceContext --> *MenuRepository: create()
+
+PersistenceContext  --> ListMenuService: Menu Repository
+
+
+
+CreateMealController --> *ListDishService: create()
+
+ListDishService -> PersistenceContext: dishes()
+
+PersistenceContext --> *DishRepository: create()
+
+PersistenceContext  --> ListDishService: Dish Repository
+
+
+
+CreateMealController --> *ListMealTypeService: create()
+
+ListMealTypeService -> PersistenceContext: mealTypes()
+
+PersistenceContext --> *MealTypeRepository: create()
+
+PersistenceContext  --> ListMealTypeService: Meal Type Repository
+
+
+
+CreateMealUI -> CreateMealController: listEditableMenus()
+
+CreateMealController -> ListMenuService: editableMenus()
+
+ListMenuService -> MenuRepository: editableMenus()
+
+MenuRepository --> ListMenuService: Editable Menus
+
+ListMenuService --> CreateMealController: Editable Menus
+
+CreateMealController --> CreateMealUI: Editable Menus
+
+CreateMealUI --> User: Show Menu List
+
+User -> CreateMealUI: Select Menu
+
+
+
+CreateMealUI -> CreateMealController: listAllDishes()
+
+CreateMealController -> ListDishService: allDishes()
+
+ListDishService -> MenuRepository: allDishes()
+
+DishRepository --> ListDishService: All Dishes
+
+ListDishService --> CreateMealController: All Dishes
+
+CreateMealController --> CreateMealUI: All Dishes
+
+
+
+CreateMealUI --> User: Show Dish List
+
+User -> CreateMealUI: Select Dish 
+
+
+
+CreateMealUI -> CreateMealController: listMealTypes()
+
+CreateMealController -> ListMealTypeService: activeMealTypes()
+
+ListMealTypeService -> MealTypeRepository: activeMealTypes()
+
+MealTypeRepository --> ListMealTypeService: Active Meal Types
+
+ListMealTypeService --> CreateMealController: Active Meal Types
+
+CreateMealController --> CreateMealUI: Active Meal Types
+
+
+
+CreateMealUI --> User: Show Meal Type List
+
+User -> CreateMealUI: Select Meal Type
+
+CreateMealUI --> User: Request Meal Date
+
+User -> CreateMealUI: Input Date 
+
+
+
+CreateMealUI -> CreateMealController: createMeal(menu, dish, mealtype, date)
+CreateMealController -> *Meal: create(menu, dish, mealtype, date)
+
+CreateMealController -> MealRepository: save(newMeal)
+
+
+
+CreateMealUI --> User: Success

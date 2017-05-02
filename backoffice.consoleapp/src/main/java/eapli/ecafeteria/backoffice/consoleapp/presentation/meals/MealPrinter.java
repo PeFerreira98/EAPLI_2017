@@ -9,7 +9,7 @@ public class MealPrinter implements Visitor<Meal> {
 
 	@Override
 	public void visit(Meal visitee) {
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         System.out.printf("%-12s%-30s%-30s%-12s%-30s\n", 
         		format1.format(visitee.date().getTime()),
         		visitee.dish().dishType().description(),
