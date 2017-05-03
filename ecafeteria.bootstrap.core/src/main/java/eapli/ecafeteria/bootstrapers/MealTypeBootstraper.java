@@ -19,15 +19,15 @@ public class MealTypeBootstraper implements Action {
 
     @Override
     public boolean execute() {
-        register("lunch", "lunch meal");
-        register("dinner", "dinner meal");
+        register("lunch", "lunch meal", 10);
+        register("dinner", "dinner meal", 16);
         return false;
     }
 
-    private void register(String acronym, String description) {
+    private void register(String acronym, String description, int reservationHour) {
         final RegisterMealTypeController controller = new RegisterMealTypeController();
         try {
-            controller.registerMealType(acronym, description);
+            controller.registerMealType(acronym, description, reservationHour);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             // ignoring exception. assuming it is just a primary key violation
             // due to the tentative of inserting a duplicated user

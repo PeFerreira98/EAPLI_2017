@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import eapli.framework.domain.AggregateRoot;
+import eapli.util.DateTime;
 
 /**
  *
@@ -39,7 +40,7 @@ public class Meal implements AggregateRoot<CompositeIdMeal>, Serializable {
     @Temporal(TemporalType.DATE)
     private Calendar date;
     private String description;
-    
+
     private MealPlanItem mealPlanItem;
 
     protected Meal() {
@@ -142,7 +143,16 @@ public class Meal implements AggregateRoot<CompositeIdMeal>, Serializable {
      * @return boolean
      */
     protected boolean isTimeForReserveNotExceed() {
-        return false;
+        Calendar now = DateTime.now();
+
+        if (DateTime.isPreviousDate(now, this.date())) {
+            return true;
+        }
+
+        return DateTime.isSameDate(now, this.date()) && now.
+                get(Calendar.HOUR_OF_DAY) <= this.
+                mealType().
+                limitForReservation();
     }
 
     private boolean isMealAvailableToReserve() {
@@ -156,7 +166,7 @@ public class Meal implements AggregateRoot<CompositeIdMeal>, Serializable {
      */
     public boolean registerReservation() {
         if (isMealAvailableToReserve()) {
-           return this.mealPlanItem.addReserve();
+            return this.mealPlanItem.addReserve();
         } else {
             return false;
         }

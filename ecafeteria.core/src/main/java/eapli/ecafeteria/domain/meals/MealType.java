@@ -34,16 +34,31 @@ public class MealType implements AggregateRoot<String>, Serializable {
     @Column(unique = true)
     private String acronym;
     private String description;
+    private int reservationHourLimit;
     private boolean active;
 
     protected MealType() {
         //ORM
     }
 
-    public MealType(String name, String description) {
+    public MealType(String name, String description, int reservationHour) {
+
+        if (Strings.isNullOrEmpty(name) || reservationHour < 0 || reservationHour > 24) {
+            throw new IllegalArgumentException();
+        }
+
         setName(name);
         setDescription(description);
+        this.reservationHourLimit = reservationHour;
         this.active = true;
+    }
+
+    /**
+     *
+     * @return limit hour for reservation
+     */
+    public int limitForReservation() {
+        return this.reservationHourLimit;
     }
 
     /**

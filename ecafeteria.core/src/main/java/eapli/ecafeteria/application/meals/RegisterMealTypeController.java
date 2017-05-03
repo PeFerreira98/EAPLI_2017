@@ -18,15 +18,15 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  *
  * @author zero_
  */
-public class RegisterMealTypeController implements Controller{
-    
+public class RegisterMealTypeController implements Controller {
+
     private final MealTypeRepository repository = PersistenceContext.repositories().mealTypes();
 
-    public MealType registerMealType(String acronym, String description)
+    public MealType registerMealType(String acronym, String description, int reservationHour)
             throws DataIntegrityViolationException, DataConcurrencyException {
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
-        final MealType newMealType = new MealType(acronym, description);
+        final MealType newMealType = new MealType(acronym, description, reservationHour);
         return this.repository.save(newMealType);
     }
 }

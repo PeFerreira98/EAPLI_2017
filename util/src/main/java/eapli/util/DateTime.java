@@ -25,6 +25,37 @@ public final class DateTime {
 
     private static final int DAYS_TILL_END_OF_WEEK = 6;
 
+    /**
+     * checks if the date in both calendar instances are the same. time is not
+     * compared!
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public static boolean isSameDate(final Calendar a, final Calendar b) {
+        return (a.get(Calendar.YEAR) == b.get(Calendar.YEAR)) && (a.
+                get(Calendar.MONTH) == b.get(Calendar.MONTH)) && (a.
+                get(Calendar.DAY_OF_MONTH) == b.get(Calendar.DAY_OF_MONTH));
+    }
+
+    /**
+     * Checks if a date is previous to another. Time is not compared!
+     *
+     * @param a date to be checked
+     * @param b date to be checked against
+     * @return
+     */
+    public static boolean isPreviousDate(final Calendar a, final Calendar b) {
+        Calendar dateA = new GregorianCalendar(a.get(Calendar.YEAR), a.
+                get(Calendar.MONTH), a.
+                get(Calendar.DAY_OF_MONTH));
+        Calendar dateB = new GregorianCalendar(b.get(Calendar.YEAR), b.
+                get(Calendar.MONTH), b.
+                get(Calendar.DAY_OF_MONTH));
+        return (dateA.before(dateB));
+    }
+
     private DateTime() {
         // to make sure this is an utility class
     }
@@ -212,19 +243,20 @@ public final class DateTime {
 
         return dayNames[calendar.get(Calendar.DAY_OF_WEEK)];
     }
-    
+
     /**
      * Retorna uma lista com os dias da semana que contem o dia indicado
+     *
      * @param originalDay dia indicado
      * @return lista com 7 dias
      */
-    public static List<Calendar> listDaysOfWeekOfGivenDay(Calendar originalDay){
+    public static List<Calendar> listDaysOfWeekOfGivenDay(Calendar originalDay) {
         int year = originalDay.get(Calendar.YEAR);
         int calendarWeek = weekNumber(originalDay);
         Calendar sunday = beginningOfWeek(year, calendarWeek);
         List<Calendar> daysInWeek = new ArrayList<>();
-        for(int i = 0; i < 7; i++){
-            daysInWeek.add( (Calendar) sunday.clone());
+        for (int i = 0; i < 7; i++) {
+            daysInWeek.add((Calendar) sunday.clone());
             sunday.add(Calendar.DAY_OF_MONTH, 1);
         }
         return daysInWeek;

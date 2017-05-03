@@ -21,9 +21,11 @@ public class RegisterMealTypeUI extends AbstractUI{
 		final String acronym = Console.readLine("Acronym");
 		
 		final String description = Console.readLine("Description");
+                
+                final int reservationHour = Console.readInteger("Hour Limit for Reservation");
 
 		try {			
-			this.theController.registerMealType(acronym, description);
+			this.theController.registerMealType(acronym, description, reservationHour);
 			
 		} catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             System.out.println("You tried to enter a meal which already exists in the database.");
