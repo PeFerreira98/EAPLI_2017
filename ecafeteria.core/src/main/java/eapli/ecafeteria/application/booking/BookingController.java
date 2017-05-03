@@ -56,6 +56,7 @@ public class BookingController implements Controller {
                 Booking reserve = new Booking(user, meal);
                 PersistenceContext.repositories().reserves().save(reserve);
                 //retirar o dinheiro
+                user.registerExpense(meal.dish().currentPrice().amountAsDecimal());
                 return reserve;
             } else {
                 System.out.

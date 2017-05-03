@@ -1,9 +1,11 @@
 package eapli.ecafeteria.domain.cafeteria;
 
 import eapli.ecafeteria.domain.authz.SystemUser;
+import eapli.ecafeteria.domain.mealbooking.Account;
 import eapli.framework.domain.AggregateRoot;
 import eapli.framework.domain.Money;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -42,6 +44,8 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     @ManyToOne(cascade = CascadeType.MERGE)
     private OrganicUnit organicUnit;
 
+    private Account account;
+
     public CafeteriaUser(SystemUser user, OrganicUnit organicUnit, MecanographicNumber mecanographicNumber) {
         if (mecanographicNumber == null || user == null || organicUnit == null) {
             throw new IllegalStateException();
@@ -49,6 +53,7 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         this.systemUser = user;
         this.organicUnit = organicUnit;
         this.mecanographicNumber = mecanographicNumber;
+        this.account = new Account("EUR");
     }
 
     protected CafeteriaUser() {
@@ -109,7 +114,15 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         return this.organicUnit;
     }
 
+    public Money accountBalance() {
+        return this.account.getBalance();
+    }
+
     public boolean hasSufficientBalance(Money expenseValue) {
-        return false;
+        return this.account.hasSufficientBalance(expenseValue);
+    }
+
+    public boolean registerExpense(BigDecimal value) {
+        return this.account.addAccountDebt(value);
     }
 }
