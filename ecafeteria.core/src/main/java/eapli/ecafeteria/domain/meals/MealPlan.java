@@ -15,14 +15,12 @@ public class MealPlan {
 
     private Calendar periodStart;
     private Calendar periodEnd;
-    private int maxDishes;
 
-    public MealPlan(Calendar dateStart, Calendar dateEnd, int maxDishes) {
+    public MealPlan(Calendar dateStart, Calendar dateEnd) {
 
         if (dateEnd.after(dateStart)) {
             this.periodStart = dateStart;
             this.periodEnd = dateEnd;
-            this.maxDishes = maxDishes;
         } else {
             System.out.println("Dates Invalid!!");
         }
@@ -39,10 +37,6 @@ public class MealPlan {
         this.periodEnd = end;
     }
 
-    public void changeMaxDishes(int dishes) {
-        this.maxDishes = dishes;
-    }
-
     public Calendar getPeriodStart() {
         return periodStart;
     }
@@ -50,9 +44,4 @@ public class MealPlan {
     public Calendar getPeriodEnd() {
         return periodEnd;
     }
-
-    public int getMaxDishes() {
-        return maxDishes;
-    }
-
 }

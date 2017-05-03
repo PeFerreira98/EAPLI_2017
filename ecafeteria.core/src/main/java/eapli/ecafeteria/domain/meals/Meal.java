@@ -39,6 +39,8 @@ public class Meal implements AggregateRoot<CompositeIdMeal>, Serializable {
     @Temporal(TemporalType.DATE)
     private Calendar date;
     private String description;
+    
+    private MealPlanItem mealPlanItem;
 
     protected Meal() {
         // ORM
@@ -130,7 +132,7 @@ public class Meal implements AggregateRoot<CompositeIdMeal>, Serializable {
      * @return boolean
      */
     protected boolean areThereAvailableMeals() {
-        return false;
+        return (this.mealPlanItem.quantityReserved() < this.mealPlanItem.quantityPlanned());
     }
 
     /**
@@ -154,8 +156,7 @@ public class Meal implements AggregateRoot<CompositeIdMeal>, Serializable {
      */
     public boolean registerReservation() {
         if (isMealAvailableToReserve()) {
-           //reservo
-           return false;
+           return this.mealPlanItem.addReserve();
         } else {
             return false;
         }
