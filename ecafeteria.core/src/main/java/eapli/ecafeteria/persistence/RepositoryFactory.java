@@ -40,16 +40,20 @@ public interface RepositoryFactory {
     DishRepository dishes();
 
     MaterialRepository materials();
-    
+
     MenuRepository menus();
-    
+
     MealTypeRepository mealTypes();
-    
+
     MealRepository meals();
-    
+
     AllergenRepository allergens();
-    
+
     DishAllergenRepository dishAllergens();
-    
+
     BookingRepository reserves();
+
+    NutricionalProfileRepository nutricionalProfiles();
+
+    NutricionalProfileAllergenRepository nutricionalProfileAllergens();
 }

@@ -1,6 +1,5 @@
 package eapli.ecafeteria.persistence.inmemory;
 
-//import eapli.ecafeteria.bootstrapers.ECafeteriaBootstraper;
 import eapli.ecafeteria.bootstrapers.ECafeteriaBootstraper;
 import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.BookingRepository;
@@ -12,6 +11,8 @@ import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MealTypeRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
+import eapli.ecafeteria.persistence.NutricionalProfileAllergenRepository;
+import eapli.ecafeteria.persistence.NutricionalProfileRepository;
 import eapli.ecafeteria.persistence.OrganicUnitRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
@@ -78,19 +79,29 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     public MealRepository meals() {
         return new InMemoryMealRepository();
     }
-    
+
     @Override
     public AllergenRepository allergens() {
         return new InMemoryAllergenRepository();
     }
-    
+
     @Override
     public DishAllergenRepository dishAllergens() {
-        return (DishAllergenRepository) new InMemoryDishAllergenRepository();
+        return new InMemoryDishAllergenRepository();
     }
 
     @Override
     public BookingRepository reserves() {
         return new InMemoryBookingRepository();
+    }
+
+    @Override
+    public NutricionalProfileRepository nutricionalProfiles() {
+        return new InMemoryNutricionalProfileRepository();
+    }
+
+    @Override
+    public NutricionalProfileAllergenRepository nutricionalProfileAllergens() {
+        return new InMemoryNutricionalProfileAllergenRepository();
     }
 }

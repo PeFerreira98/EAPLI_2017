@@ -9,6 +9,8 @@ import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MealTypeRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
+import eapli.ecafeteria.persistence.NutricionalProfileAllergenRepository;
+import eapli.ecafeteria.persistence.NutricionalProfileRepository;
 import eapli.ecafeteria.persistence.OrganicUnitRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
@@ -69,12 +71,12 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public MealRepository meals() {
         return new JpaMealRepository();
     }
-    
+
     @Override
     public AllergenRepository allergens() {
         return new JpaAllergenRepository();
     }
-    
+
     @Override
     public DishAllergenRepository dishAllergens() {
         return (DishAllergenRepository) new JpaDishAllergenRepository();
@@ -83,5 +85,15 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public BookingRepository reserves() {
         return new JpaBookingRepository();
+    }
+
+    @Override
+    public NutricionalProfileRepository nutricionalProfiles() {
+        return new JpaNutricionalProfileRepository();
+    }
+
+    @Override
+    public NutricionalProfileAllergenRepository nutricionalProfileAllergens() {
+        return new JpaNutricionalProfileAllergenRepository();
     }
 }

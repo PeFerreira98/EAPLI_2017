@@ -24,9 +24,9 @@ public class DishAllergen implements Serializable {
     }
 
     public String description() {
-		return this.description;
-	}
-    
+        return this.description;
+    }
+
     public boolean isActive() {
         return this.active;
     }
@@ -40,7 +40,7 @@ public class DishAllergen implements Serializable {
     public String idDish() {
         return this.dish.id().toString();
     }
-    
+
     //@Override
     public String idAllergen() {
         return this.allergen.id();
@@ -67,6 +67,6 @@ public class DishAllergen implements Serializable {
         }
 
         final DishAllergen other = (DishAllergen) o;
-        return (idDish().equals(other.idDish())&&idAllergen().equals(other.idAllergen()));
+        return (idDish().equals(other.idDish()) && idAllergen().equals(other.idAllergen()));
     }
 }

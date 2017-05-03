@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package eapli.ecafeteria.domain.meals;
 
@@ -15,40 +15,40 @@ import eapli.framework.domain.ValueObject;
  *
  */
 @Embeddable
-public class CompositeIdMeal implements ValueObject, Serializable{
+public class CompositeIdMeal implements ValueObject, Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	private String menu;
-	private String dish;
-	private String mealType;
-	private String calendar;
-	
-	protected CompositeIdMeal(){
-		// for ORM
-	}
-	
-	public CompositeIdMeal(Menu menu, Dish dish, MealType mealType, Calendar calendar){
-		if (menu == null || mealType == null || dish == null || calendar == null) {
+    private static final long serialVersionUID = 1L;
+
+    private String menu;
+    private String dish;
+    private String mealType;
+    private String calendar;
+
+    protected CompositeIdMeal() {
+        // for ORM
+    }
+
+    public CompositeIdMeal(Menu menu, Dish dish, MealType mealType, Calendar calendar) {
+        if (menu == null || mealType == null || dish == null || calendar == null) {
             throw new IllegalArgumentException("Null parameter inserted");
         }
-		if (!menu.isInBetween(calendar)){
-			throw new IllegalArgumentException("Meal date does not correspond to menu");
-		}
-		SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
-		
-		this.dish = dish.id().toString();
+        if (!menu.isInBetween(calendar)) {
+            throw new IllegalArgumentException("Meal date does not correspond to menu");
+        }
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+
+        this.dish = dish.id().toString();
         this.mealType = mealType.id();
         this.menu = menu.id();
         this.calendar = format1.format(calendar.getTime());
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-		
+
         if (!(o instanceof CompositeIdMeal)) {
             return false;
         }
@@ -68,14 +68,14 @@ public class CompositeIdMeal implements ValueObject, Serializable{
 
         return this.calendar.equals(other.calendar);
     }
-	
-	@Override
-	public String toString() {
-		return "CompositeIdMeal [menu=" + menu + ", dish=" + dish + ", mealType=" + mealType + ", calendar=" + calendar
-				+ "]";
-	}
-	
-	@Override
+
+    @Override
+    public String toString() {
+        return "CompositeIdMeal [menu=" + menu + ", dish=" + dish + ", mealType=" + mealType + ", calendar=" + calendar
+                + "]";
+    }
+
+    @Override
     public int hashCode() {
         return this.dish.hashCode();
     }

@@ -26,6 +26,8 @@ public class ECafeteriaBootstraper implements Action {
             new MenuBootstraper(),
             new MealTypeBootstraper(),
             new MealBootstraper(),
+            new AllergenBootstraper(),
+            new NutricionalProfileBootstraper()
         };
 
         // authenticate a super user to be able to register new users, ...
@@ -37,6 +39,7 @@ public class ECafeteriaBootstraper implements Action {
         roles.add(RoleType.ADMIN);
         roles.add(RoleType.MENU_MANAGER);
         roles.add(RoleType.KITCHEN_MANAGER);
+        roles.add(RoleType.CAFETERIA_USER);
         final UserSession adminSession = new UserSession(
                 new SystemUser("poweruser", "poweruserA1", "joe", "doe", "joe@email.org", roles));
         Application.session().setSession(adminSession);
