@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.domain.meals;
 
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -13,14 +13,16 @@ import java.util.Date;
  */
 public class MealPlan {
 
-    private Date periodStart;
-    private Date periodEnd;
+    private Calendar periodStart;
+    private Calendar periodEnd;
+    private int maxDishes;
 
-    public MealPlan(Date dateStart, Date dateEnd) {
+    public MealPlan(Calendar dateStart, Calendar dateEnd, int maxDishes) {
 
         if (dateEnd.after(dateStart)) {
             this.periodStart = dateStart;
             this.periodEnd = dateEnd;
+            this.maxDishes = maxDishes;
         } else {
             System.out.println("Dates Invalid!!");
         }
@@ -32,17 +34,25 @@ public class MealPlan {
      * @param start
      * @param end
      */
-    public void changePeriod(Date start, Date end) {
+    public void changePeriod(Calendar start, Calendar end) {
         this.periodStart = start;
         this.periodEnd = end;
     }
 
-    public Date getPeriodStart() {
+    public void changeMaxDishes(int dishes) {
+        this.maxDishes = dishes;
+    }
+
+    public Calendar getPeriodStart() {
         return periodStart;
     }
 
-    public Date getPeriodEnd() {
+    public Calendar getPeriodEnd() {
         return periodEnd;
+    }
+
+    public int getMaxDishes() {
+        return maxDishes;
     }
 
 }
