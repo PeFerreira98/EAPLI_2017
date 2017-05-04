@@ -1,0 +1,12 @@
+
+UC SRR-08 Meal Rating
+
+Use case: (brief)
+The cafeteria User indicates that he wishes to rate a meal.
+The system shows the meals avaiable for rating fro this cafeteria user and ask to select one.
+The cafeteria User indicates a meal.
+The system, asks the rating of the meal.
+The cafeteria User indicates the rating.
+The system asks for a comment.
+The cafeteria User indicates a comment, or no.
+The system creates the meal rating and informs of sucess.
