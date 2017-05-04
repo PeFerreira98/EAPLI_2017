@@ -5,22 +5,38 @@
  */
 package eapli.ecafeteria.domain.meals;
 
+import eapli.framework.domain.AggregateRoot;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  *
  * @author JoãoPedro
  */
+@Entity
 public class DishAllergen implements Serializable {
-
+    private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue
+    private Long pk;
+    
+    @OneToOne
     Dish dish;
+    @OneToOne
     Allergen allergen;
+    
+    
     boolean active = true;
     String description = "";
 
     public DishAllergen(Dish dish, Allergen allergen) {
         this.dish = dish;
         this.allergen = allergen;
+    }
+    
+    protected DishAllergen(){
+        //orm
     }
 
     public String description() {
