@@ -11,9 +11,10 @@
     <class>eapli.ecafeteria.domain.cafeteria.CafeteriaUser</class>
     <class>eapli.ecafeteria.domain.cafeteria.SignupRequest</class>
     <class>eapli.ecafeteria.domain.meals.Dish</class>
-    <class>eapli.ecafeteria.domain.menus.Menu</class>
     <class>eapli.ecafeteria.domain.meals.MealType</class>
     <class>eapli.ecafeteria.domain.meals.Meal</class>
+    <class>eapli.ecafeteria.domain.meals.Allergen</class>
+    <class>eapli.ecafeteria.domain.menus.Menu</class>
     <class>eapli.ecafeteria.domain.kitchen.Material</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\ecafeteria;MV_STORE=FALSE"/>
