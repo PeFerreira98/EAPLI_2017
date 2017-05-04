@@ -5,13 +5,17 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.framework.persistence.repositories.DataRepository;
+import java.util.Calendar;
 
 /**
  *
  * @author Alexandra Ferreira 1140388 - Nuno Costa 1131106
  */
-public interface BookingRepository extends DataRepository<Booking, Long>{
+public interface BookingRepository extends DataRepository<Booking, Long> {
+
+    Iterable<Booking> findNextReserves(Calendar dateInitial, Calendar dateFinal, CafeteriaUser user);
     
 }
