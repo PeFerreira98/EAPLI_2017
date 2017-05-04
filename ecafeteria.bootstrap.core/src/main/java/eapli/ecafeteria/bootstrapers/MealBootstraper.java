@@ -28,14 +28,14 @@ public class MealBootstraper implements Action {
         Dish dish = dishRepository.first();
         Calendar calendar = GregorianCalendar.getInstance();
 
-		calendar.set(2017, Calendar.APRIL, 10);
-		register(menu, dish, mealTypeLunch, calendar, "meal1");
-		
-		calendar.set(2017, Calendar.APRIL, 11);
-		register(menu, dish, mealTypeLunch, calendar, "meal2");
-		
-		calendar.set(2017, Calendar.APRIL, 13);
-		register(menu, dish, mealTypeLunch, calendar, "meal3");
+//		calendar.set(2017, Calendar.APRIL, 10);
+//		register(menu, dish, mealTypeLunch, calendar, "meal1");
+//		
+//		calendar.set(2017, Calendar.APRIL, 11);
+//		register(menu, dish, mealTypeLunch, calendar, "meal2");
+//		
+//		calendar.set(2017, Calendar.APRIL, 13);
+//		register(menu, dish, mealTypeLunch, calendar, "meal3");
         try {
             Menu menuMaio = menuRepository.findByName("MenuSemanaMaio");
             MealType mealTypeDinner = mealTypeRepository.findByAcronym("dinner");

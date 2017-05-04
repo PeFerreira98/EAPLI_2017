@@ -17,21 +17,23 @@ import java.util.Calendar;
  *
  * @author Marcos
  */
-public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, CompositeIdMeal> implements MealRepository{
+public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, CompositeIdMeal> implements MealRepository {
 
     @Override
     public Iterable<Meal> mealsByMenu(Menu menu) {
-        return match("e.menu='" + menu +"'");
+        return match("e.menu='" + menu + "'");
     }
 
     @Override
     public Iterable<Meal> mealsOfPublishedMenuFromCertainDate(Calendar date) {
-        return match("e.date='" + new Date(date.getTimeInMillis()) +"'");
+        return match("e.date='" + new Date(date.getTimeInMillis()) + "'");
     }
 
     @Override
     public Iterable<Meal> mealsOfMenuByDateMealType(Calendar date, MealType mealType, Menu menu) {
-        return match("e.date='" + new Date(date.getTimeInMillis()) +" AND e.mealType="+mealType+" AND e.menu="+menu+" '");
+        return match("e.date='" + new Date(date.getTimeInMillis()) + 
+                " AND e.mealType=" + mealType.id() + 
+                " AND e.menu=" + menu.name() + " '");
     }
-    
+
 }
