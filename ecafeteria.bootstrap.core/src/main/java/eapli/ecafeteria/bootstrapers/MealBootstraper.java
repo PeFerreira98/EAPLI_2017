@@ -15,19 +15,19 @@ import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 
-public class MealBootstraper implements Action{
+public class MealBootstraper implements Action {
 
-	@Override
-	public boolean execute() {
+    @Override
+    public boolean execute() {
 
-		final MenuRepository menuRepository = PersistenceContext.repositories().menus();
-		final MealTypeRepository mealTypeRepository = PersistenceContext.repositories().mealTypes();
-		final DishRepository dishRepository = PersistenceContext.repositories().dishes();
-		Menu menu = menuRepository.first();
-		MealType mealTypeLunch = mealTypeRepository.findByAcronym("lunch");
-		Dish dish = dishRepository.first();
-		Calendar calendar = GregorianCalendar.getInstance();
-		
+        final MenuRepository menuRepository = PersistenceContext.repositories().menus();
+        final MealTypeRepository mealTypeRepository = PersistenceContext.repositories().mealTypes();
+        final DishRepository dishRepository = PersistenceContext.repositories().dishes();
+        Menu menu = menuRepository.findByName("MenuSemanaAbril");
+        MealType mealTypeLunch = mealTypeRepository.findByAcronym("lunch");
+        Dish dish = dishRepository.first();
+        Calendar calendar = GregorianCalendar.getInstance();
+
 		calendar.set(2017, Calendar.APRIL, 10);
 		register(menu, dish, mealTypeLunch, calendar, "meal1");
 		
@@ -36,23 +36,24 @@ public class MealBootstraper implements Action{
 		
 		calendar.set(2017, Calendar.APRIL, 13);
 		register(menu, dish, mealTypeLunch, calendar, "meal3");
-		
-                
-//                Menu menuMaio = menuRepository.findByName("MenuSemanaMaio");
-//                MealType mealTypeDinner = mealTypeRepository.findByAcronym("dinner");
-//		dish = dishRepository.first();
-//                
-//                calendar.set(2017, Calendar.MAY, 27);
-//		register(menuMaio, dish, mealTypeLunch, calendar, "meal4");
-//                
-//                calendar.set(2017, Calendar.MAY, 27);
-//		register(menuMaio, dish, mealTypeDinner, calendar, "meal5");
-                
-		return false;
-	}
-	
-	private void register(Menu menu, Dish dish, MealType mealType, Calendar date, String description){
-		final RegisterMealController controller = new RegisterMealController();
+        try {
+            Menu menuMaio = menuRepository.findByName("MenuSemanaMaio");
+            MealType mealTypeDinner = mealTypeRepository.findByAcronym("dinner");
+            dish = dishRepository.first();
+
+            calendar.set(2017, Calendar.MAY, 27);
+            register(menuMaio, dish, mealTypeLunch, calendar, "meal4");
+
+            calendar.set(2017, Calendar.MAY, 27);
+            register(menuMaio, dish, mealTypeDinner, calendar, "meal5");
+        }catch(Throwable e){
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    private void register(Menu menu, Dish dish, MealType mealType, Calendar date, String description) {
+        final RegisterMealController controller = new RegisterMealController();
         try {
             controller.registerMeal(dish, mealType, menu, date, description);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
@@ -61,6 +62,6 @@ public class MealBootstraper implements Action{
             Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
                     .info("EAPLI-DI001: bootstrapping existing record");
         }
-	}
+    }
 
 }

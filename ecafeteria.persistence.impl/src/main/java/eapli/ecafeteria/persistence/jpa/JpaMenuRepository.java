@@ -28,7 +28,7 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, String> 
 
     @Override
     public Menu findByName(String name) {
-        return matchOne("e.name:=name", "name", name);
+        return matchOne("e.name=:name", "name", name);
     }
 
     // TODO test and validate query 
