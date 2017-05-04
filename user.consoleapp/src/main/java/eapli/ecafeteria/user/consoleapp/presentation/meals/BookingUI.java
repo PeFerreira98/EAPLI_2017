@@ -6,13 +6,17 @@
 package eapli.ecafeteria.user.consoleapp.presentation.meals;
 
 import eapli.ecafeteria.AppSettings;
+import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.booking.BookingController;
 import eapli.ecafeteria.application.booking.ShowMealInfoBookingController;
+import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Allergen;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
+import eapli.ecafeteria.persistence.CafeteriaUserRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
@@ -72,9 +76,11 @@ public class BookingUI extends AbstractUI implements Observer {
 
         final Meal mealChosen = mealSelector.selectedElement();
 
+        CafeteriaUser activeCafeteriaUser = this.obtainCurrentCafeteriaUser();
+
         if (mealChosen != null) {
             try {
-                if (this.controller.bookingMeal(null, mealChosen) == null) {
+                if (this.controller.bookingMeal(activeCafeteriaUser, mealChosen) == null) {
                     System.out.println("Reserve not registered.");
                 } else {
                     System.out.println("Reserve registerd.");
@@ -105,7 +111,7 @@ public class BookingUI extends AbstractUI implements Observer {
              List<Allergen> listAlergenInMeal = showController.obtainListAllergen(mealChosen);
              AllergenPrinter dishAllergenPrinter = new AllergenPrinter();
              for(Allergen dishAllergen : listAlergenInMeal){
-                dishAllergenPrinter.visit(dishAllergen);
+             dishAllergenPrinter.visit(dishAllergen);
              }
              if( listAlergenInMeal.isEmpty() ) System.out.println(" none ");
             
@@ -124,6 +130,16 @@ public class BookingUI extends AbstractUI implements Observer {
         //Fim da parte de mostrar info. Hugo & Pedro
 
         return false;   //Nao identifiquei uso, pelo consegui constatar. Alguns retornam falso, outros true. O return true if this "scope" should end(HugoB)
+    }
+
+    public CafeteriaUser obtainCurrentCafeteriaUser() {
+        CafeteriaUser activeCafeteriaUser;
+
+        //  FIXME: implementar um servico para isto.        
+        CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(true);
+        CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
+
+        return cafeteriaUser;
     }
 
     @Override
