@@ -8,7 +8,10 @@ package eapli.ecafeteria.application.booking;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Allergen;
 import eapli.ecafeteria.domain.meals.Dish;
+import eapli.ecafeteria.domain.meals.DishAllergen;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.persistence.AllergenRepository;
+import eapli.ecafeteria.persistence.DishAllergenRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +60,28 @@ public class AllergyDetectionService extends Observable{
         //TODO
         // Obter uma lista com todos os DishAllergen do Dish.
         // Ir a cada DishAllerger, obter o Allergen e addicionar a lista.
-        System.out.println("FALTA IMPLEMENTAR listAllergen(Meal meal) Hugo & Pedro");
+        System.out.println("FALTA TESTAR listAllergen(Meal meal) Hugo & Pedro");
+        
+        try {
+
+            DishAllergenRepository dishAllergenRepository = PersistenceContext.repositories().dishAllergens();
+            Iterable<DishAllergen> iterableDishAllergen = dishAllergenRepository.findByDish(dish);
+
+            AllergenRepository allergenRepository = PersistenceContext.repositories().allergens();
+
+            for(DishAllergen dAllergen : iterableDishAllergen){
+                Allergen a = allergenRepository.findByName(dAllergen.idAllergen());
+                listaAllergenicos.add(a);
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Impossivel obter alergenicos de prato");
+        }
+        
+        for(Allergen a : listaAllergenicos){
+            System.out.println(a.id());
+        }
+       
         
         return listaAllergenicos;
     }
