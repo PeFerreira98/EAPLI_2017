@@ -28,6 +28,12 @@ public class MenuBootstraper implements Action {
         clEnding.set(2017, Calendar.APRIL, 15);
 
         register("MenuSemanaAbril", clBeginning, clEnding);
+
+        clBeginning.set(2017, Calendar.MAY, 22);
+        clEnding.set(2017, Calendar.MAY, 28);
+
+        register("MenuSemanaMaio", clBeginning, clEnding);
+        
         return false;
     }
 

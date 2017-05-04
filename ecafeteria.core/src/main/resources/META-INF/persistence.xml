@@ -4,12 +4,19 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>eapli.ecafeteria.domain.mealbooking.Account</class>
     <class>eapli.ecafeteria.domain.mealbooking.Transaction</class>
+    <class>eapli.ecafeteria.domain.cafeteria.CafeteriaUser</class>
+    <class>eapli.ecafeteria.domain.mealbooking.Booking</class>
+    <class>eapli.ecafeteria.domain.meals.Dish</class>
+    <class>eapli.ecafeteria.domain.meals.DishType</class>
+    <class>eapli.ecafeteria.domain.meals.Meal</class>
+    <class>eapli.ecafeteria.domain.meals.MealType</class>
+    <class>eapli.ecafeteria.domain.menus.Menu</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:C:\Users\HP\Desktop\EAPLI\PL\eapli-2016-ecafeteria-base\db\ecafeteria"/>
       <property name="javax.persistence.jdbc.user" value=""/>
       <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
       <property name="javax.persistence.jdbc.password" value=""/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

@@ -24,19 +24,30 @@ public class MealBootstraper implements Action{
 		final MealTypeRepository mealTypeRepository = PersistenceContext.repositories().mealTypes();
 		final DishRepository dishRepository = PersistenceContext.repositories().dishes();
 		Menu menu = menuRepository.first();
-		MealType mealType = mealTypeRepository.findByAcronym("lunch");
+		MealType mealTypeLunch = mealTypeRepository.findByAcronym("lunch");
 		Dish dish = dishRepository.first();
 		Calendar calendar = GregorianCalendar.getInstance();
 		
 		calendar.set(2017, Calendar.APRIL, 10);
-		register(menu, dish, mealType, calendar, "meal1");
+		register(menu, dish, mealTypeLunch, calendar, "meal1");
 		
 		calendar.set(2017, Calendar.APRIL, 11);
-		register(menu, dish, mealType, calendar, "meal2");
+		register(menu, dish, mealTypeLunch, calendar, "meal2");
 		
 		calendar.set(2017, Calendar.APRIL, 13);
-		register(menu, dish, mealType, calendar, "meal3");
+		register(menu, dish, mealTypeLunch, calendar, "meal3");
 		
+                
+//                Menu menuMaio = menuRepository.findByName("MenuSemanaMaio");
+//                MealType mealTypeDinner = mealTypeRepository.findByAcronym("dinner");
+//		dish = dishRepository.first();
+//                
+//                calendar.set(2017, Calendar.MAY, 27);
+//		register(menuMaio, dish, mealTypeLunch, calendar, "meal4");
+//                
+//                calendar.set(2017, Calendar.MAY, 27);
+//		register(menuMaio, dish, mealTypeDinner, calendar, "meal5");
+                
 		return false;
 	}
 	
