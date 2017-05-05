@@ -5,6 +5,9 @@
  */
 package eapli.util;
 
+import static eapli.util.DateTime.beginningOfWeek;
+import static eapli.util.DateTime.weekNumber;
+import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
