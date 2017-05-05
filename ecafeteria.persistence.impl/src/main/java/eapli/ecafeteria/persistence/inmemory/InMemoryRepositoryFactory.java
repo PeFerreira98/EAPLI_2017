@@ -17,6 +17,7 @@ import eapli.ecafeteria.persistence.OrganicUnitRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
+import eapli.framework.persistence.repositories.TransactionalContext;
 
 /**
  *
@@ -30,11 +31,6 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public UserRepository users(boolean tx) {
-        return new InMemoryUserRepository();
-    }
-
-    @Override
     public DishTypeRepository dishTypes() {
         return new InMemoryDishTypeRepository();
     }
@@ -42,17 +38,6 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public OrganicUnitRepository organicUnits() {
         return new InMemoryOrganicUnitRepository();
-    }
-
-    @Override
-    public CafeteriaUserRepository cafeteriaUsers(boolean tx) {
-
-        return new InMemoryCafeteriaUserRepository();
-    }
-
-    @Override
-    public SignupRequestRepository signupRequests(boolean tx) {
-        return new InMemorySignupRequestRepository();
     }
 
     @Override
@@ -104,4 +89,26 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     public NutricionalProfileAllergenRepository nutricionalProfileAllergens() {
         return new InMemoryNutricionalProfileAllergenRepository();
     }
+
+	@Override
+	public UserRepository users(TransactionalContext autoTx) {
+		return new InMemoryUserRepository();
+	}
+
+	@Override
+	public CafeteriaUserRepository cafeteriaUsers(TransactionalContext autoTx) {
+		return new InMemoryCafeteriaUserRepository();
+	}
+
+	@Override
+	public SignupRequestRepository signupRequests(TransactionalContext autoTx) {
+		return new InMemorySignupRequestRepository();
+	}
+	
+	@Override
+	public TransactionalContext buildTransactionalContext() {
+		// TODO Auto-generated method stub
+		// FIXME 
+		return null;
+	}
 }
