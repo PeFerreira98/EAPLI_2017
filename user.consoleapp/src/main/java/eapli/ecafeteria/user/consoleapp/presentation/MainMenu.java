@@ -10,6 +10,7 @@ import eapli.cafeteria.consoleapp.presentation.MyUserMenu;
 import eapli.ecafeteria.application.CafeteriaUserBaseController;
 import eapli.ecafeteria.user.consoleapp.presentation.meals.BookingAction;
 import eapli.ecafeteria.user.consoleapp.presentation.meals.ConsultReservesAction;
+import eapli.ecafeteria.user.consoleapp.presentation.rating.MealRatingAction;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.Menu;
 import eapli.framework.presentation.console.MenuItem;
@@ -31,6 +32,7 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int MY_USER_OPTION = 1;
     private static final int BOOKINGS_OPTION = 2;
     private static final int ACCOUNT_OPTION = 3;
+    private static final int RATING_OPTION = 4;
 
     // BOOKINGS MENU
     private static final int LIST_MENUS_OPTION = 1;
@@ -40,6 +42,9 @@ class MainMenu extends CafeteriaUserBaseUI {
     // ACCOUNT MENU
     private static final int LIST_MOVEMENTS_OPTION = 1;
 
+    // RATING MENU AND CALORIES
+    private static final int MEAL_RATING_OPTION = 1;
+    
     @Override
     public boolean show() {
         drawFormTitle();
@@ -74,6 +79,11 @@ class MainMenu extends CafeteriaUserBaseUI {
         // TODO add menu options
 
         mainMenu.add(VerticalSeparator.separator());
+        
+        final Menu ratingMenu = buildRatingMenu();
+        mainMenu.add(new SubMenu(RATING_OPTION, ratingMenu, new ShowVerticalSubMenuAction(ratingMenu)));
+        
+        mainMenu.add(VerticalSeparator.separator());
 
         mainMenu.add(new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
 
@@ -98,6 +108,16 @@ class MainMenu extends CafeteriaUserBaseUI {
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }
+    
+    
+    // SUBMENU Ratings/Calorias da pagina 7 do enunciado (Hugo)
+    private Menu buildRatingMenu(){
+        final Menu menu = new Menu("Rating/Calories");
+        menu.add(new MenuItem(MEAL_RATING_OPTION, "Rate a meal", new MealRatingAction()));
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+        return menu;
+    }
+    
 
     @Override
     protected CafeteriaUserBaseController controller() {

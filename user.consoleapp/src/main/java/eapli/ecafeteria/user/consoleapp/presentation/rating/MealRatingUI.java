@@ -36,7 +36,7 @@ public class MealRatingUI extends AbstractUI{
         int position = 0;
         for(Meal meal : mealList){
             position++;
-            System.out.print("["+position+"]");
+            System.out.print("["+position+"] --- ");
             new MealPrinter().visit(meal);
         }
         
