@@ -7,7 +7,7 @@ package eapli.ecafeteria.domain.mealbooking;
 
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.framework.domain.AggregateRoot;
+import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;

@@ -6,7 +6,7 @@
 package eapli.ecafeteria.domain.mealbooking;
 
 import eapli.framework.domain.Money;
-import eapli.framework.domain.ValueObject;
+import eapli.framework.domain.ddd.ValueObject;
 import javax.persistence.Embeddable;
 
 /**
