@@ -36,6 +36,7 @@ public class InMemoryMealRepository extends InMemoryRepository<Meal, CompositeId
 
     @Override
     public Iterable<Meal> mealsOfMenuByDateMealType(Calendar date, MealType mealType, Menu menu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return match(e -> (e.date().equals(date) && (e.mealType().equals(mealType))) 
+                && (e.menu().equals(menu)));
     }
 }
