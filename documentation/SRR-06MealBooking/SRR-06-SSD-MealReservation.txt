@@ -1,0 +1,26 @@
+title Meal Reservation
+
+User -> BookingUI : Confirms the reservation
+BookingUI -> BookingController: bookingMeal(SystemUser user, Meal meal)
+BookingController -> CafeteriaUser : hasSufficientBalance(Money expenseValue)
+CafeteriaUser -> Account: boolean = hasSufficientBalance(Money expenseValue)
+BookingController -> Meal: boolean = registerReservation()
+Meal -> Meal: boolean = isMealAvailableToReserve()
+Meal -> MealPlanItem: addReserve()
+
+BookingController -> Booking: Booking(CafeteriaUser user, Meal meal)
+BookingController -> PersistenceContext: repositories()
+PersistenceContext -> RepositoryFactory: repositories()
+RepositoryFactory -> BookingRepository: reserves()
+BookingRepository -> Repository: save(reserve)
+
+BookingController -> CafeteriaUser: registerExpense(BigDecimal value) 
+CafeteriaUser -> Account: addAccountDebt(BigDecimal value)
+
+BookingController -> PersistenceContext: repositories()
+PersistenceContext -> RepositoryFactory: repositories()
+RepositoryFactory -> CafeteriaUserRepository: cafeteriaUsers()
+CafeteriaUserRepository -> Repository: save(user)
+BookingRepository --> BookingController : booking
+BookingController -->BookingUI : booking
+BookingUI --> User : Reserve registered with success

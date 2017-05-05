@@ -21,6 +21,6 @@ public class JpaAllergenRepository extends CafeteriaJpaRepositoryBase<Allergen, 
 
     @Override
     public Allergen findByName(String name) {
-        return matchOne("e.acronym=:acronym", "acronym", name);
+        return matchOne("e.name=:name", "name", name);
     }
 }

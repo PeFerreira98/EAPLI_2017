@@ -6,6 +6,8 @@
 package eapli.ecafeteria.application.booking;
 
 import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.cafeteria.CafeteriaUserService;
+import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Allergen;
 import eapli.ecafeteria.domain.meals.Dish;
@@ -15,6 +17,7 @@ import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Observer;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,6 +31,7 @@ public class ShowMealInfoBookingController {
      * @return a informacao nutricional da meal
      */
     public NutricionalInfo obtainNutricionalInfo(Meal meal){
+        if(meal == null) throw new IllegalArgumentException("Selected Meal was null");
         Dish dish = meal.dish();
         NutricionalInfo mealNutricionalInfo = dish.nutricionalInfo();
         return mealNutricionalInfo;   
@@ -71,13 +75,18 @@ public class ShowMealInfoBookingController {
      * @return o cafeteria user que esta actualmente logado. Se nao existir, devolve null.
      */
     public CafeteriaUser obtainCurrentCafeteriaUser(){
-        CafeteriaUser activeCafeteriaUser;
-
-        //  FIXME: implementar um servico para isto.        
-        CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(true);
-        CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
+        CafeteriaUser activeCafeteriaUser = null;
+        try{
+            Username username = Application.session().session().authenticatedUser().username();
+            CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(true);
+            activeCafeteriaUser = new CafeteriaUserService().findCafeteriaUserByUsername(username);
+        }
+        catch(javax.persistence.PersistenceException ex){
+            String error = "Error getting the CafeteriaUser of loged SystemUser.   " + ex;
+            Logger.getGlobal().severe(error);
+        }
         
-        return cafeteriaUser;
+        return activeCafeteriaUser;
     } 
    
     /**

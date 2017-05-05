@@ -1,0 +1,26 @@
+title SD-SRR-08-Meal-Rating-Rating-de-uma-refeicao-v2
+
+CafeteriaUser->>UIMealRating: run...
+UIMealRating->>*MealRatingController: create()
+UIMealRating->MealRatingController: listMeals()
+
+MealRatingController->>*MealRepository : 
+MealRatingController->MealRepository : getall()
+
+
+MealRatingController-->>UIMealRating: mealList
+UIMealRating-->>CafeteriaUser: show meals and asks to select a meal
+
+CafeteriaUser->>UIMealRating: selects a meal
+UIMealRating-->>CafeteriaUser: asks rating
+CafeteriaUser->>UIMealRating: indicates rating
+UIMealRating-->>CafeteriaUser: asks comment
+CafeteriaUser->>UIMealRating: indicates a comment or empty
+
+UIMealRating->MealRatingController: registerNewMealRating( meal, rate, comment)
+MealRatingController->>MealRatingController: getActiveCafeteriaUser()
+MealRatingController->>MealRatingController: registerNewMealRating( cafeteriaUser , meal, rate, comment)
+MealRatingController->MealRatingService: registerNewMealRating( cafeteriaUser, meal, rate, comment)
+
+MealRatingController-->>UIMealRating: answer: boolean
+UIMealRating-->>CafeteriaUser: informs success

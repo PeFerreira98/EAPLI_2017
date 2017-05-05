@@ -1,0 +1,18 @@
+title Consult Reserves
+
+User -> ConsultReservesUI : Initiates the process of consulting reserves
+ConsultReservesUI ->* ConsultReservesController : create()
+ConsultReservesUI --> User : Ask the final date of the consulting
+User -> ConsultReservesUI : Insert a date
+ConsultReservesUI -> ConsultReservesController: getReservesBetweenDates(CafeteriaUser user, Calendar dateInitial, Calendar dateFinal)
+ConsultReservesController -> ConsultReservesController : isPreviousDate(Calendar dateInitial, Calendar dateFinal)
+
+
+ConsultReservesController -> PersistenceContext: repositories()
+PersistenceContext -> RepositoryFactory: repositories()
+RepositoryFactory -> BookingRepository: reserves()
+BookingRepository -> Repository: findNextReserves(CafeteriaUser user, Calendar dateInitial, Calendar dateFinal)
+
+BookingRepository --> ConsultReservesController : list of reserves
+ConsultReservesController --> ConsultReservesUI : list of reserves
+ConsultReservesUI --> User : List of reserves until "x" date

@@ -6,13 +6,17 @@
 package eapli.ecafeteria.user.consoleapp.presentation.meals;
 
 import eapli.ecafeteria.AppSettings;
+import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.booking.BookingController;
 import eapli.ecafeteria.application.booking.ShowMealInfoBookingController;
+import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Allergen;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
+import eapli.ecafeteria.persistence.CafeteriaUserRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
@@ -72,9 +76,11 @@ public class BookingUI extends AbstractUI implements Observer {
 
         final Meal mealChosen = mealSelector.selectedElement();
 
+        CafeteriaUser activeCafeteriaUser = this.obtainCurrentCafeteriaUser();
+
         if (mealChosen != null) {
             try {
-                if (this.controller.bookingMeal(null, mealChosen) == null) {
+                if (this.controller.bookingMeal(activeCafeteriaUser, mealChosen) == null) {
                     System.out.println("Reserve not registered.");
                 } else {
                     System.out.println("Reserve registerd.");
@@ -87,18 +93,27 @@ public class BookingUI extends AbstractUI implements Observer {
         }
 
         //------------------------------------------------------
-        //INSERIR codigo do bookingUI aqui.
-        //Codigo da parte de mostrar info da Meal indicada pelo user. Hugo & Pedro        
-        {
-            /*
+        // 
+        // SRR-06B  Codigo da parte de mostrar info da Meal indicada pelo user. Hugo & Pedro    
+        //
+        boolean showInfo = false;
+        //showInfo = true;          // Descomentar para correr a parte de mostar a informacao sobre os allergenios.
+        if(showInfo){
+            
              //Instranciacao do controller.
              ShowMealInfoBookingController showController = new ShowMealInfoBookingController();
         
              //Mostrar as cal+sal da meal:
-             NutricionalInfo selectedMealNutricionalInfo = showController.obtainNutricionalInfo( mealChosen );
-             System.out.println("Meal Nutritional info: ");
+             NutricionalInfo selectedMealNutricionalInfo = null;
              NutricionalInfoPrinter nutricionalInfoPrinter = new NutricionalInfoPrinter();
-             nutricionalInfoPrinter.visit( selectedMealNutricionalInfo);
+             try {
+                selectedMealNutricionalInfo = showController.obtainNutricionalInfo( mealChosen );
+                System.out.println("Meal Nutritional info: ");
+                nutricionalInfoPrinter.visit( selectedMealNutricionalInfo);
+             }
+             catch(IllegalArgumentException ex){    //apanha o meal == null.
+                 System.out.println("ERROR: "+ ex.getMessage() + "\n");
+             }
         
              //Mostrar os alegenicos:
              System.out.println("Allergen present in the meal:");
@@ -119,11 +134,21 @@ public class BookingUI extends AbstractUI implements Observer {
              NutricionalInfo weekCommulativeNutritional = showController.returnWeekInfo(mealChosen);
              System.out.println("Planed week nutricional consumption:");
              nutricionalInfoPrinter.visit( weekCommulativeNutritional );
-             */
+             
         }
         //Fim da parte de mostrar info. Hugo & Pedro
 
         return false;   //Nao identifiquei uso, pelo consegui constatar. Alguns retornam falso, outros true. O return true if this "scope" should end(HugoB)
+    }
+
+    public CafeteriaUser obtainCurrentCafeteriaUser() {
+        CafeteriaUser activeCafeteriaUser;
+
+        //  FIXME: implementar um servico para isto.        
+        CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(true);
+        CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
+
+        return cafeteriaUser;
     }
 
     @Override

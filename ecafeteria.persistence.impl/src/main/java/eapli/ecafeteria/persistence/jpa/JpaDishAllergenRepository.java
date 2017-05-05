@@ -24,12 +24,12 @@ public class JpaDishAllergenRepository extends CafeteriaJpaRepositoryBase<DishAl
     //Por corrigir, provavelmente user o match(); e returnar uma lista
     @Override
     public Iterable<DishAllergen> findByDish(Dish dish) {
-        return match(dish.id().toString());
+        return match("e.dish='"+dish+"'");
     }
     
     //Por Corrigir
     @Override
     public Iterable<DishAllergen> findByAllergen(Allergen allergen) {
-        return match(allergen.id());
+        return match("e.allergen='"+allergen+"'");
     }
 }
