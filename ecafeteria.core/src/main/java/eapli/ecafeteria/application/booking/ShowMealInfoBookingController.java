@@ -78,7 +78,8 @@ public class ShowMealInfoBookingController {
         CafeteriaUser activeCafeteriaUser = null;
         try{
             Username username = Application.session().session().authenticatedUser().username();
-            CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(true);
+            //TO DELETE:
+            //CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(true);
             activeCafeteriaUser = new CafeteriaUserService().findCafeteriaUserByUsername(username);
         }
         catch(javax.persistence.PersistenceException ex){
