@@ -27,15 +27,15 @@ public class RegisterMealUI extends AbstractUI {
 		final Iterable<MealType> mealTypes = this.theController.listMealTypes();
 		final Iterable<Dish> dishes = this.theController.listDish();
 		
-		final SelectWidget<Menu> menuSelector = new SelectWidget<>(menus, new MenuPrinter());
+		final SelectWidget<Menu> menuSelector = new SelectWidget<>("xpto", menus, new MenuPrinter());
 		menuSelector.show();
 		final Menu menu = menuSelector.selectedElement();
 		
-		final SelectWidget<Dish> dishSelector = new SelectWidget<>(dishes, new DishPrinter());
+		final SelectWidget<Dish> dishSelector = new SelectWidget<>("xpto", dishes, new DishPrinter());
 		dishSelector.show();
 		final Dish dish = dishSelector.selectedElement();
 		
-		final SelectWidget<MealType> mealTypeSelector = new SelectWidget<>(mealTypes, new MealTypePrinter());
+		final SelectWidget<MealType> mealTypeSelector = new SelectWidget<>("xpto", mealTypes, new MealTypePrinter());
 		mealTypeSelector.show();
 		final MealType mealType = mealTypeSelector.selectedElement();
 		

@@ -23,7 +23,7 @@ public class ChangeMealTypeUI extends AbstractUI {
 	@Override
 	protected boolean doShow() {
 		final Iterable<MealType> mealTypes = this.theController.listMealTypes();
-		final SelectWidget<MealType> selector = new SelectWidget<>(mealTypes, new MealTypePrinter());
+		final SelectWidget<MealType> selector = new SelectWidget<>("xpto", mealTypes, new MealTypePrinter());
 		selector.show();
 		final MealType theMealType = selector.selectedElement();		
 		
