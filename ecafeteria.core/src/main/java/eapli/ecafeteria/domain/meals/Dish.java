@@ -1,8 +1,8 @@
 package eapli.ecafeteria.domain.meals;
 
-import eapli.framework.domain.AggregateRoot;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.Money;
+import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
@@ -152,7 +152,8 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     }
 
     public void changePriceTo(Money newPrice) {
-        //TODO extra business logic associated with changing the price of a dish, e.g., save price history
+        // TODO extra business logic associated with changing the price of a
+        // dish, e.g., save price history
         setPrice(newPrice);
     }
 

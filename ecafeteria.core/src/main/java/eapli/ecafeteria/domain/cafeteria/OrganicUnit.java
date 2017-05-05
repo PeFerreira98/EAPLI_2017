@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.domain.cafeteria;
 
-import eapli.framework.domain.AggregateRoot;
+import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -101,9 +101,7 @@ public class OrganicUnit implements AggregateRoot<String>, Serializable {
             return true;
         }
 
-        return this.acronym.equals(that.acronym)
-                && name.equals(that.name)
-                && description.equals(that.description)
+        return this.acronym.equals(that.acronym) && name.equals(that.name) && description.equals(that.description)
                 && active == that.active;
     }
 }

@@ -1,7 +1,7 @@
 package eapli.ecafeteria.domain.authz;
 
-import eapli.framework.domain.AggregateRoot;
 import eapli.framework.domain.EmailAddress;
+import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.dto.DTOable;
 import eapli.framework.dto.GenericDTO;
 import eapli.framework.visitor.Visitable;
@@ -34,8 +34,7 @@ import javax.persistence.Version;
  *
  */
 @Entity
-public class SystemUser
-        implements AggregateRoot<Username>, DTOable, Visitable<GenericDTO>, Serializable {
+public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<GenericDTO>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -69,7 +68,7 @@ public class SystemUser
         this.username = new Username(username);
         this.password = new Password(password);
         this.name = new Name(firstName, lastName);
-        this.email = new EmailAddress(email);
+        this.email = EmailAddress.valueOf(email);
         this.roles = new RoleSet();
 
         this.roles.addAll(roles.stream().map(rt -> new Role(rt, this.createdOn)).collect(Collectors.toList()));

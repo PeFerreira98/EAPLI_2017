@@ -1,9 +1,7 @@
 package eapli.ecafeteria.domain.cafeteria;
 
 import eapli.ecafeteria.domain.authz.SystemUser;
-import eapli.ecafeteria.domain.mealbooking.Account;
-import eapli.framework.domain.AggregateRoot;
-import eapli.framework.domain.Money;
+import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.CascadeType;

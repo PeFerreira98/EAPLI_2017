@@ -5,11 +5,12 @@ public abstract class InMemoryRepositoryWithLongPK<T> extends InMemoryRepository
     private static long nextPK = 1L;
 
     public InMemoryRepositoryWithLongPK() {
-        super();
+	super();
     }
 
     @Override
+    @SuppressWarnings("squid:S2696")
     protected Long newPK(T entity) {
-        return ++nextPK;
+	return ++nextPK;
     }
 }

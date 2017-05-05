@@ -3,8 +3,8 @@ package eapli.ecafeteria.domain.cafeteria;
 import eapli.ecafeteria.domain.authz.Name;
 import eapli.ecafeteria.domain.authz.Password;
 import eapli.ecafeteria.domain.authz.Username;
-import eapli.framework.domain.AggregateRoot;
 import eapli.framework.domain.EmailAddress;
+import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.util.DateTime;
 import eapli.util.Strings;
 import java.io.Serializable;
@@ -72,7 +72,7 @@ public class SignupRequest implements AggregateRoot<Username>, Serializable {
         this.username = new Username(username);
         this.password = new Password(password);
         this.name = new Name(firstName, lastName);
-        this.email = new EmailAddress(email);
+        this.email = EmailAddress.valueOf(email);
         this.organicUnit = organicUnit;
         this.mecanographicNumber = new MecanographicNumber(mecanographicNumber);
         // by default

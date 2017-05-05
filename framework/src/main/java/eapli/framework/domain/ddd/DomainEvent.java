@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates and open the template
  * in the editor.
  */
-package eapli.framework.domain;
+package eapli.framework.domain.ddd;
 
 import java.util.Calendar;
 

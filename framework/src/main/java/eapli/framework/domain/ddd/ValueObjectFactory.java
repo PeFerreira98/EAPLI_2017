@@ -1,7 +1,7 @@
 /**
  *
  */
-package eapli.framework.domain;
+package eapli.framework.domain.ddd;
 
 /**
  * @author Paulo Gandra Sousa

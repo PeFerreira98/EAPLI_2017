@@ -35,13 +35,13 @@ import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterMealTyp
 import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.RegisterMenuAction;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
-import eapli.framework.actions.ShowMessageAction;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.HorizontalMenuRenderer;
 import eapli.framework.presentation.console.ListUI;
 import eapli.framework.presentation.console.Menu;
 import eapli.framework.presentation.console.MenuItem;
 import eapli.framework.presentation.console.MenuRenderer;
+import eapli.framework.presentation.console.ShowMessageAction;
 import eapli.framework.presentation.console.ShowVerticalSubMenuAction;
 import eapli.framework.presentation.console.SubMenu;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
@@ -206,8 +206,8 @@ public class MainMenu extends AbstractUI {
         }));
         menu.add(new MenuItem(LIST_ORGANIC_UNIT_OPTION, "List Organic Unit", () -> {
             // example of using the generic list ui from the framework
-            new ListUI<>(new ListOrganicUnitsController().listOrganicUnits(), new OrganicUnitPrinter(),
-                    "Organic Unit").show();
+            new ListUI<>(new ListOrganicUnitsController().listOrganicUnits(), new OrganicUnitPrinter(), "Organic Unit")
+                    .show();
             return false;
         }));
         // TODO add other options for Organic Unit management
@@ -245,7 +245,8 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(DISH_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Dish",
                 new ActivateDeactivateDishAction()));
         final Menu changeDishMenu = buildChangeDishMenu();
-        menu.add(new MenuItem(DISH_CHANGE_OPTION, "Change Dish Information", new ShowVerticalSubMenuAction(changeDishMenu)));
+        menu.add(new MenuItem(DISH_CHANGE_OPTION, "Change Dish Information",
+                new ShowVerticalSubMenuAction(changeDishMenu)));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;

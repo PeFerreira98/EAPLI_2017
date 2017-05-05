@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates and open the template
  * in the editor.
  */
-package eapli.framework.domain;
+package eapli.framework.domain.ddd;
 
 /**
  * An aggregate root is a Domain-Driven Design pattern for defining scopes of
@@ -24,9 +24,10 @@ package eapli.framework.domain;
  * <li>Product
  * </ol>
  *
+ * @param <I>
+ *            the type of the primary <b>business</b> identity of the entity
  * @author Paulo Gandra Sousa
- * @param <ID> the type of the primary <b>business</b> id of the entity
  */
-public interface AggregateRoot<ID> extends DomainEntity<ID> {
+public interface AggregateRoot<I> extends DomainEntity<I> {
 
 }

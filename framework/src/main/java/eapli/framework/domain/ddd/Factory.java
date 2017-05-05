@@ -1,7 +1,7 @@
 /**
  *
  */
-package eapli.framework.domain;
+package eapli.framework.domain.ddd;
 
 /**
  * A factory of domain objects. When creation of an entire, internally

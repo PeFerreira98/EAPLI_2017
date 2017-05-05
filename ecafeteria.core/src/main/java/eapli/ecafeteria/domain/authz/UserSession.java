@@ -3,7 +3,7 @@
  */
 package eapli.ecafeteria.domain.authz;
 
-import eapli.framework.domain.ValueObject;
+import eapli.framework.domain.ddd.ValueObject;
 import java.util.UUID;
 
 /**

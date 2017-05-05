@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates and open the template
  * in the editor.
  */
-package eapli.framework.domain;
+package eapli.framework.domain.ddd;
+
+import eapli.framework.domain.Identifiable;
 
 /**
  * An entity is a Domain-Driven Design pattern for concepts in the domain which
@@ -19,14 +21,15 @@ package eapli.framework.domain;
  * <li>Account
  * </ol>
  *
+ * @param <I> the type of the primary <b>business</b> id of the entity
  * @author Paulo Gandra Sousa
- * @param <K> the type of the primary <b>business</b> id of the entity
  */
-public interface DomainEntity<K> extends Identifiable<K> {
+public interface DomainEntity<I> extends Identifiable<I> {
 
     /**
      * Entities are compared by identity only. no need to compare all fields of
-     * the object.
+     * the object. you can use the domainEntityHelper.areEqual() method as
+     * default implementation
      *
      * see sameAs().
      *

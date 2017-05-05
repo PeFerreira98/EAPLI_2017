@@ -9,19 +9,16 @@ package eapli.framework.presentation.console;
  */
 public class HorizontalMenuRenderer extends MenuRenderer {
 
-    /**
-     *
-     */
     public HorizontalMenuRenderer(Menu menu) {
-        super(menu);
+	super(menu);
     }
 
     @Override
     protected void doShow() {
-        for (final MenuItem item : this.menu.itens()) {
-            System.out.print("| ");
-            item.show();
-            System.out.print(" |");
-        }
+	System.out.print("| ");
+	for (final MenuItem item : this.menu.itens()) {
+	    item.show();
+	    System.out.print(" | ");
+	}
     }
 }

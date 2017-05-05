@@ -1,6 +1,6 @@
 package eapli.ecafeteria.domain.authz;
 
-import eapli.framework.domain.ValueObject;
+import eapli.framework.domain.ddd.ValueObject;
 import eapli.util.Strings;
 import java.io.Serializable;
 import java.util.regex.Matcher;

@@ -14,12 +14,12 @@ public class ListUI<T> extends AbstractListUI<T> {
 
     protected final Iterable<T> source;
     protected final Visitor<T> printer;
-    protected final String elementName;
+    protected final String theElementName;
 
     public ListUI(Iterable<T> source, Visitor<T> printer, String elementName) {
-        this.source = source;
-        this.printer = printer;
-        this.elementName = elementName;
+	this.source = source;
+	this.printer = printer;
+	this.theElementName = elementName;
     }
 
     /**
@@ -29,7 +29,7 @@ public class ListUI<T> extends AbstractListUI<T> {
      */
     @Override
     protected Iterable<T> listOfElements() {
-        return this.source;
+	return this.source;
     }
 
     /**
@@ -39,7 +39,7 @@ public class ListUI<T> extends AbstractListUI<T> {
      */
     @Override
     protected Visitor<T> elementPrinter() {
-        return this.printer;
+	return this.printer;
     }
 
     /**
@@ -49,6 +49,6 @@ public class ListUI<T> extends AbstractListUI<T> {
      */
     @Override
     protected String elementName() {
-        return this.elementName;
+	return this.theElementName;
     }
 }

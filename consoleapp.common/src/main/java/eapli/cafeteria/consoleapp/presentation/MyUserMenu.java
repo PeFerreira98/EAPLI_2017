@@ -3,9 +3,9 @@ package eapli.cafeteria.consoleapp.presentation;
 import eapli.cafeteria.consoleapp.presentation.authz.LoginAction;
 import eapli.cafeteria.consoleapp.presentation.authz.LogoutAction;
 import eapli.framework.actions.ReturnAction;
-import eapli.framework.actions.ShowMessageAction;
 import eapli.framework.presentation.console.Menu;
 import eapli.framework.presentation.console.MenuItem;
+import eapli.framework.presentation.console.ShowMessageAction;
 
 public class MyUserMenu extends Menu {
 

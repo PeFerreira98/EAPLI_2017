@@ -3,7 +3,7 @@
  */
 package eapli.ecafeteria.domain.cafeteria;
 
-import eapli.framework.domain.AggregateRoot;
+import eapli.framework.domain.ddd.AggregateRoot;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Version;

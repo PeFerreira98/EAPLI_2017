@@ -1,7 +1,7 @@
 package eapli.ecafeteria.domain.cafeteria;
 
 import eapli.ecafeteria.domain.authz.SystemUser;
-import eapli.framework.domain.Factory;
+import eapli.framework.domain.ddd.Factory;
 
 /**
  * A factory for User entities.
@@ -41,7 +41,6 @@ public class CafeteriaUserBuilder implements Factory<CafeteriaUser> {
     public CafeteriaUser build() {
         // since the factory knows that all the parts are needed it could throw
         // an exception. however, we will leave that to the constructor
-        return new CafeteriaUser(this.systemUser, this.organicUnit,
-                this.mecanographicNumber);
+        return new CafeteriaUser(this.systemUser, this.organicUnit, this.mecanographicNumber);
     }
 }

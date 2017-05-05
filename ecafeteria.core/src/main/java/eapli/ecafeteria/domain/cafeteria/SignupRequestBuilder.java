@@ -1,6 +1,6 @@
 package eapli.ecafeteria.domain.cafeteria;
 
-import eapli.framework.domain.Factory;
+import eapli.framework.domain.ddd.Factory;
 import java.util.Calendar;
 
 /**

@@ -1,7 +1,7 @@
 package eapli.ecafeteria.domain.authz;
 
 import eapli.framework.domain.EmailAddress;
-import eapli.framework.domain.Factory;
+import eapli.framework.domain.ddd.Factory;
 import eapli.util.Strings;
 import java.util.Calendar;
 import java.util.List;
@@ -71,7 +71,7 @@ public class SystemUserBuilder implements Factory<SystemUser> {
     }
 
     public SystemUserBuilder withEmail(String email) {
-        this.email = new EmailAddress(email);
+        this.email = EmailAddress.valueOf(email);
         return this;
     }
 

@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.domain.meals;
 
-import eapli.framework.domain.ValueObject;
+import eapli.framework.domain.ddd.ValueObject;
 import java.io.Serializable;
 import javax.persistence.Embeddable;
 

@@ -21,18 +21,18 @@ import eapli.util.DateTime;
  */
 public class DeactivateUserController implements Controller {
 
-    private final UserRepository userRepository = PersistenceContext.repositories().users(true);
+    private final UserRepository userRepository = PersistenceContext.repositories().users(null);
 
     public Iterable<SystemUser> activeUsers() {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+	Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-        return this.userRepository.findAll();
+	return this.userRepository.findAll();
     }
 
     public SystemUser deactivateUser(SystemUser user) throws DataConcurrencyException, DataIntegrityViolationException {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+	Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-        user.deactivate(DateTime.now());
-        return this.userRepository.save(user);
+	user.deactivate(DateTime.now());
+	return this.userRepository.save(user);
     }
 }

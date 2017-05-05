@@ -6,7 +6,7 @@ package eapli.framework.persistence.repositories.impl.jpa;
 
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import eapli.framework.persistence.repositories.DataRepository;
+import eapli.framework.persistence.repositories.IterableRepository;
 import eapli.util.Strings;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -41,7 +41,7 @@ import javax.persistence.TypedQuery;
  * @param <T> the entity type that we want to build a repository for
  * @param <K> the key type of the entity
  */
-public abstract class JpaBaseRepository<T, K extends Serializable> implements DataRepository<T, K> {
+public abstract class JpaBaseRepository<T, K extends Serializable> implements IterableRepository<T, K> {
 
     private static final String QUERY_MUST_NOT_BE_NULL_OR_EMPTY = "query must not be null or empty";
     private static final int DEFAULT_PAGESIZE = 20;
@@ -53,6 +53,7 @@ public abstract class JpaBaseRepository<T, K extends Serializable> implements Da
     private EntityManagerFactory emFactory;
     private EntityManager entityManager;
 
+    @SuppressWarnings("unchecked")
     public JpaBaseRepository() {
         final ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
         entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
@@ -155,7 +156,7 @@ public abstract class JpaBaseRepository<T, K extends Serializable> implements Da
      * sense for this repository
      */
     @Override
-    public void deleteByPK(K entityId) throws DataIntegrityViolationException {
+    public void delete(K entityId) throws DataIntegrityViolationException {
         if (entityId == null) {
             throw new IllegalArgumentException();
         }
@@ -174,7 +175,8 @@ public abstract class JpaBaseRepository<T, K extends Serializable> implements Da
      */
     @Override
     public long count() {
-        TypedQuery<Long> q = entityManager().createQuery("SELECT COUNT(*) FROM " + this.entityClass.getSimpleName(), Long.class);
+        final TypedQuery<Long> q = entityManager()
+                .createQuery("SELECT COUNT(*) FROM " + this.entityClass.getSimpleName(), Long.class);
         return q.getSingleResult();
     }
 
@@ -368,15 +370,15 @@ public abstract class JpaBaseRepository<T, K extends Serializable> implements Da
 
     public T matchOne(String where, Object... args) {
         final TypedQuery<T> q = query(where);
-        boolean isArgName = true;
+        boolean handleAsArgName = true;
         String argName = "";
         for (final Object o : args) {
-            if (isArgName) {
+            if (handleAsArgName) {
                 argName = (String) o;
             } else {
                 q.setParameter(argName, o);
             }
-            isArgName = !isArgName;
+            handleAsArgName = !handleAsArgName;
         }
         // TODO should we allow to throw NoResultException? it will expose a JPA
         // specific exception to domain layer. most likely we should return null

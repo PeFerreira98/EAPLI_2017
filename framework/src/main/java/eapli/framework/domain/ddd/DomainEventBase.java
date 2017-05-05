@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates and open the template
  * in the editor.
  */
-package eapli.framework.domain;
+package eapli.framework.domain.ddd;
+
+import java.util.Calendar;
 
 import eapli.util.DateTime;
-import java.util.Calendar;
 
 /**
  *
@@ -14,25 +15,23 @@ import java.util.Calendar;
  */
 public abstract class DomainEventBase implements DomainEvent {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
+
     private final Calendar occuredAt;
     private final Calendar registeredAt;
 
     public DomainEventBase(Calendar occuredAt) {
-        this.occuredAt = occuredAt;
-        registeredAt = DateTime.now();
+	this.occuredAt = occuredAt;
+	registeredAt = DateTime.now();
     }
 
     @Override
     public Calendar occurredAt() {
-        return occuredAt;
+	return occuredAt;
     }
 
     @Override
     public Calendar registeredAt() {
-        return registeredAt;
+	return registeredAt;
     }
 }
