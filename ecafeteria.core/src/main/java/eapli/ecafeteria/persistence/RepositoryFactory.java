@@ -73,4 +73,8 @@ public interface RepositoryFactory {
     NutricionalProfileRepository nutricionalProfiles();
 
     NutricionalProfileAllergenRepository nutricionalProfileAllergens();
+    
+    BatchRepository batches();
+    
+    MealBatchRepository mealBatches();
 }

@@ -2,11 +2,13 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.persistence.AllergenRepository;
+import eapli.ecafeteria.persistence.BatchRepository;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.DishAllergenRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MealBatchRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MealTypeRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
@@ -103,5 +105,15 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public NutricionalProfileAllergenRepository nutricionalProfileAllergens() {
         return new JpaNutricionalProfileAllergenRepository();
+    }
+
+    @Override
+    public BatchRepository batches() {
+        return new JpaBatchRepository();
+    }
+
+    @Override
+    public MealBatchRepository mealBatches() {
+        return new JpaMealBatchRepository();
     }
 }

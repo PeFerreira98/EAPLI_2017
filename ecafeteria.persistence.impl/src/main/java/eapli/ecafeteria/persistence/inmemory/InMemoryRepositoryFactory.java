@@ -2,12 +2,14 @@ package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.bootstrapers.ECafeteriaBootstraper;
 import eapli.ecafeteria.persistence.AllergenRepository;
+import eapli.ecafeteria.persistence.BatchRepository;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.DishAllergenRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MealBatchRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MealTypeRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
@@ -90,25 +92,35 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
         return new InMemoryNutricionalProfileAllergenRepository();
     }
 
-	@Override
-	public UserRepository users(TransactionalContext autoTx) {
-		return new InMemoryUserRepository();
-	}
+    @Override
+    public UserRepository users(TransactionalContext autoTx) {
+        return new InMemoryUserRepository();
+    }
 
-	@Override
-	public CafeteriaUserRepository cafeteriaUsers(TransactionalContext autoTx) {
-		return new InMemoryCafeteriaUserRepository();
-	}
+    @Override
+    public CafeteriaUserRepository cafeteriaUsers(TransactionalContext autoTx) {
+        return new InMemoryCafeteriaUserRepository();
+    }
 
-	@Override
-	public SignupRequestRepository signupRequests(TransactionalContext autoTx) {
-		return new InMemorySignupRequestRepository();
-	}
-	
-	@Override
-	public TransactionalContext buildTransactionalContext() {
-		// TODO Auto-generated method stub
-		// FIXME 
-		return null;
-	}
+    @Override
+    public SignupRequestRepository signupRequests(TransactionalContext autoTx) {
+        return new InMemorySignupRequestRepository();
+    }
+
+    @Override
+    public TransactionalContext buildTransactionalContext() {
+        // TODO Auto-generated method stub
+        // FIXME 
+        return null;
+    }
+
+    @Override
+    public BatchRepository batches() {
+        return new InMemoryBatchRepository();
+    }
+
+    @Override
+    public MealBatchRepository mealBatches() {
+        return new InMemoryMealBatchRepository();
+    }
 }
