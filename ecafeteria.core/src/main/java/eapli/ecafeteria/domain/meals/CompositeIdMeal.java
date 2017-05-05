@@ -4,11 +4,12 @@
 package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.menus.Menu;
+import eapli.framework.domain.ddd.ValueObject;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.persistence.Embeddable;
-import eapli.framework.domain.ValueObject;
 
 /**
  * @author zero_
