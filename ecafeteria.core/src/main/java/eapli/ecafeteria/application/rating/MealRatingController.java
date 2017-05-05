@@ -14,6 +14,7 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
@@ -62,10 +63,10 @@ public class MealRatingController {
         try{
             cafeteriaUser = new CafeteriaUserService().findCafeteriaUserByUsername(userName);
         }
-        catch(Exception e){
-            //TODO replace global exception por uma menos generica. Hugo & Pedro
-            System.out.println("Error getting the CafeteriaUser of loged SystemUser.");
-            System.out.println(e.getMessage());
+        catch(javax.persistence.PersistenceException ex){
+            String error = "Error getting the CafeteriaUser of loged SystemUser.   " + ex;
+            Logger.getGlobal().severe(error);
+            
         }
         
         return cafeteriaUser;
