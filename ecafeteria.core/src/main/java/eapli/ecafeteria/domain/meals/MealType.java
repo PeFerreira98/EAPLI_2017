@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.domain.meals;
 
-import eapli.framework.domain.AggregateRoot;
+import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.util.Strings;
 import java.io.Serializable;
 import javax.persistence.Column;

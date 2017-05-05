@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.domain.menus;
 
-import eapli.framework.domain.AggregateRoot;
+import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.domain.range.TimePeriod;
 import java.io.Serializable;
 import java.util.Calendar;

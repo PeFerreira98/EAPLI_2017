@@ -6,6 +6,8 @@
 package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.menus.Menu;
+import eapli.framework.domain.ddd.AggregateRoot;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.EmbeddedId;
@@ -14,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
-import eapli.framework.domain.AggregateRoot;
 import eapli.util.DateTime;
 
 /**
