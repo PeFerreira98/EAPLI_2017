@@ -24,4 +24,9 @@ public class JpaMealTypeRepository extends CafeteriaJpaRepositoryBase<MealType, 
         return matchOne("e.acronym=:acronym", "acronym", acronym);
     }
 
+    @Override
+    public MealType findByDefault() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

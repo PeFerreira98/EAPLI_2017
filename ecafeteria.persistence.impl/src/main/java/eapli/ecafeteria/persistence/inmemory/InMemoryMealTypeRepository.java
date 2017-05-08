@@ -25,4 +25,9 @@ public class InMemoryMealTypeRepository extends InMemoryRepositoryWithLongPK<Mea
         return matchOne(e -> e.id().equals(acronym));
     }
 
+    @Override
+    public MealType findByDefault() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -18,4 +18,5 @@ public interface MealTypeRepository extends DataRepository<MealType, Long>{
 
     MealType findByAcronym(String acronym);
     
+    MealType findByDefault();
 }
