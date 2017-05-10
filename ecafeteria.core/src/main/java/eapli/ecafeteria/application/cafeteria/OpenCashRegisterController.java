@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.application.cafeteria;
 
+import eapli.ecafeteria.domain.cashregister.CashRegister;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.MealTypeRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -15,22 +16,21 @@ import java.util.Calendar;
  * @author Alexandra Ferreira 1140388 - Nuno Costa 1131106
  */
 public class OpenCashRegisterController {
-    
+
     public Iterable<MealType> getMealTypes() {
         return PersistenceContext.repositories().mealTypes().findAll();
     }
-    
+
     public MealType mealByDefault() {
-        
+
         final MealTypeRepository mealRepository = PersistenceContext.repositories().mealTypes();
 
         return mealRepository.findByDefault();
     }
-    
-    public boolean open(String number, MealType mealType, Calendar date){
-        
+
+    public boolean open(String number, MealType mealType, Calendar date) {
+
         return false;
     }
 
-    
 }

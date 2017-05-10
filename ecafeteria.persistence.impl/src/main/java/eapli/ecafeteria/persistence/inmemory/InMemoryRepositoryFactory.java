@@ -5,6 +5,7 @@ import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.BatchRepository;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
+import eapli.ecafeteria.persistence.CashRegisterRepository;
 import eapli.ecafeteria.persistence.DishAllergenRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
@@ -122,5 +123,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public MealBatchRepository mealBatches() {
         return new InMemoryMealBatchRepository();
+    }
+
+    @Override
+    public CashRegisterRepository cashRegisters() {
+        return new InMemoryCashRegisterRepository();
     }
 }
