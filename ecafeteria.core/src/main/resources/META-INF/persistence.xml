@@ -14,6 +14,7 @@
     <class>eapli.ecafeteria.domain.meals.MealType</class>
     <class>eapli.ecafeteria.domain.menus.Menu</class>
     <class>eapli.ecafeteria.domain.cashregister.CashRegister</class>
+    <class>eapli.ecafeteria.domain.cashregister.Shift</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:C:\Users\HP\Desktop\EAPLI\PL\eapli-2016-ecafeteria-base\db\ecafeteria"/>
       <property name="javax.persistence.jdbc.user" value=""/>
