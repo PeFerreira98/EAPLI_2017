@@ -21,7 +21,7 @@ import javax.persistence.Version;
  * @author Pedro Pereira
  */
 @Entity
-public class Ranking implements Serializable {
+public class Rating implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -31,7 +31,7 @@ public class Ranking implements Serializable {
     private Long version;
     
     
-    private int rank;   
+    private int rate;   
     @ManyToOne
     private CafeteriaUser cafeteriaUser;
     @ManyToOne
@@ -39,19 +39,19 @@ public class Ranking implements Serializable {
     @ManyToOne
     private Comment comment;
     
-    protected Ranking(){
+    protected Rating(){
         // ORM
     }
 
-    public Ranking(int rank, CafeteriaUser cafeteriaUser, Meal meal, Comment comment){
-        this.rank = rank;
+    public Rating(int rate, CafeteriaUser cafeteriaUser, Meal meal, Comment comment){
+        this.rate = rate;
         this.cafeteriaUser = cafeteriaUser;
         this.meal = meal;
         this.comment = comment;
     }
     
-    public int readRank(){
-        return this.rank;
+    public int readRate(){
+        return this.rate;
     }
 
     public CafeteriaUser cafeteriaUser(){
@@ -84,10 +84,10 @@ public class Ranking implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Ranking)) {
+        if (!(object instanceof Rating)) {
             return false;
         }
-        Ranking other = (Ranking) object;
+        Rating other = (Rating) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
