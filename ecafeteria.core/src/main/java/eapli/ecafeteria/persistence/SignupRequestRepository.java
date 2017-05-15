@@ -3,7 +3,6 @@ package eapli.ecafeteria.persistence;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.SignupRequest;
 import eapli.framework.persistence.repositories.DataRepository;
-import eapli.framework.persistence.repositories.TransactionalContext;
 
 /**
  *

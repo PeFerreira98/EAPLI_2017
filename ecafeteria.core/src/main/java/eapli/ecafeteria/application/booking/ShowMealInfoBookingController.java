@@ -13,8 +13,6 @@ import eapli.ecafeteria.domain.meals.Allergen;
 import eapli.ecafeteria.domain.meals.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
-import eapli.ecafeteria.persistence.CafeteriaUserRepository;
-import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Observer;
 import java.util.logging.Logger;

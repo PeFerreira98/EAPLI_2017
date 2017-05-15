@@ -6,10 +6,8 @@
 package eapli.ecafeteria.application.booking;
 
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
-import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
-import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.util.DateTime;
 import java.util.Calendar;
 import java.util.List;

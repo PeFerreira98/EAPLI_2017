@@ -4,7 +4,6 @@ import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteria.MecanographicNumber;
 import eapli.framework.persistence.repositories.DataRepository;
-import eapli.framework.persistence.repositories.TransactionalContext;
 
 /**
  *

@@ -7,7 +7,6 @@ package eapli.ecafeteria.application.rating;
 
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.cafeteria.CafeteriaUserService;
-import eapli.ecafeteria.application.meals.ListMealService;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;

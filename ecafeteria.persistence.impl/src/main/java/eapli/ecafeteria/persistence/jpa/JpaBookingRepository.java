@@ -8,11 +8,7 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.ecafeteria.persistence.BookingRepository;
-import eapli.util.DateTime;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 

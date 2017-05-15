@@ -7,9 +7,6 @@ package eapli.ecafeteria.domain.kitchen;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Objects;
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 
 /**

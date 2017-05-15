@@ -3,7 +3,6 @@ package eapli.ecafeteria.domain.cafeteria;
 import eapli.ecafeteria.domain.meals.Allergen;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
