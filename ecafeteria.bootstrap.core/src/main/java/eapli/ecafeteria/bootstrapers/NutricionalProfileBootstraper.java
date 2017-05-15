@@ -18,7 +18,7 @@ class NutricionalProfileBootstraper implements Action {
 
     @Override
     public boolean execute() {
-        final CafeteriaUserRepository userRepo = PersistenceContext.repositories().cafeteriaUsers(true);
+        final CafeteriaUserRepository userRepo = PersistenceContext.repositories().cafeteriaUsers(PersistenceContext.repositories().buildTransactionalContext());
         final CafeteriaUser user1 = userRepo.findByUsername(new Username("900330"));
         final CafeteriaUser user2 = userRepo.findByUsername(new Username("900331"));
 
