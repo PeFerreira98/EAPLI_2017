@@ -28,13 +28,19 @@ public class OpenCashRegisterUI extends AbstractUI {
 
         Iterable<MealType> mealTypes = controller.getMealTypes();
 
-        final SelectWidget<MealType> mealTypeSelector = //new SelectWidget<>("xpto", mealTypes, new MealTypePrinter());
+        final SelectWidget<MealType> mealTypeSelector
+                = //new SelectWidget<>("xpto", mealTypes, new MealTypePrinter());
                 null;
         mealTypeSelector.show();
 
         if (mealTypeSelector.selectedOption() == 0) {
 
             MealType mealTypeDefault = controller.mealByDefault();
+
+            if (!this.controller.hasMeal(Calendar.getInstance(), mealTypeDefault)) {
+                System.out.println("No meal scheduled for now");
+                return false;
+            }
 
             try {
                 if (this.controller.open(number, mealTypeDefault, Calendar.getInstance())) {
@@ -43,7 +49,8 @@ public class OpenCashRegisterUI extends AbstractUI {
                 } else {
                     System.out.println("Cash Register is already opened");
                 }
-            } catch (NoResultException e) {
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
             }
             return true;
         } else {
@@ -54,6 +61,11 @@ public class OpenCashRegisterUI extends AbstractUI {
 
                 Calendar date = eapli.util.io.Console.readCalendar("Insert meal date: (dd-MM-yyyy)");
 
+                if (!this.controller.hasMeal(date, mealTypeDefault)) {
+                    System.out.println("There's no meal in the date selected");
+                    return false;
+                }
+
                 try {
                     if (this.controller.open(number, mealTypeDefault, date)) {
                         System.out.
@@ -62,9 +74,11 @@ public class OpenCashRegisterUI extends AbstractUI {
                         System.out.println("Cash Register is already opened");
                     }
 
-                } catch (NoResultException e) {
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
                 }
             } catch (NoResultException e) {
+                System.out.println("There's no such Meal");
             }
         }
         return false;

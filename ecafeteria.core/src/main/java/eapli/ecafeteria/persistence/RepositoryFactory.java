@@ -79,4 +79,6 @@ public interface RepositoryFactory {
     MealBatchRepository mealBatches();
     
     CashRegisterRepository cashRegisters();
+    
+    ShiftRepository shifts();
 }

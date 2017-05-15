@@ -6,20 +6,21 @@
 package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.cashregister.CashRegister;
+import eapli.ecafeteria.domain.cashregister.Shift;
 import eapli.framework.persistence.repositories.DataRepository;
 
 /**
  *
  * @author Alexandra Ferreira 1140388
  */
-public interface CashRegisterRepository extends DataRepository<CashRegister, Long> {
+public interface ShiftRepository extends DataRepository<Shift, Long> {
 
     /**
-     * This method find the cash register by is numbeer
+     * This method returns a new shift that is associated to a specific opened
+     * cash register
      *
-     * @param number cash register number
-     * @return cash register
+     * @param cashRegister
+     * @return Shift
      */
-    public CashRegister findByNumber(String number);
-
+    public Shift findByOpenedCashRegister(CashRegister cashRegister);
 }

@@ -5,7 +5,6 @@
  */
 package eapli.ecafeteria.domain.cashregister;
 
-import eapli.ecafeteria.AppSettings;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.meals.MealType;
 import java.io.Serializable;

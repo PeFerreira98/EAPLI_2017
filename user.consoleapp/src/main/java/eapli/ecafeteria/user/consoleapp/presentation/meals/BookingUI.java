@@ -5,7 +5,6 @@
  */
 package eapli.ecafeteria.user.consoleapp.presentation.meals;
 
-import eapli.ecafeteria.AppSettings;
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.booking.BookingController;
 import eapli.ecafeteria.application.booking.ShowMealInfoBookingController;
@@ -55,7 +54,7 @@ public class BookingUI extends AbstractUI implements Observer {
             return false;
         }
 
-        final SelectWidget<MealType> mealTypeSelector = new SelectWidget<>(mealType, new MealTypePrinter());
+        final SelectWidget<MealType> mealTypeSelector = new SelectWidget<>("xpto", mealType, new MealTypePrinter());
         mealTypeSelector.show();
 
         final MealType mealTypeChosen = mealTypeSelector.selectedElement();
@@ -71,7 +70,7 @@ public class BookingUI extends AbstractUI implements Observer {
             return false;
         }
 
-        final SelectWidget<Meal> mealSelector = new SelectWidget<>(meals, new MealPrinter());
+        final SelectWidget<Meal> mealSelector = new SelectWidget<>("xpto", meals, new MealPrinter());
         mealSelector.show();
 
         final Meal mealChosen = mealSelector.selectedElement();

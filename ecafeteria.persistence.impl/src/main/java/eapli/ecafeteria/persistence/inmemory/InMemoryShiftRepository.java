@@ -6,18 +6,20 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.cashregister.CashRegister;
-import eapli.ecafeteria.persistence.CashRegisterRepository;
+import eapli.ecafeteria.domain.cashregister.Shift;
+import eapli.ecafeteria.persistence.ShiftRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
 
 /**
  *
  * @author Alexandra Ferreira 1140388
  */
-public class InMemoryCashRegisterRepository extends InMemoryRepositoryWithLongPK<CashRegister> implements CashRegisterRepository{
+public class InMemoryShiftRepository extends InMemoryRepositoryWithLongPK<Shift> implements ShiftRepository{
 
     @Override
-    public CashRegister findByNumber(String number) {
-        return matchOne(e -> e.number().equals(number));
+    public Shift findByOpenedCashRegister(CashRegister cashRegister) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+
 }

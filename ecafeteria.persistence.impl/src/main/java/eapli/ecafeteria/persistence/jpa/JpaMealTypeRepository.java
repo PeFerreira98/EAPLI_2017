@@ -7,6 +7,8 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.MealTypeRepository;
+import java.util.Calendar;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,7 +28,22 @@ public class JpaMealTypeRepository extends CafeteriaJpaRepositoryBase<MealType, 
 
     @Override
     public MealType findByDefault() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < 15
+                || (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 15 && Calendar.
+                getInstance().get(Calendar.MINUTE) == 0)) {
+            final Query q = entityManager().
+                    createQuery("select mt from MealType mt "
+                            + "where mt.designation.mealTypeName like 'lunch'", MealType.class);
+
+            return (MealType) q.getSingleResult();
+            
+        } else {
+            final Query q = entityManager().
+                    createQuery("select mt from MealType mt "
+                            + "where mt.designation.mealTypeName like 'dinner'", MealType.class);
+          
+            return (MealType) q.getSingleResult();
+        }
     }
 
 }

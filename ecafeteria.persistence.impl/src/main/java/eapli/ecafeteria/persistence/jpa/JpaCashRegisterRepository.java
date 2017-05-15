@@ -7,11 +7,20 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.cashregister.CashRegister;
 import eapli.ecafeteria.persistence.CashRegisterRepository;
+import javax.persistence.Query;
 
 /**
  *
  * @author Alexandra Ferreira 1140388
  */
-public class JpaCashRegisterRepository extends CafeteriaJpaRepositoryBase<CashRegister, Long> implements CashRegisterRepository{
-    
+public class JpaCashRegisterRepository extends CafeteriaJpaRepositoryBase<CashRegister, Long> implements CashRegisterRepository {
+
+    @Override
+    public CashRegister findByNumber(String number) {
+        final Query q = entityManager().
+                createQuery("select cr from CashRegister cr where cr.number=:number", CashRegister.class);
+        q.setParameter("number", number);
+        return (CashRegister) q.getSingleResult();
+    }
+
 }
