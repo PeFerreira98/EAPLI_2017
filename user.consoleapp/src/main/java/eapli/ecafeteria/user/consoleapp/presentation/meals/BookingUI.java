@@ -144,7 +144,7 @@ public class BookingUI extends AbstractUI implements Observer {
         CafeteriaUser activeCafeteriaUser;
 
         //  FIXME: implementar um servico para isto.        
-        CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(true);
+        CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(PersistenceContext.repositories().buildTransactionalContext());
         CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
 
         return cafeteriaUser;
