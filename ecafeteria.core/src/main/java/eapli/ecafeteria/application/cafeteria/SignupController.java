@@ -28,7 +28,8 @@ public class SignupController implements Controller {
 	    final String lastName, final String email, OrganicUnit organicUnit, String mecanographicNumber,
 	    final Calendar createdOn) throws DataIntegrityViolationException, DataConcurrencyException {
 
-	Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+	// there is no need for authorisation check in this method as even
+    // unauthenticated users may request a signup JAL
 
 	final SignupRequestBuilder signupRequestBuilder = new SignupRequestBuilder();
 	signupRequestBuilder.withUsername(username).withPassword(password).withFirstName(firstName)
