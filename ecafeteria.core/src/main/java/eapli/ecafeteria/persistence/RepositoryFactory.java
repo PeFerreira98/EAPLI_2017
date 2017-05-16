@@ -81,4 +81,6 @@ public interface RepositoryFactory {
     CashRegisterRepository cashRegisters();
     
     ShiftRepository shifts();
+    
+    RatingRepository ratings();
 }

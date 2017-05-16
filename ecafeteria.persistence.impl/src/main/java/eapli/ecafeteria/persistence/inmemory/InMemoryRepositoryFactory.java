@@ -17,6 +17,7 @@ import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.NutricionalProfileAllergenRepository;
 import eapli.ecafeteria.persistence.NutricionalProfileRepository;
 import eapli.ecafeteria.persistence.OrganicUnitRepository;
+import eapli.ecafeteria.persistence.RatingRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.ShiftRepository;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
@@ -134,5 +135,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public ShiftRepository shifts() {
         return new InMemoryShiftRepository();
+    }
+
+    @Override
+    public RatingRepository ratings() {
+        return new InMemoryRatingRepository();
     }
 }
