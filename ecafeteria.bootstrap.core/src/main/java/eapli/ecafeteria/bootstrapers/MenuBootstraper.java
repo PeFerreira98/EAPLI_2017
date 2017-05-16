@@ -22,19 +22,22 @@ public class MenuBootstraper implements Action {
     @Override
     public boolean execute() {
 
-        Calendar clBeginning = GregorianCalendar.getInstance();
-        Calendar clEnding = GregorianCalendar.getInstance();
-        clBeginning.set(2017, Calendar.APRIL, 9);
-        clEnding.set(2017, Calendar.APRIL, 15);
+    	// WARNING: Java Multithreading issues (use registerSimple to avoid calendar setting issues)
 
-        register("MenuSemanaAbril", clBeginning, clEnding);
+        registerSimple("MenuSemanaAbril", 2017, Calendar.APRIL, 9, 2017, Calendar.APRIL, 15);
 
-        clBeginning.set(2017, Calendar.MAY, 22);
-        clEnding.set(2017, Calendar.MAY, 28);
-
-        register("MenuSemanaMaio", clBeginning, clEnding);
+        registerSimple("MenuSemanaMaio", 2017, Calendar.MAY, 22, 2017, Calendar.MAY, 28);
         
         return false;
+    }
+    
+    private void registerSimple(String name, int yearBeg, int monthBeg, int dayBeg, int yearEnd, int monthEnd, int dayEnd){
+    	Calendar clBeginning = GregorianCalendar.getInstance();
+        Calendar clEnding = GregorianCalendar.getInstance();
+        clBeginning.set(yearBeg, monthBeg, dayBeg);
+        clEnding.set(yearEnd, monthEnd, dayEnd);
+        
+        register(name, clBeginning, clEnding);
     }
 
     private void register(String name, Calendar beginning, Calendar ending) {

@@ -2,6 +2,8 @@ package eapli.ecafeteria.bootstrapers;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Logger;
 import eapli.ecafeteria.application.meals.RegisterMealController;
 import eapli.ecafeteria.domain.meals.Dish;
@@ -19,7 +21,9 @@ public class MealBootstraper implements Action {
 
     @Override
     public boolean execute() {
-
+    	
+    	// WARNING: Java Multithreading issues (use registerSimple to avoid calendar setting issues)
+    	
         final MenuRepository menuRepository = PersistenceContext.repositories().menus();
         final MealTypeRepository mealTypeRepository = PersistenceContext.repositories().mealTypes();
         final DishRepository dishRepository = PersistenceContext.repositories().dishes();
@@ -29,25 +33,25 @@ public class MealBootstraper implements Action {
         MealType mealTypeDinner = mealTypeRepository.findByAcronym("dinner");
         MealType mealTypeLunch = mealTypeRepository.findByAcronym("lunch");
         Dish dish = dishRepository.iterator().next();
-        Calendar calendar = GregorianCalendar.getInstance();
-        Calendar calendar1 = GregorianCalendar.getInstance();
 
-		calendar.set(2017, Calendar.APRIL, 10);
-		register(menu, dish, mealTypeLunch, calendar, "meal1");
-		
-		calendar.set(2017, Calendar.APRIL, 11);
-		register(menu, dish, mealTypeLunch, calendar, "meal2");
-		
-		calendar.set(2017, Calendar.APRIL, 13);
-		register(menu, dish, mealTypeLunch, calendar, "meal3");
-		
-        calendar1.set(2017, Calendar.MAY, 27);
-        register(menuMaio, dish, mealTypeLunch, calendar1, "meal4");
-
-        calendar1.set(2017, Calendar.MAY, 27);
-        register(menuMaio, dish, mealTypeDinner, calendar1, "meal5");
+        registerSimple(menu, dish, mealTypeLunch, "meal1", 2017, Calendar.APRIL, 10);
         
+        registerSimple(menu, dish, mealTypeLunch, "meal2", 2017, Calendar.APRIL, 11);
+        
+        registerSimple(menu, dish, mealTypeLunch, "meal3", 2017, Calendar.APRIL, 13);
+        
+        registerSimple(menuMaio, dish, mealTypeLunch, "meal4", 2017, Calendar.MAY, 27);
+        
+        registerSimple(menuMaio, dish, mealTypeDinner, "meal5", 2017, Calendar.MAY, 27);
+		        
         return false;
+    }
+    
+    private void registerSimple(Menu menu, Dish dish, MealType mealType, String description, int year, int month, int day){
+        	Calendar calendar = GregorianCalendar.getInstance();
+        	calendar.set(year, month, day);
+        	
+    		register(menu, dish, mealType, calendar, description);
     }
 
     private void register(Menu menu, Dish dish, MealType mealType, Calendar date, String description) {

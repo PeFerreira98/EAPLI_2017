@@ -10,7 +10,7 @@ import java.util.Collection;
  *
  */
 public enum ActionRight {
-    ADMINISTER, SELECT_MEAL, MANAGE_KITCHEN, MANAGE_MENUS, SALE, MANAGE_DELIVERY, MANAGE_PROFILE,;
+    ADMINISTER, SELECT_MEAL, MANAGE_KITCHEN, MANAGE_MENUS, SALE, MANAGE_DELIVERY, MANAGE_PROFILE;
 
     /**
      * checks if this action right can be performed by a user with the specified
