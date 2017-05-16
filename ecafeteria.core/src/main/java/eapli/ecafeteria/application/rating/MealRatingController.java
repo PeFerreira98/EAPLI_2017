@@ -11,6 +11,8 @@ import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -47,7 +49,7 @@ public class MealRatingController {
      * @param comment comment , can be empty. ""
      * @return success of creating and registing the new rating.
      */
-    public boolean registerNewMealRating(Meal meal, int rate,  String comment){
+    public boolean registerNewMealRating(Meal meal, int rate,  String comment) throws DataConcurrencyException, DataIntegrityViolationException{
         return registerNewMealRating( this.getActiveCafeteriaUser() , meal, rate, comment);
     }
     
@@ -79,7 +81,7 @@ public class MealRatingController {
      * @param comment comment , can be empty. ""
      * @return success of creating and registing the new rating.
      */
-    public boolean registerNewMealRating(CafeteriaUser cafeteriaUser , Meal meal, int rate, String comment){
+    public boolean registerNewMealRating(CafeteriaUser cafeteriaUser , Meal meal, int rate, String comment) throws DataConcurrencyException, DataIntegrityViolationException{
         return new MealRatingService().registerNewMealRating(cafeteriaUser, meal, rate, comment);
     }
     

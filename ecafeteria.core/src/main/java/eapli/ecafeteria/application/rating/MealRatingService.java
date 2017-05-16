@@ -7,6 +7,12 @@ package eapli.ecafeteria.application.rating;
 
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.rating.Comment;
+import eapli.ecafeteria.domain.rating.Rating;
+import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.ecafeteria.persistence.RatingRepository;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 
 /** Serviço de lida com operacoes relacionadas com Ratings.
  *
@@ -14,6 +20,7 @@ import eapli.ecafeteria.domain.meals.Meal;
  */
 public class MealRatingService {
     
+    private RatingRepository ratingRepository = PersistenceContext.repositories().ratings();
     
     /**
      * Registers a new meal rating for a cafeteria user
@@ -23,12 +30,17 @@ public class MealRatingService {
      * @param comment comment , can be empty. ""
      * @return success of creating and registing the new rating.
      */
-    public boolean registerNewMealRating(CafeteriaUser cafeteriaUser , Meal meal, int rate, String comment){
-        //if (cafeteriaUser == null) throw new IllegalArgumentException("cafeteriaUser == null");
+    public boolean registerNewMealRating(CafeteriaUser cafeteriaUser , Meal meal, int rate, String comment) throws DataConcurrencyException, DataIntegrityViolationException{
+        if (cafeteriaUser == null) throw new IllegalArgumentException("cafeteriaUser == null");
         if (meal == null) throw new IllegalArgumentException("meal == null");
         
+        
         //TODO criar o objecto Rating, Comentario e codifica-lo. e decomentar acima.
-         System.out.println("Falta Implementar o codigo de criar um novo rating. Hugo & Pedro");
+        // System.out.println("Falta Implementar o codigo de criar um novo rating. Hugo & Pedro");
+        
+        Rating newRating = new Rating(rate, cafeteriaUser, meal, comment);
+        
+        this.ratingRepository.save(newRating);
         
         return true;
     }

@@ -8,9 +8,13 @@ package eapli.ecafeteria.user.consoleapp.presentation.rating;
 import eapli.ecafeteria.application.rating.MealRatingController;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.user.consoleapp.presentation.meals.MealPrinter;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.util.io.Console;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -79,6 +83,10 @@ public class MealRatingUI extends AbstractUI{
         }
         catch(IllegalArgumentException ex){
             System.out.println("Error: " + ex.getMessage());
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(MealRatingUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(MealRatingUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         if(sucess) System.out.println("Rating created with sucess.");
