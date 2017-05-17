@@ -5,6 +5,7 @@ import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.BatchRepository;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CashRegisterRepository;
+import eapli.ecafeteria.persistence.CommentRepository;
 import eapli.ecafeteria.persistence.DishAllergenRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
@@ -133,5 +134,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public RatingRepository ratings() {
         return new JpaRatingRepository();
+    }
+
+    @Override
+    public CommentRepository comments() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

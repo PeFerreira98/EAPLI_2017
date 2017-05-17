@@ -5,10 +5,15 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.rating.Comment;
+import eapli.framework.persistence.repositories.DataRepository;
+
 /**
  *
  * @author Pedro Pereira
  */
-public interface CommentRepository {
+public interface CommentRepository extends DataRepository<Comment, Long>{
+    
+    Iterable<Comment> findByText(String text);
     
 }

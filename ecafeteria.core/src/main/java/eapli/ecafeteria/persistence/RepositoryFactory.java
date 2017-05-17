@@ -83,4 +83,6 @@ public interface RepositoryFactory {
     ShiftRepository shifts();
     
     RatingRepository ratings();
+    
+    CommentRepository comments();
 }

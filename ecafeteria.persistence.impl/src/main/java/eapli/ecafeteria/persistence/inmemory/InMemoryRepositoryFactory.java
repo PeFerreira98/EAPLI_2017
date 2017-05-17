@@ -6,6 +6,7 @@ import eapli.ecafeteria.persistence.BatchRepository;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.CashRegisterRepository;
+import eapli.ecafeteria.persistence.CommentRepository;
 import eapli.ecafeteria.persistence.DishAllergenRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
@@ -140,5 +141,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public RatingRepository ratings() {
         return new InMemoryRatingRepository();
+    }
+
+    @Override
+    public CommentRepository comments() {
+        return new InMemoryCommentRepository();
     }
 }
