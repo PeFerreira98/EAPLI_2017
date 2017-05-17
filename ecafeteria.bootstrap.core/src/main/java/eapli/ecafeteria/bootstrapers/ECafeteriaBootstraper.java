@@ -28,6 +28,7 @@ public class ECafeteriaBootstraper implements Action {
             new MealBootstraper(),
             new AllergenBootstraper(),
             new DishAllergenBootstraper(),
+            new RatingBootstraper()
 //            new NutricionalProfileBootstraper()
         };
 

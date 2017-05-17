@@ -37,8 +37,8 @@ public class MealRatingService {
         
         //TODO criar o objecto Rating, Comentario e codifica-lo. e decomentar acima.
         // System.out.println("Falta Implementar o codigo de criar um novo rating. Hugo & Pedro");
-        
-        Rating newRating = new Rating(rate, cafeteriaUser, meal, comment);
+        Comment c = new Comment(comment, cafeteriaUser);
+        Rating newRating = new Rating(rate, cafeteriaUser, meal, c);
         
         this.ratingRepository.save(newRating);
         

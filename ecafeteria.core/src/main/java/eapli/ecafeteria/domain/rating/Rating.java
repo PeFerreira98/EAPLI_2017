@@ -36,19 +36,21 @@ public class Rating implements Serializable {
     private CafeteriaUser cafeteriaUser;
     @ManyToOne
     private Meal meal;
-    //@ManyToOne
-    //private Comment comment;
-    private String comment;
     
+    /*
+    @ManyToOne
+    private Comment comment;
+    //private String comment;
+    */
     protected Rating(){
         // ORM
     }
 
-    public Rating(int rate, CafeteriaUser cafeteriaUser, Meal meal, String comment){
+    public Rating(int rate, CafeteriaUser cafeteriaUser, Meal meal, Comment comment){
         this.rate = rate;
         this.cafeteriaUser = cafeteriaUser;
         this.meal = meal;
-        this.comment = comment;
+        //this.comment = comment;
     }
     
     public int readRate(){
@@ -63,9 +65,9 @@ public class Rating implements Serializable {
         return this.meal;
     }
     
-    public String comment(){
-        return this.comment;
-    }
+//    public Comment comment(){
+//        return this.comment;
+//    }
     
     public Long getId() {
         return id;
