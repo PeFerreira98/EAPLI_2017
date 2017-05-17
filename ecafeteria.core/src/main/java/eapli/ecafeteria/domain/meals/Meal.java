@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.domain.meals;
 
+import eapli.ecafeteria.domain.mealplans.MealPlanItem;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.domain.ddd.AggregateRoot;
 
@@ -42,6 +43,7 @@ public class Meal implements AggregateRoot<CompositeIdMeal>, Serializable {
     private Calendar date;
     private String description;
 
+    //FIXME : A meal does not contain a mealPlanItem. a mealPlanItem contains a meal!
     private MealPlanItem mealPlanItem;
 
     protected Meal() {
