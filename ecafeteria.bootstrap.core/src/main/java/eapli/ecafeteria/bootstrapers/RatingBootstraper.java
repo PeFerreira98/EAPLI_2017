@@ -61,6 +61,40 @@ public class RatingBootstraper implements Action {
           }
           System.out.println("Ratings found in database: " + found + " / "+ expected);
           
+          expected = 1;
+          found = 0;
+          
+          
+          Iterable<Rating> itRating2 = ratingRepo.findByMeal(meal);
+          for(Rating r : itRating2){
+              if(r != null){
+                  found++;
+              }
+          }
+          System.out.println("Ratings found by meal in database: " + found + " / "+ expected);
+          
+          expected = 1;
+          found = 0;
+          
+          Iterable<Rating> itRating3 = ratingRepo.findByCafeteriaUser(cafeteriaUser);
+          for(Rating r : itRating3){
+              if(r != null){
+                  found++;
+              }
+          }
+          System.out.println("Ratings found by user in database: " + found + " / "+ expected);
+          
+          expected = 1;
+          found = 0;
+          
+          Iterable<Rating> itRating4 = ratingRepo.findByMealAndCafeteriaUser(meal, cafeteriaUser);
+          for(Rating r : itRating4){
+              if(r != null){
+                  found++;
+              }
+          }
+          System.out.println("Ratings found by user and meal in database: " + found + " / "+ expected);
+          
         return false;
     }
     
