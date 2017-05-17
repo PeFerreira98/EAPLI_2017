@@ -14,8 +14,10 @@ import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.DishAllergenRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
+import java.util.logging.Logger;
 
 /**
  * Servico cuja responsabilidade e detectar allergenicos e alergias de users e Meals. OBSERVABLE
@@ -57,31 +59,42 @@ public class AllergyDetectionService extends Observable{
         
         Dish dish = meal.dish();
         
-        //TODO
+        
         // Obter uma lista com todos os DishAllergen do Dish.
         // Ir a cada DishAllerger, obter o Allergen e addicionar a lista.
-        System.out.println("FALTA TESTAR listAllergen(Meal meal) Hugo & Pedro");
         
+        // FIXME FIX ME Corrigir os erros nos repositorios para nao termos de usar getALL nos repositorios.
         try {
 
             DishAllergenRepository dishAllergenRepository = PersistenceContext.repositories().dishAllergens();
-            Iterable<DishAllergen> iterableDishAllergen = dishAllergenRepository.findByDish(dish);
+            
+            // O repo find by dish está quebrado, portanto vamos primeiro obter os DishAlergen do nosso dish.
+            //Iterable<DishAllergen> iterableDishAllergen = dishAllergenRepository.findByDish(dish);
+            
+            Iterable<DishAllergen> iterableDishAllergen = dishAllergenRepository.findAll();
 
             AllergenRepository allergenRepository = PersistenceContext.repositories().allergens();
+            Iterable<Allergen> iterableAllergen = allergenRepository.findAll();
 
-            for(DishAllergen dAllergen : iterableDishAllergen){
-                Allergen a = allergenRepository.findByName(dAllergen.idAllergen());
-                listaAllergenicos.add(a);
+            for(DishAllergen dishAllergen : iterableDishAllergen){
+                for(Allergen allergen : iterableAllergen){
+                    if(dishAllergen.is(dish, allergen)){
+                        if(allergen.isActive() && dishAllergen.isActive()){
+                            listaAllergenicos.add(allergen);
+                        }
+                    }
+                }
             }
-            
-        } catch (Exception e) {
-            System.out.println("Impossivel obter alergenicos de prato");
-        }
+        } catch (javax.persistence.PersistenceException ex){
+            String error = "Error interacting with dishAllergenRepository.   " + ex;
+            Logger.getGlobal().severe(error);
+        }    
         
+        /*  DEBUG!!!!
         for(Allergen a : listaAllergenicos){
-            System.out.println(a.id());
+            System.out.println("Debug:" + a.id());
         }
-       
+       */
         
         return listaAllergenicos;
     }

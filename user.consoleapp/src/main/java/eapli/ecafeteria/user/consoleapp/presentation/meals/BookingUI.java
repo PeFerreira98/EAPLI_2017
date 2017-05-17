@@ -76,27 +76,14 @@ public class BookingUI extends AbstractUI implements Observer {
         final Meal mealChosen = mealSelector.selectedElement();
 
         CafeteriaUser activeCafeteriaUser = this.obtainCurrentCafeteriaUser();
-
-        if (mealChosen != null) {
-            try {
-                if (this.controller.bookingMeal(activeCafeteriaUser, mealChosen) == null) {
-                    System.out.println("Reserve not registered.");
-                } else {
-                    System.out.println("Reserve registerd.");
-                }
-            } catch (DataConcurrencyException ex) {
-                System.out.println("Data was changed meanwhile. Please try again.");
-            } catch (DataIntegrityViolationException ex) {
-                System.out.println("Reservation already registered!");
-            }
-        }
-
+        
+        
         //------------------------------------------------------
         // 
         // SRR-06B  Codigo da parte de mostrar info da Meal indicada pelo user. Hugo & Pedro    
         //
         boolean showInfo = false;
-        //showInfo = true;          // Descomentar para correr a parte de mostar a informacao sobre os allergenios.
+        showInfo = true;          // Descomentar para correr a parte de mostar a informacao sobre os allergenios.
         if(showInfo){
             
              //Instranciacao do controller.
@@ -115,27 +102,50 @@ public class BookingUI extends AbstractUI implements Observer {
              }
         
              //Mostrar os alegenicos:
-             System.out.println("Allergen present in the meal:");
+             System.out.println("\nAllergen present in the meal:");
              List<Allergen> listAlergenInMeal = showController.obtainListAllergen(mealChosen);
              AllergenPrinter dishAllergenPrinter = new AllergenPrinter();
              for(Allergen dishAllergen : listAlergenInMeal){
+                 System.out.print("  - "); 
                 dishAllergenPrinter.visit(dishAllergen);
              }
              if( listAlergenInMeal.isEmpty() ) System.out.println(" none ");
-            
+             
+             
              //Mostrar warning caso allergico
+             System.out.println("\nChecking if user is allergic...");
              boolean isAllergic = showController.isAllergic(mealChosen, this);
              // O padrao observador deve mostrar o alerta automaticamente. "isAllergic fica como debug".
             
              
              
              //Mostrar consumo de calorias/sal dos bookings desta semana incluindo a mealSelecionada.
+             System.out.println("\nPlaned week nutricional consumption:");
              NutricionalInfo weekCommulativeNutritional = showController.returnWeekInfo(mealChosen);
-             System.out.println("Planed week nutricional consumption:");
              nutricionalInfoPrinter.visit( weekCommulativeNutritional );
              
         }
         //Fim da parte de mostrar info. Hugo & Pedro
+        // subi a parte de mostrar os alergenicos, para o local correcto, antes de de criar o booking..        
+        
+        
+        
+
+        if (mealChosen != null) {
+            try {
+                if (this.controller.bookingMeal(activeCafeteriaUser, mealChosen) == null) {
+                    System.out.println("Reserve not registered.");
+                } else {
+                    System.out.println("Reserve registerd.");
+                }
+            } catch (DataConcurrencyException ex) {
+                System.out.println("Data was changed meanwhile. Please try again.");
+            } catch (DataIntegrityViolationException ex) {
+                System.out.println("Reservation already registered!");
+            }
+        }
+
+        
 
         return false;   //Nao identifiquei uso, pelo consegui constatar. Alguns retornam falso, outros true. O return true if this "scope" should end(HugoB)
     }

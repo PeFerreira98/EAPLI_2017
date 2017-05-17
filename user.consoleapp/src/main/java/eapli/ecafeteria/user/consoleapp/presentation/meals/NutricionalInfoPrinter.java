@@ -18,7 +18,7 @@ public class NutricionalInfoPrinter implements Visitor<NutricionalInfo> {
     public void visit(NutricionalInfo visitee) {
         int calories = visitee.calories();
         int salt = visitee.salt();
-        System.out.println("Calorias: " + calories + " cal");
+        System.out.print("Calorias: " + calories + " cal  ");
         System.out.println("Sal: "+ salt + " g");
         
        // System.out.printf("%-30s%-30s\n", visitee.calories(), visitee.salt());
