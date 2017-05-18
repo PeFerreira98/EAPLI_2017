@@ -9,6 +9,7 @@ import eapli.cafeteria.consoleapp.presentation.ExitWithMessageAction;
 import eapli.cafeteria.consoleapp.presentation.MyUserMenu;
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.cafeteria.ListOrganicUnitsController;
+import eapli.ecafeteria.application.cafeteria.OpenCashRegisterAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.authz.AcceptRefuseSignupRequestAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.authz.AddUserUI;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.authz.DeactivateUserAction;
@@ -115,6 +116,9 @@ public class MainMenu extends AbstractUI {
     private static final int MEAL_TYPE_CHANGE_OPTION = 3;
     private static final int MEAL_TYPE_ACTIVATE_DEACTIVATE_OPTION = 4;
 
+    //SALES
+    private static final int OPEN_CASH_REGISTER = 1;
+
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
@@ -124,6 +128,7 @@ public class MainMenu extends AbstractUI {
     private static final int TRACEABILITY_OPTION = 6;
     private static final int MEAL_OPTION = 7;
     private static final int MENU_OPTION = 8;
+    private static final int SALES_OPTION = 9;
 
     @Override
     public boolean show() {
@@ -183,7 +188,8 @@ public class MainMenu extends AbstractUI {
             mainMenu.add(new SubMenu(MENU_OPTION, menusMenu, new ShowVerticalSubMenuAction(menusMenu)));
         }
         if (Application.session().session().authenticatedUser().isAuthorizedTo(ActionRight.SALE)) {
-            // TODO
+            final Menu salesMenu = buildSalesMenu();
+            mainMenu.add(new SubMenu(SALES_OPTION, salesMenu, new ShowVerticalSubMenuAction(salesMenu)));
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -319,6 +325,14 @@ public class MainMenu extends AbstractUI {
         //menu.add(new MenuItem(MEAL_TYPE_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Meal Type", new ActivateDeactivateMealTypeAction()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+        return menu;
+    }
+
+    private Menu buildSalesMenu() {
+        final Menu menu = new Menu("Sales >");
+        menu.add(new MenuItem(OPEN_CASH_REGISTER, "Open Cash Register", new OpenCashRegisterAction()));
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+
         return menu;
     }
 }

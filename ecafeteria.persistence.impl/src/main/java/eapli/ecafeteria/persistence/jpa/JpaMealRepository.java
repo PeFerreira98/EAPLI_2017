@@ -28,11 +28,15 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Composit
     public Iterable<Meal> mealsOfPublishedMenuFromCertainDate(Calendar date) {
         return match("e.date='" + new Date(date.getTimeInMillis()) + "'");
     }
-    
+
     @Override
     public Iterable<Meal> mealsByDateAndMealType(Calendar date, MealType mealType) {
         return match("e.date='" + new Date(date.getTimeInMillis()) + 
+<<<<<<< HEAD
                 " AND e.mealType.acronym=" + mealType.id() + " '");
+=======
+                "' AND e.mealType.acronym='" + mealType.id() + "'");
+>>>>>>> d84e69299628841ea55e8bc294ed6889531f9d38
     }
 
 }

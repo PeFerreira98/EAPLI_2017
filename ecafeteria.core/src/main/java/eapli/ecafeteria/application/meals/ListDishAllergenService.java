@@ -35,12 +35,12 @@ public class ListDishAllergenService {
     public Iterable<DishAllergen> findByDish(Dish dish) {
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
-        return this.dishAllergenRepository.findByDish(dish);
+        return this.dishAllergenRepository.findByDish(dish.name().toString());
     }
     
     public Iterable<DishAllergen> findByAllergen(Allergen allergen) {
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
-        return this.dishAllergenRepository.findByAllergen(allergen);
+        return this.dishAllergenRepository.findByAllergen(allergen.getName());
     }
 }
