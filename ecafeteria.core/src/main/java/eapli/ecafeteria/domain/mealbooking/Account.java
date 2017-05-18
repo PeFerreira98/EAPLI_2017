@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,6 +41,7 @@ public class Account implements Serializable {
     /**
      * List of Transactions.
      */
+    @ElementCollection
     private List<Transaction> transactionList;
 
     protected Account() {
@@ -77,13 +79,30 @@ public class Account implements Serializable {
             balance = balance.add(transaction.getAmount());
             return true;
         }
-        
+
         if (transaction.getType() == DEBT) {
             balance = balance.subtract(transaction.getAmount());
             return true;
         }
-        
+
         return false;
+    }
+
+    /**
+     * Add amount to the account.
+     *
+     * @param amount
+     * @return
+     */
+    public boolean addAccountLoad(BigDecimal amount) {
+        Money money = new Money(amount.doubleValue(), balance.currency());
+        Transaction load = new Transaction(money, LOAD);
+
+        if (!transactionList.add(load)) {
+            return false;
+        }
+        updateBalance(load);
+        return true;
     }
 
     /**

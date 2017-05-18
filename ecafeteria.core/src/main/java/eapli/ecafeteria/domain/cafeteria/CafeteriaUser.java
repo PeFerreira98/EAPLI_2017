@@ -44,6 +44,7 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     @ManyToOne(cascade = CascadeType.MERGE)
     private OrganicUnit organicUnit;
 
+    @OneToOne(cascade = CascadeType.MERGE)
     private Account account;
 
     public CafeteriaUser(SystemUser user, OrganicUnit organicUnit, MecanographicNumber mecanographicNumber) {
@@ -112,6 +113,10 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
 
     public OrganicUnit organicUnit() {
         return this.organicUnit;
+    }
+    
+    public Account account() {
+        return this.account;
     }
 
     public Money accountBalance() {

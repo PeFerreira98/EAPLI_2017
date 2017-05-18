@@ -30,6 +30,7 @@ public class ECafeteriaBootstraper implements Action {
             new DishAllergenBootstraper(),
             new RatingBootstraper(),
             new BookingBootstraper(),
+            new CafeteriaAccountBootstraper(),
 //            new NutricionalProfileBootstraper()
         };
 
