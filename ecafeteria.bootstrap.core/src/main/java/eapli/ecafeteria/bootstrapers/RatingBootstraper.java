@@ -11,6 +11,7 @@ import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menus.Menu;
+import eapli.ecafeteria.domain.rating.Comment;
 import eapli.ecafeteria.domain.rating.Rating;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
@@ -59,7 +60,17 @@ public class RatingBootstraper implements Action {
                   found++;
               }
           }
-          System.out.println("Ratings found in database: " + found + " / "+ expected);
+          System.out.println("\nRATINGS found in database: " + found + " / "+ expected);
+          
+          if(found > 0){
+              Rating r = itRating.iterator().next();
+              Comment c = r.comment();
+              if(c == null){
+                 System.out.println("   Found null comment");  
+              } else {                
+                System.out.println("   Comentario encontrado: " + c.text());
+              }
+          }
           
           expected = 1;
           found = 0;
@@ -71,7 +82,7 @@ public class RatingBootstraper implements Action {
                   found++;
               }
           }
-          System.out.println("Ratings found by meal in database: " + found + " / "+ expected);
+          System.out.println("   Ratings found by meal in database: " + found + " / "+ expected);
           
           expected = 1;
           found = 0;
@@ -82,7 +93,7 @@ public class RatingBootstraper implements Action {
                   found++;
               }
           }
-          System.out.println("Ratings found by user in database: " + found + " / "+ expected);
+          System.out.println("   Ratings found by user in database: " + found + " / "+ expected);
           
           expected = 1;
           found = 0;
@@ -93,8 +104,9 @@ public class RatingBootstraper implements Action {
                   found++;
               }
           }
-          System.out.println("Ratings found by user and meal in database: " + found + " / "+ expected);
-          
+          System.out.println("   Ratings found by user and meal in database: " + found + " / "+ expected);
+          System.out.println();
+                   
         return false;
     }
     
