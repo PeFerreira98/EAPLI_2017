@@ -9,7 +9,6 @@ import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.presentation.console.ListWidget;
 import eapli.framework.visitor.Visitor;
 import eapli.util.io.Console;
-import java.util.Calendar;
 import static java.util.Collections.list;
 import java.util.List;
 
@@ -38,19 +37,13 @@ public class ListMealByBatchCodeUI extends AbstractListUI<MealBatch> {
         try {
 
             List<MealBatch> list = this.theController.searchMealByBatchCode(batchCode);
-            
-            for (MealBatch mealBatch : list) {
-                Calendar date = mealBatch.date();
-                System.out.printf("%-10s\n", date.getTime());
-                
-            }
-//            new ListWidget<>("Batches", list).show();
-            
-            
-            
+            new ListWidget<MealBatch>(headline(), list);
         } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
             System.out.println("That acronym is already in use.");
         }
+        
+        
+        
 
         return false;
     }
@@ -72,7 +65,7 @@ public class ListMealByBatchCodeUI extends AbstractListUI<MealBatch> {
 
     @Override
     protected String elementName() {
-        return "Batch";
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
