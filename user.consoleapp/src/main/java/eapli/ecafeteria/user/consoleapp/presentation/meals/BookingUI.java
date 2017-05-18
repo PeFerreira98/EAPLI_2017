@@ -42,40 +42,27 @@ public class BookingUI extends AbstractUI implements Observer {
 
     @Override
     protected boolean doShow() {
+    	final CafeteriaUser cafeteriaUser = this.controller.returnActiveCafeteriaUser();
+    	
+		final Iterable<MealType> mealTypes = this.controller.listMealTypes();
 
-        /* Meal section */
-        Calendar date = Console.readCalendar("Insert meal date: (dd-MM-yyyy)");
+		final Calendar date = Console.readCalendar("Insert meal date: (dd-MM-yyyy)");
 
-        /* Meal type section */
-        final Iterable<MealType> mealType = this.controller.listMealType(date);
-
-        if (!mealType.iterator().hasNext()) {
-            System.out.println("There are no meal types defined!");
+		final SelectWidget<MealType> mealTypeSelector = new SelectWidget<>("xpto", mealTypes, new MealTypePrinter());
+		mealTypeSelector.show();
+		final MealType mealType = mealTypeSelector.selectedElement();
+		if (mealType == null) {
             return false;
         }
 
-        final SelectWidget<MealType> mealTypeSelector = new SelectWidget<>("xpto", mealType, new MealTypePrinter());
-        mealTypeSelector.show();
-
-        final MealType mealTypeChosen = mealTypeSelector.selectedElement();
-
-        if (mealTypeChosen == null) {
-            return false;
-        }
-
-        final Iterable<Meal> meals = this.controller.listMeals(date, mealTypeChosen);
-
-        if (meals == null) {
+		final Iterable<Meal> meals = this.controller.listMealsByDateAndMealType(date, mealType);
+		if (meals == null) {
             System.out.println("There are no meals available!");
             return false;
         }
-
-        final SelectWidget<Meal> mealSelector = new SelectWidget<>("xpto", meals, new MealPrinter());
-        mealSelector.show();
-
-        final Meal mealChosen = mealSelector.selectedElement();
-
-        CafeteriaUser activeCafeteriaUser = this.obtainCurrentCafeteriaUser();
+		final SelectWidget<Meal> mealSelector = new SelectWidget<>("xpto", meals, new MealPrinter());
+		mealSelector.show();
+		final Meal mealChosen = mealSelector.selectedElement();
         
         
         //------------------------------------------------------
@@ -129,11 +116,9 @@ public class BookingUI extends AbstractUI implements Observer {
         // subi a parte de mostrar os alergenicos, para o local correcto, antes de de criar o booking..        
         
         
-        
-
         if (mealChosen != null) {
             try {
-                if (this.controller.bookingMeal(activeCafeteriaUser, mealChosen) == null) {
+                if (this.controller.bookingMeal(cafeteriaUser, mealChosen) == null) {
                     System.out.println("Reserve not registered.");
                 } else {
                     System.out.println("Reserve registerd.");

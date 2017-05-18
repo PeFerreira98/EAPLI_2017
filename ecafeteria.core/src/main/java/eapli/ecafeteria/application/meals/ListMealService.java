@@ -9,7 +9,6 @@ import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
-import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.Calendar;
@@ -27,10 +26,9 @@ public class ListMealService {
 
         return this.mealRepo.findAll();
     }
-
-    public Iterable<Meal> mealsOfMenuByDateMealType(Calendar date, MealType mealType, Menu menu) {
-        
-        return this.mealRepo.mealsOfMenuByDateMealType(date, mealType, menu);
-    }
+    
+    public Iterable<Meal> mealsByDateAndMealType(Calendar date, MealType mealType) {
+		return this.mealRepo.mealsByDateAndMealType(date, mealType);
+	}
     
 }

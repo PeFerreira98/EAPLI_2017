@@ -90,7 +90,7 @@ public class OpenCashRegisterController {
 
         MealRepository mealRepo = PersistenceContext.repositories().meals();
 
-        return mealRepo.mealsOfMenuByDateMealType(day, mealType, menu.iterator().next()).iterator().hasNext();
+        return mealRepo.mealsByDateAndMealType(day, mealType).iterator().hasNext();
     }
 
 }
