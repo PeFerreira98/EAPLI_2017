@@ -10,5 +10,5 @@ package eapli.ecafeteria.domain.mealbooking;
  * @author Alexandra Ferreira 1140388
  */
 public enum TransactionType {
-    LOAD, DEBT
+    LOAD, DEBT, REFUND
 }
