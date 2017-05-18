@@ -22,5 +22,5 @@ public interface MealRepository extends DataRepository<Meal, CompositeIdMeal> {
 
     Iterable<Meal> mealsOfPublishedMenuFromCertainDate(Calendar date);
 
-    public Iterable<Meal> mealsOfMenuByDateMealType(Calendar date, MealType mealType, Menu menu);
+    Iterable<Meal> mealsByDateAndMealType(Calendar date, MealType mealType);
 }

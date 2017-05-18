@@ -35,7 +35,7 @@ public class Booking implements AggregateRoot<String>, Serializable {
     private CafeteriaUser cafeteriaUser;
 
     protected Booking() {
-
+    	// ORM
     }
 
     public Booking(CafeteriaUser user, Meal meal) {

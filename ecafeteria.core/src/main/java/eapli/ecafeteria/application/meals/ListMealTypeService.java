@@ -26,8 +26,6 @@ public class ListMealTypeService {
     }
 
     public Iterable<MealType> activeMealTypes() {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-
         return this.mealTypeRepo.activeMealTypes();
     }
     
