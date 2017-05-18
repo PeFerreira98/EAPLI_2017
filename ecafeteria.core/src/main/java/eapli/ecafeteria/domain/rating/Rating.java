@@ -42,11 +42,18 @@ public class Rating implements Serializable {
     private Comment comment;
     //private String comment;
     
+    final private static int MIN_VALUE = 1;
+    final private static int MAX_VALUE = 5;
+    
+    
     protected Rating(){
         // ORM
     }
 
     public Rating(int rate, CafeteriaUser cafeteriaUser, Meal meal, Comment comment){
+        if(rate < MIN_VALUE || rate > MAX_VALUE){
+            throw new IllegalArgumentException();
+        }
         this.rate = rate;
         this.cafeteriaUser = cafeteriaUser;
         this.meal = meal;

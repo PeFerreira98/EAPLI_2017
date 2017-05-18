@@ -35,11 +35,13 @@ public class MealRatingService {
     public boolean registerNewMealRating(CafeteriaUser cafeteriaUser , Meal meal, int rate, String comment) throws DataConcurrencyException, DataIntegrityViolationException{
         if (cafeteriaUser == null) throw new IllegalArgumentException("cafeteriaUser == null");
         if (meal == null) throw new IllegalArgumentException("meal == null");
+        Comment c = null;
         
+        if(comment == null || comment.isEmpty()){
+            comment = "No comment";
+        }
         
-        //TODO criar o objecto Rating, Comentario e codifica-lo. e decomentar acima.
-        // System.out.println("Falta Implementar o codigo de criar um novo rating. Hugo & Pedro");
-        Comment c = new Comment(comment, cafeteriaUser);
+        c = new Comment(comment, cafeteriaUser);
         this.commentRepository.save(c);
         
         Rating newRating = new Rating(rate, cafeteriaUser, meal, c);
