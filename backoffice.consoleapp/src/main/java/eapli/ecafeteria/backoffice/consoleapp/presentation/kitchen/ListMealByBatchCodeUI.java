@@ -9,6 +9,7 @@ import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.presentation.console.ListWidget;
 import eapli.framework.visitor.Visitor;
 import eapli.util.io.Console;
+import java.util.Calendar;
 import static java.util.Collections.list;
 import java.util.List;
 
@@ -37,7 +38,11 @@ public class ListMealByBatchCodeUI extends AbstractListUI<MealBatch> {
         try {
 
             List<MealBatch> list = this.theController.searchMealByBatchCode(batchCode);
-            new ListWidget<MealBatch>(headline(), list);
+            for (MealBatch mealBatch : list) {
+                Calendar date = mealBatch.date();
+                System.out.printf("%-10s\n", date.getTime());
+                
+            }
         } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
             System.out.println("That acronym is already in use.");
         }
