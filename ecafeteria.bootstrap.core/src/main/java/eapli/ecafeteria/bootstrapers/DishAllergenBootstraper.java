@@ -54,7 +54,28 @@ public class DishAllergenBootstraper implements Action {
             i++;            
         }
         System.out.println("Numero de allergenicos do dish " + i);
-        
+        int expected = 4;
+          int found = 0;
+         DishAllergenRepository dishAllergenRepo = PersistenceContext.repositories().dishAllergens();
+          
+          Iterable<DishAllergen> itDA = dishAllergenRepo.findAll();
+          for(DishAllergen da : itDA){
+              if(da != null){
+                  found++;
+              }
+          }
+          System.out.println("\nDishAllergens found in database: " + found + " / "+ expected);
+          
+          if(found > 0){
+              DishAllergen da = itDA.iterator().next();
+              boolean test = da.is(dishRepo.findByName(Designation.valueOf("tofu grelhado")), allergenRepo.findByName("glúten"));
+              if(!test){
+                 System.out.println("   DishAllergen not found");  
+              } else {                
+                System.out.println("   Dish Allergen found: Dish , " + da.idDish() + " | Allergen, " + da.idAllergen()
+                );
+              }
+          }
         return false;
     }
 

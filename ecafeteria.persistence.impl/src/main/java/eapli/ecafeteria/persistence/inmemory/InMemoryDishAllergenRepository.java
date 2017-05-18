@@ -23,12 +23,12 @@ public class InMemoryDishAllergenRepository extends InMemoryRepositoryWithLongPK
     }
 
     @Override
-    public Iterable<DishAllergen> findByDish(Dish dish) {
-        return match(e -> e.idDish().equals(dish.id().toString()));
+    public Iterable<DishAllergen> findByDish(String name) {
+        return match(e -> e.idDish().equals(name));
     }
     
     @Override
-    public Iterable<DishAllergen> findByAllergen(Allergen Allergen) {
-        return match(e -> e.idAllergen().equals(Allergen.id()));
+    public Iterable<DishAllergen> findByAllergen(String name) {
+        return match(e -> e.idAllergen().equals(name));
     }
 }

@@ -22,7 +22,7 @@ public interface DishAllergenRepository extends DataRepository<DishAllergen, Lon
      */
     Iterable<DishAllergen> activeDishAllergens();
 
-    Iterable<DishAllergen> findByDish(Dish dish);
-    Iterable<DishAllergen> findByAllergen(Allergen allergen);
+    Iterable<DishAllergen> findByDish(String name);
+    Iterable<DishAllergen> findByAllergen(String name);
     
 }

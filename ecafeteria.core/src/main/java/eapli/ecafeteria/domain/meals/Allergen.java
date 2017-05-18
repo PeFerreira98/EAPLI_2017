@@ -102,6 +102,10 @@ public class Allergen implements AggregateRoot<String>, Serializable {
 	public boolean isActive() {
 		return this.active;
 	}
+        
+        public String getName(){
+                return this.name;
+        }
 
 	/**
 	 * Toggles the state of the Allergen, activating it or deactivating it
