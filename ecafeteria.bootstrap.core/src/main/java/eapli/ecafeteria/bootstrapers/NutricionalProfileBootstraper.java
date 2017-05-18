@@ -1,10 +1,9 @@
 package eapli.ecafeteria.bootstrapers;
 
+import eapli.ecafeteria.application.cafeteria.CafeteriaUserService;
 import eapli.ecafeteria.application.cafeteria.RegisterNutricionalProfileController;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
-import eapli.ecafeteria.persistence.CafeteriaUserRepository;
-import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
@@ -18,9 +17,9 @@ class NutricionalProfileBootstraper implements Action {
 
     @Override
     public boolean execute() {
-        final CafeteriaUserRepository userRepo = PersistenceContext.repositories().cafeteriaUsers(PersistenceContext.repositories().buildTransactionalContext());
-        final CafeteriaUser user1 = userRepo.findByUsername(new Username("900330"));
-        final CafeteriaUser user2 = userRepo.findByUsername(new Username("900331"));
+        final CafeteriaUserService service = new CafeteriaUserService();
+        final CafeteriaUser user1 = service.findCafeteriaUserByUsername(new Username("900330"));
+        final CafeteriaUser user2 = service.findCafeteriaUserByUsername(new Username("900331"));
 
         register(user1, 500, 25, 3000, 150);
         register(user2, 1000, 50, 5000, 300);

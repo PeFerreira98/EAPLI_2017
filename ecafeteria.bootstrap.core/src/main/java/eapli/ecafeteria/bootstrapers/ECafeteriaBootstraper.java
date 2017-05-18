@@ -29,7 +29,7 @@ public class ECafeteriaBootstraper implements Action {
             new AllergenBootstraper(),
             new DishAllergenBootstraper(),
             new RatingBootstraper(),
-            new BookingBootstraper()
+            new BookingBootstraper(),
 //            new NutricionalProfileBootstraper()
         };
 
@@ -38,7 +38,7 @@ public class ECafeteriaBootstraper implements Action {
         // AuthenticationService authz = new AuthenticationService();
         // Session adminSession = authz.authenticate(new Username("admin"), new
         // Password("admin"));
-        final Set<RoleType> roles = new HashSet<RoleType>();
+        final Set<RoleType> roles = new HashSet<>();
         roles.add(RoleType.ADMIN);
         roles.add(RoleType.MENU_MANAGER);
         roles.add(RoleType.KITCHEN_MANAGER);

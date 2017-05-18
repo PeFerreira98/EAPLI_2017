@@ -47,7 +47,7 @@ public class NutricionalProfileAllergen implements Serializable {
         }
         this.nutricionalProfile = nutricionalProfile;
         this.allergen = allergen;
-        this.id = nutricionalProfile.cafeteriaUser().user().id() + allergen.id();
+        this.id = nutricionalProfile.cafeteriaUser().user().id().toString() + allergen.id();
     }
 
     @Override

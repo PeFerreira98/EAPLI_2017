@@ -17,7 +17,7 @@ public class InMemoryNutricionalProfileAllergenRepository extends InMemoryReposi
     }
 
     @Override
-    public Iterable<NutricionalProfileAllergen> nutricionalProfileAllergenByNutricionalProfile(NutricionalProfile profile) {
+    public Iterable<NutricionalProfileAllergen> findNutricionalProfileAllergenByNutricionalProfile(NutricionalProfile profile) {
         return match(e -> e.nutricionalProfile().equals(profile));
     }
 

@@ -10,5 +10,5 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface NutricionalProfileAllergenRepository extends DataRepository<NutricionalProfileAllergen, String> {
 
-    Iterable<NutricionalProfileAllergen> nutricionalProfileAllergenByNutricionalProfile(NutricionalProfile profile);
+    Iterable<NutricionalProfileAllergen> findNutricionalProfileAllergenByNutricionalProfile(NutricionalProfile profile);
 }

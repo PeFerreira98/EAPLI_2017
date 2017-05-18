@@ -20,6 +20,7 @@ public class NutricionalProfile implements Serializable {
     @Id
     @OneToOne
     private CafeteriaUser cafeteriaUser;
+
     @Version
     private Long version;
 

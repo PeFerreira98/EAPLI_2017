@@ -11,7 +11,7 @@ import eapli.ecafeteria.persistence.NutricionalProfileAllergenRepository;
 class JpaNutricionalProfileAllergenRepository extends CafeteriaJpaRepositoryBase<NutricionalProfileAllergen, String> implements NutricionalProfileAllergenRepository {
 
     @Override
-    public Iterable<NutricionalProfileAllergen> nutricionalProfileAllergenByNutricionalProfile(NutricionalProfile profile) {
+    public Iterable<NutricionalProfileAllergen> findNutricionalProfileAllergenByNutricionalProfile(NutricionalProfile profile) {
         return match("e.nutricionalProfile='" + profile + "'");
     }
 
