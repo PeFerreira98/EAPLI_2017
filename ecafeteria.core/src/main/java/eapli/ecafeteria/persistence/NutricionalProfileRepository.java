@@ -13,7 +13,7 @@ import eapli.framework.persistence.repositories.DataRepository;
  *
  * @author zero_
  */
-public interface NutricionalProfileRepository extends DataRepository<NutricionalProfile, CafeteriaUser> {
+public interface NutricionalProfileRepository extends DataRepository<NutricionalProfile, Long> {
 
     NutricionalProfile findByCafeteriaUser(CafeteriaUser user);
 

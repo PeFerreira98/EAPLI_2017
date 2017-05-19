@@ -1,10 +1,12 @@
-package eapli.ecafeteria.persistence;
+package eapli.ecafeteria.application.cafeteria;
 
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.MecanographicNumber;
 import eapli.ecafeteria.domain.cafeteria.NutricionalProfile;
 import eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen;
 import eapli.ecafeteria.domain.meals.Allergen;
+import eapli.ecafeteria.persistence.NutricionalProfileAllergenRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 

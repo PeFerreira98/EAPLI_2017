@@ -31,7 +31,7 @@ public class ECafeteriaBootstraper implements Action {
             new RatingBootstraper(),
             new BookingBootstraper(),
             new CafeteriaAccountBootstraper(),
-//            new NutricionalProfileBootstraper()
+            new NutricionalProfileBootstraper()
         };
 
         // authenticate a super user to be able to register new users, ...
