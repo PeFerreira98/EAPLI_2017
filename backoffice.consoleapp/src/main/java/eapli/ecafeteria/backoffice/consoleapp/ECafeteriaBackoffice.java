@@ -7,6 +7,7 @@ package eapli.ecafeteria.backoffice.consoleapp;
 
 import eapli.cafeteria.consoleapp.presentation.authz.LoginAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.MainMenu;
+import eapli.ecafeteria.bootstrapers.ECafeteriaBootstraper;
 
 /**
  *
@@ -21,6 +22,7 @@ public final class ECafeteriaBackoffice {
 
         // only needed because of the in memory persistence
         //new ECafeteriaBootstrap().execute();
+        //new ECafeteriaBootstraper().execute();
 
         // login and go to main menu
         // TODO should provide three attempts
