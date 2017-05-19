@@ -9,9 +9,10 @@
     <class>eapli.ecafeteria.domain.authz.RoleSet</class>
     <class>eapli.ecafeteria.domain.cafeteria.Cafeteria</class>
     <class>eapli.ecafeteria.domain.cafeteria.CafeteriaUser</class>
+    <class>eapli.ecafeteria.domain.mealbooking.Account</class>
     <class>eapli.ecafeteria.domain.cafeteria.SignupRequest</class>
-    <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfile</class>
-    <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen</class>
+    <!--<class>eapli.ecafeteria.domain.cafeteria.NutricionalProfile</class>-->
+    <!--<class>eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen</class>-->
     <class>eapli.ecafeteria.domain.meals.Dish</class>
     <class>eapli.ecafeteria.domain.meals.MealType</class>
     <class>eapli.ecafeteria.domain.meals.Meal</class>

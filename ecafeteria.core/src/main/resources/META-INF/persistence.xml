@@ -4,9 +4,10 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>eapli.ecafeteria.domain.mealbooking.Account</class>
     <class>eapli.ecafeteria.domain.mealbooking.Transaction</class>
+    <class>eapli.ecafeteria.domain.mealbooking.Account</class>
     <class>eapli.ecafeteria.domain.cafeteria.CafeteriaUser</class>
-    <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfile</class>
-    <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen</class>
+    <!--<class>eapli.ecafeteria.domain.cafeteria.NutricionalProfile</class>-->
+    <!--<class>eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen</class>-->
     <class>eapli.ecafeteria.domain.mealbooking.Booking</class>
     <class>eapli.ecafeteria.domain.meals.Dish</class>
     <class>eapli.ecafeteria.domain.meals.DishType</class>
