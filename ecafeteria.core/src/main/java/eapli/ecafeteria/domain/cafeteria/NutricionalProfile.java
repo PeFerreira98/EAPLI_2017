@@ -2,8 +2,10 @@ package eapli.ecafeteria.domain.cafeteria;
 
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
 import java.io.Serializable;
-import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
@@ -18,6 +20,8 @@ public class NutricionalProfile implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    private long id;
+
     @OneToOne
     private CafeteriaUser cafeteriaUser;
 
@@ -40,6 +44,10 @@ public class NutricionalProfile implements Serializable {
         this.cafeteriaUser = user;
         this.dailyNutritionalInfo = new NutricionalInfo(dailyCalories, dailySalt);
         this.weeklyNutritionalInfo = new NutricionalInfo(weeklyCalories, weeklySalt);
+    }
+
+    public long id() {
+        return id;
     }
 
     public CafeteriaUser cafeteriaUser() {
