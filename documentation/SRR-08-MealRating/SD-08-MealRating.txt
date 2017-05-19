@@ -1,4 +1,4 @@
-title SD-SRR-08-Meal-Rating-Rating-de-uma-refeicao-v2
+title SD-SRR-08-Meal-Rating-Rating-de-uma-refeicao-v3
 
 CafeteriaUser->>UIMealRating: run...
 UIMealRating->>*MealRatingController: create()
@@ -21,6 +21,10 @@ UIMealRating->MealRatingController: registerNewMealRating( meal, rate, comment)
 MealRatingController->>MealRatingController: getActiveCafeteriaUser()
 MealRatingController->>MealRatingController: registerNewMealRating( cafeteriaUser , meal, rate, comment)
 MealRatingController->MealRatingService: registerNewMealRating( cafeteriaUser, meal, rate, comment)
+
+MealRatingService->>*Comment: create(text)
+MealRatingService->>*Rating: create(Comment , cafeteriaUser, rate, )
+MealRatingService->>RatingRepository: save(Rating)
 
 MealRatingController-->>UIMealRating: answer: boolean
 UIMealRating-->>CafeteriaUser: informs success
