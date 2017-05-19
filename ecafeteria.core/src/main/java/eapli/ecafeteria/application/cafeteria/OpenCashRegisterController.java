@@ -6,15 +6,18 @@
 package eapli.ecafeteria.application.cafeteria;
 
 import eapli.ecafeteria.domain.cashregister.CashRegister;
+import eapli.ecafeteria.domain.cashregister.CashRegisterState;
 import eapli.ecafeteria.domain.cashregister.Shift;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menus.Menu;
+import eapli.ecafeteria.persistence.CashRegisterRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MealTypeRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Calendar;
+import java.util.LinkedList;
 
 /**
  *
@@ -37,23 +40,15 @@ public class OpenCashRegisterController {
 
         CashRegister cashRegister = PersistenceContext.repositories().cashRegisters().findByNumber(number);
 
-        Shift shift = null;
-
-        boolean flag = false;
-
-        try {
-            shift = PersistenceContext.repositories().shifts().findByOpenedCashRegister(cashRegister);
+        if(cashRegister.state().equals(CashRegisterState.CLOSED)){
+            Shift shift = new Shift(mealType, cashRegister);
+            cashRegister.open();
             saveShift(shift);
-            flag = true;
-        } catch (Exception e) {
-            shift = new Shift(mealType, cashRegister);
-            saveShift(shift);
-            flag = true;
+            saveCashRegister(cashRegister);
+            return true;
         }
 
-        saveCashRegister(cashRegister);
-
-        return flag;
+        return false;
     }
 
     /**
@@ -85,12 +80,17 @@ public class OpenCashRegisterController {
      * previously
      */
     public boolean hasMeal(Calendar day, MealType mealType) {
-
-        Iterable<Menu> menu = PersistenceContext.repositories().menus().findByDate(day);
-
+        
         MealRepository mealRepo = PersistenceContext.repositories().meals();
 
         return mealRepo.mealsByDateAndMealType(day, mealType).iterator().hasNext();
+    }
+
+    public LinkedList<CashRegister> getCashRegisters() {
+        final CashRegisterRepository cashRegisterRepository
+                = PersistenceContext.repositories().cashRegisters();
+
+        return (LinkedList) cashRegisterRepository.findAll();
     }
 
 }

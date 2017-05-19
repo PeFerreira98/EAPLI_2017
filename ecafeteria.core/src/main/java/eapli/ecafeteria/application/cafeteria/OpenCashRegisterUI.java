@@ -5,10 +5,15 @@
  */
 package eapli.ecafeteria.application.cafeteria;
 
+import eapli.ecafeteria.domain.cashregister.CashRegister;
 import eapli.ecafeteria.domain.meals.MealType;
+import eapli.ecafeteria.persistence.CashRegisterRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.LinkedList;
 import javax.persistence.NoResultException;
 
 /**
@@ -21,6 +26,11 @@ public class OpenCashRegisterUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
+
+        //impressao das caixas disponiveis
+        for (CashRegister cashR : controller.getCashRegisters()) {
+            System.out.println(cashR);
+        }
 
         final String number = eapli.util.io.Console.readLine("Insert cash register number");
 
@@ -57,19 +67,19 @@ public class OpenCashRegisterUI extends AbstractUI {
 
             try {
 
-                final MealType mealTypeDefault = mealTypeSelector.selectedElement();
+                final MealType mealType = mealTypeSelector.selectedElement();
 
                 Calendar date = eapli.util.io.Console.readCalendar("Insert meal date: (dd-MM-yyyy)");
 
-                if (!this.controller.hasMeal(date, mealTypeDefault)) {
+                if (!this.controller.hasMeal(date, mealType)) {
                     System.out.println("There's no meal in the date selected");
                     return false;
                 }
 
                 try {
-                    if (this.controller.open(number, mealTypeDefault, date)) {
+                    if (this.controller.open(number, mealType, date)) {
                         System.out.
-                                println("Cash Register opened sucessfully for " + mealTypeDefault.description());
+                                println("Cash Register opened sucessfully for " + mealType.description());
                     } else {
                         System.out.println("Cash Register is already opened");
                     }
