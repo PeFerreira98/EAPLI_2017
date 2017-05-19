@@ -1,0 +1,70 @@
+title Open Cash Register
+
+Cashier - OpenCashRegisterUI  Initiates the process of open cash register
+OpenCashRegisterUI - OpenCashRegisterController  create()
+
+OpenCashRegisterController - PersistenceContext repositories()
+PersistenceContext - RepositoryFactory repositories()
+RepositoryFactory - CashRegisterRepository cashRegisters()
+
+
+Cashier - OpenCashRegisterUI  Insert cash register number
+
+OpenCashRegisterUI - OpenCashRegisterController  getMealTypes()
+OpenCashRegisterController - PersistenceContext repositories()
+PersistenceContext - RepositoryFactory repositories()
+RepositoryFactory - MealTypeRepository mealTypes()
+
+OpenCashRegisterUI -- Cashier  shows meal type
+
+
+
+Cashier - OpenCashRegisterUI  Insert a meal type
+
+opt !=0
+Cashier - OpenCashRegisterUI  Insert a date
+
+OpenCashRegisterUI - OpenCashRegisterController hasMeal(date, mealType)
+OpenCashRegisterController - PersistenceContext repositories()
+PersistenceContext - RepositoryFactory repositories()
+RepositoryFactory - MealRepository mealsByDateAndMealType(date, mealType)
+
+
+OpenCashRegisterUI - OpenCashRegisterController open(number, date, mealType)
+
+end
+
+
+opt ==0
+
+OpenCashRegisterUI - OpenCashRegisterController mealByDefault()
+OpenCashRegisterController - PersistenceContext repositories()
+PersistenceContext - RepositoryFactory repositories()
+RepositoryFactory - MealRepository findByDefault()
+
+OpenCashRegisterUI - OpenCashRegisterController hasMeal(date, mealType)
+OpenCashRegisterController - PersistenceContext repositories()
+PersistenceContext - RepositoryFactory repositories()
+RepositoryFactory - MealRepository mealsByDateAndMealType(date, mealType)
+
+
+OpenCashRegisterController  - OpenCashRegisterController saveShift(shift)
+
+OpenCashRegisterController - PersistenceContext repositories()
+PersistenceContext - RepositoryFactory repositories()
+RepositoryFactory - ShiftRepository shifts()
+
+OpenCashRegisterController  - OpenCashRegisterController saveCashRegister(shift)
+
+OpenCashRegisterController - PersistenceContext repositories()
+PersistenceContext - RepositoryFactory repositories()
+RepositoryFactory - CashRegisterRepository cashRegisterRepository()
+
+
+end
+
+
+CashRegisterRepository -- OpenCashRegisterController  opened
+OpenCashRegisterController -- OpenCashRegisterUI  opened
+OpenCashRegisterUI -- Cashier  opened
+
