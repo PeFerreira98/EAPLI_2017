@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.user.consoleapp.presentation.authz;
+package eapli.ecafeteria.backoffice.consoleapp.presentation.cafeteria;
 
 import eapli.ecafeteria.application.cafeteria.RegisterNutricionalProfileController;
 import eapli.ecafeteria.domain.cafeteria.NutricionalProfile;
