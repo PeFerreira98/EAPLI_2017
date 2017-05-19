@@ -31,8 +31,10 @@ import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListDishAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListDishTypeAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListMealAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListMealTypeAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterAllergenAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.ListMenuAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterDishAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterDishAllergenAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterDishTypeAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterMealAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterMealTypeAction;
@@ -90,6 +92,10 @@ public class MainMenu extends AbstractUI {
     private static final int CHANGE_DISH_NUTRICIONAL_INFO_OPTION = 1;
     private static final int CHANGE_DISH_PRICE_OPTION = 2;
 
+    // ALLERGENS
+    private static final int ALLERGEN_REGISTER_OPTION = 6;
+    private static final int DISHALLERGEN_REGISTER_OPTION = 7;
+    
     // MATERIALS
     private static final int MATERIAL_REGISTER_OPTION = 1;
     private static final int MATERIAL_LIST_OPTION = 2;
@@ -274,7 +280,9 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(BATCH_REGISTER_OPTION, "Register batch", new RegisterBatchAction()));
         menu.add(new MenuItem(MEAL_BATCH_REGISTER_OPTION, "Register Meal Batch", new RegisterMealBatchAction()));
         menu.add(new MenuItem(SEARCH_BY_BATCH_CODE_OPTION, "Search by Batch Code", new ListMealByBatchCodeAction()));
-
+        menu.add(new MenuItem(ALLERGEN_REGISTER_OPTION, "Register new Allergen", new RegisterAllergenAction()));
+        menu.add(new MenuItem(DISHALLERGEN_REGISTER_OPTION, "Register new Dish Allergen", new RegisterDishAllergenAction()));
+        
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }

@@ -31,21 +31,14 @@ public class RegisterDishAllergenUI extends AbstractUI{
 
 	@Override
 	protected boolean doShow() {
-		final Iterable<Menu> menus = this.theController.listMenus();
 		final Iterable<Allergen> allergens = this.theController.listAllergen();
 		final Iterable<Dish> dishes = this.theController.listDish();
-		
-		final SelectWidget<Menu> menuSelector = new SelectWidget<>("xpto", menus, new MenuPrinter());
-                
-		menuSelector.show();
-                
-		final Menu menu = menuSelector.selectedElement();
-		
+                		
 		final SelectWidget<Dish> dishSelector = new SelectWidget<>("xpto", dishes, new DishPrinter());
                 
 		dishSelector.show();
                 
-		final Dish dish = dishSelector.selectedElement();
+		final Dish dishSel = dishSelector.selectedElement();
 		
 		final SelectWidget<Allergen> allergenSelector = new SelectWidget<>("xpto", allergens, new AllergenPrinter());
                 
@@ -54,7 +47,7 @@ public class RegisterDishAllergenUI extends AbstractUI{
 		final Allergen allergensSel = allergenSelector.selectedElement();
 		
 		try {			
-			this.theController.registerDishAllergen(dish, allergensSel);
+			this.theController.registerDishAllergen(dishSel, allergensSel);
 			
 		} catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             System.out.println("You tried to enter a Dish Allergen which already exists in the database.");
