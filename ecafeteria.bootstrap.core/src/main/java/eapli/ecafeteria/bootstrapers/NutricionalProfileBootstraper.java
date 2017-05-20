@@ -38,5 +38,4 @@ class NutricionalProfileBootstraper implements Action {
                     .info("EAPLI-DI001: bootstrapping existing record");
         }
     }
-
 }

@@ -20,6 +20,8 @@
     <class>eapli.ecafeteria.domain.cashregister.Shift</class>
     <class>eapli.ecafeteria.domain.rating.Comment</class>
     <class>eapli.ecafeteria.domain.rating.Rating</class>
+    <class>eapli.domain.alert.BookingAlert</class>
+    <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergenId</class>
     <properties>
       <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\ecafeteria;MV_STORE=FALSE"/>-->
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>

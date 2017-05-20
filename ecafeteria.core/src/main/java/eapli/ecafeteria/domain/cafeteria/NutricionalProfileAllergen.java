@@ -3,6 +3,8 @@ package eapli.ecafeteria.domain.cafeteria;
 import eapli.ecafeteria.domain.meals.Allergen;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -20,13 +22,13 @@ public class NutricionalProfileAllergen implements Serializable {
     @Version
     private Long version;
 
-    @Id
-    private String id;
+    @EmbeddedId
+    private NutricionalProfileAllergenId id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private NutricionalProfile nutricionalProfile;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Allergen allergen;
 
     public NutricionalProfileAllergen() {
@@ -34,7 +36,7 @@ public class NutricionalProfileAllergen implements Serializable {
     }
 
     public String id() {
-        return id;
+        return id.getId();
     }
 
     public NutricionalProfile nutricionalProfile() {
@@ -51,7 +53,7 @@ public class NutricionalProfileAllergen implements Serializable {
         }
         this.nutricionalProfile = nutricionalProfile;
         this.allergen = allergen;
-        this.id = nutricionalProfile.id() + allergen.id();
+        this.id = new NutricionalProfileAllergenId(nutricionalProfile.id() + allergen.id());
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Rafael Vieira <1141233@isep.ipp.pt>
  */
-public class RegisterNutricionalProfileController implements Controller{
+public class RegisterNutricionalProfileController implements Controller {
 
     private final NutricionalProfileRepository repository = PersistenceContext.repositories().nutricionalProfiles();
 
@@ -27,23 +27,25 @@ public class RegisterNutricionalProfileController implements Controller{
         final NutricionalProfile newNutricionalProfile = new NutricionalProfile(user, dailyCalories, dailySalt, weeklyCalories, weeklySalt);
         return this.repository.save(newNutricionalProfile);
     }
-    
+
     /**
-     * Obtem o cafeteriauser que esta actualmente logado. Se nao existir, devolve null.
-     * @return o cafeteria user que esta actualmente logado. Se nao existir, devolve null.
+     * Obtem o cafeteriauser que esta actualmente logado. Se nao existir,
+     * devolve null.
+     *
+     * @return o cafeteria user que esta actualmente logado. Se nao existir,
+     * devolve null.
      */
-    public CafeteriaUser obtainCurrentCafeteriaUser(){
+    public CafeteriaUser obtainCurrentCafeteriaUser() {
         CafeteriaUser activeCafeteriaUser = null;
-        try{
+        try {
             Username username = Application.session().session().authenticatedUser().username();
             activeCafeteriaUser = new CafeteriaUserService().findCafeteriaUserByUsername(username);
-        }
-        catch(javax.persistence.PersistenceException ex){
+        } catch (javax.persistence.PersistenceException ex) {
             String error = "Error getting the CafeteriaUser of logged SystemUser.   " + ex;
             Logger.getGlobal().severe(error);
         }
-        
+
         return activeCafeteriaUser;
-    } 
+    }
 
 }
