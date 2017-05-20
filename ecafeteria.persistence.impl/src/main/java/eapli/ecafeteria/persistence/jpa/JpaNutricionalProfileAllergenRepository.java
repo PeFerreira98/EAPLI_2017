@@ -13,7 +13,7 @@ class JpaNutricionalProfileAllergenRepository extends CafeteriaJpaRepositoryBase
 
     @Override
     public Iterable<NutricionalProfileAllergen> findNutricionalProfileAllergenByNutricionalProfile(NutricionalProfile profile) {
-        return match("e.nutricionalProfile='" + profile + "'");
+        return match("e.id='" + profile + "'");
     }
 
 }

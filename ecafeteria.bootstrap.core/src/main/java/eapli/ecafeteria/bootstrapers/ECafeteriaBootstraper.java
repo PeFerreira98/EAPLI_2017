@@ -31,8 +31,8 @@ public class ECafeteriaBootstraper implements Action {
             new RatingBootstraper(),
             new BookingBootstraper(),
             new CafeteriaAccountBootstraper(),
-            new NutricionalProfileBootstraper()
-        };
+            new NutricionalProfileBootstraper(),
+            new NutricionalProfileAllergenBootsraper(),};
 
         // authenticate a super user to be able to register new users, ...
         // in this case we will inject the session but we shouldn't do this

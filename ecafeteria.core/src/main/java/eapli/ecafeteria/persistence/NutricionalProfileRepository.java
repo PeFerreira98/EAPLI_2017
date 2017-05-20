@@ -18,4 +18,6 @@ public interface NutricionalProfileRepository extends DataRepository<Nutricional
 
     NutricionalProfile findByCafeteriaUser(CafeteriaUser user);
 
+    NutricionalProfile findByMecNumber(MecanographicNumber number);
+
 }

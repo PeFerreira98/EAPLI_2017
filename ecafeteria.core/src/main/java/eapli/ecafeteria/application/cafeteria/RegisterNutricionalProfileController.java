@@ -5,6 +5,9 @@ import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteria.NutricionalProfile;
+import eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen;
+import eapli.ecafeteria.domain.meals.Allergen;
+import eapli.ecafeteria.persistence.NutricionalProfileAllergenRepository;
 import eapli.ecafeteria.persistence.NutricionalProfileRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
@@ -19,6 +22,7 @@ import java.util.logging.Logger;
 public class RegisterNutricionalProfileController implements Controller {
 
     private final NutricionalProfileRepository repository = PersistenceContext.repositories().nutricionalProfiles();
+    private final NutricionalProfileAllergenRepository repositoryAllergen = PersistenceContext.repositories().nutricionalProfileAllergens();
 
     public NutricionalProfile registerNutricionalProfile(CafeteriaUser user, Integer dailyCalories, Integer dailySalt, Integer weeklyCalories, Integer weeklySalt)
             throws DataIntegrityViolationException, DataConcurrencyException {
@@ -26,6 +30,14 @@ public class RegisterNutricionalProfileController implements Controller {
 
         final NutricionalProfile newNutricionalProfile = new NutricionalProfile(user, dailyCalories, dailySalt, weeklyCalories, weeklySalt);
         return this.repository.save(newNutricionalProfile);
+    }
+    
+    public NutricionalProfileAllergen registerNutricionalProfileAllergen(NutricionalProfile profile, Allergen allergen)
+            throws DataIntegrityViolationException, DataConcurrencyException {
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_PROFILE);
+
+        final NutricionalProfileAllergen newNutricionalProfileAllergen = new NutricionalProfileAllergen(profile, allergen);
+        return this.repositoryAllergen.save(newNutricionalProfileAllergen);
     }
 
     /**
