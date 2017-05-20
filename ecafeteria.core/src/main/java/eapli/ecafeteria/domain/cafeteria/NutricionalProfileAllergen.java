@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 
 /**
  *
@@ -15,6 +16,9 @@ import javax.persistence.ManyToOne;
 public class NutricionalProfileAllergen implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @Version
+    private Long version;
 
     @Id
     private String id;

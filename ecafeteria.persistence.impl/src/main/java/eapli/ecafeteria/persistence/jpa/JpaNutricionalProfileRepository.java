@@ -9,7 +9,7 @@ import eapli.ecafeteria.persistence.NutricionalProfileRepository;
  *
  * @author Rafael Vieira <1141233@isep.ipp.pt>
  */
-class JpaNutricionalProfileRepository extends CafeteriaJpaRepositoryBase<NutricionalProfile, Long> implements NutricionalProfileRepository {
+public class JpaNutricionalProfileRepository extends CafeteriaJpaRepositoryBase<NutricionalProfile, MecanographicNumber> implements NutricionalProfileRepository {
 
     @Override
     public NutricionalProfile findByCafeteriaUser(CafeteriaUser user) {

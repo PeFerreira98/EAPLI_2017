@@ -2,12 +2,12 @@ package eapli.ecafeteria.domain.cafeteria;
 
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
 import java.io.Serializable;
-import javax.persistence.Id;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 /**
@@ -19,18 +19,29 @@ public class NutricionalProfile implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    private long id;
-
-    @OneToOne
-    private CafeteriaUser cafeteriaUser;
-
     @Version
     private Long version;
 
-    @ManyToOne
+//    @Id
+//    @GeneratedValue
+//    private Long id;
+    @EmbeddedId
+    private MecanographicNumber id;
+
+//    @OneToOne
+//    private CafeteriaUser cafeteriaUser;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "calories", column = @Column(name = "weeklycalories")),
+        @AttributeOverride(name = "salt", column = @Column(name = "weeklysalt"))
+    })
     private NutricionalInfo weeklyNutritionalInfo;
-    @ManyToOne
+
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "calories", column = @Column(name = "dailycalories")),
+        @AttributeOverride(name = "salt", column = @Column(name = "dailysalt"))
+    })
     private NutricionalInfo dailyNutritionalInfo;
 
     public NutricionalProfile() {
@@ -41,19 +52,19 @@ public class NutricionalProfile implements Serializable {
         if (user == null) {
             throw new IllegalStateException();
         }
-        this.cafeteriaUser = user;
+//        this.cafeteriaUser = user;
+        this.id = user.id();
         this.dailyNutritionalInfo = new NutricionalInfo(dailyCalories, dailySalt);
         this.weeklyNutritionalInfo = new NutricionalInfo(weeklyCalories, weeklySalt);
     }
 
-    public long id() {
+    public MecanographicNumber id() {
         return id;
     }
 
-    public CafeteriaUser cafeteriaUser() {
-        return cafeteriaUser;
-    }
-
+//    public CafeteriaUser cafeteriaUser() {
+//        return cafeteriaUser;
+//    }
     public NutricionalInfo dailyNutricionalinfo() {
         return dailyNutritionalInfo;
     }
@@ -64,7 +75,7 @@ public class NutricionalProfile implements Serializable {
 
     @Override
     public int hashCode() {
-        return this.cafeteriaUser.hashCode();
+        return this.id.hashCode();
     }
 
     @Override
@@ -73,7 +84,7 @@ public class NutricionalProfile implements Serializable {
             return false;
         }
         NutricionalProfile other = (NutricionalProfile) object;
-        if ((this.cafeteriaUser == null && other.cafeteriaUser != null) || (this.cafeteriaUser != null && !this.cafeteriaUser.equals(other.cafeteriaUser))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -81,7 +92,7 @@ public class NutricionalProfile implements Serializable {
 
     @Override
     public String toString() {
-        return "eapli.ecafeteria.domain.cafeteria.NutritionalProfile[ id=" + cafeteriaUser + " ]";
+        return "eapli.ecafeteria.domain.cafeteria.NutritionalProfile[ id=" + id + " ]";
     }
 
 }
