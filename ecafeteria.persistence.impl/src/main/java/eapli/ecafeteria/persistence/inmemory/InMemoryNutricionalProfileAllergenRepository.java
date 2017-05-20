@@ -2,6 +2,7 @@ package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.cafeteria.NutricionalProfile;
 import eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen;
+import eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergenId;
 import eapli.ecafeteria.persistence.NutricionalProfileAllergenRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 
@@ -9,10 +10,10 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
  *
  * @author Rafael Vieira <1141233@isep.ipp.pt>
  */
-public class InMemoryNutricionalProfileAllergenRepository extends InMemoryRepository<NutricionalProfileAllergen, String> implements NutricionalProfileAllergenRepository {
+public class InMemoryNutricionalProfileAllergenRepository extends InMemoryRepository<NutricionalProfileAllergen, NutricionalProfileAllergenId> implements NutricionalProfileAllergenRepository {
 
     @Override
-    protected String newPK(NutricionalProfileAllergen entity) {
+    protected NutricionalProfileAllergenId newPK(NutricionalProfileAllergen entity) {
         return entity.id();
     }
 

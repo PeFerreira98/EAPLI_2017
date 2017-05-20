@@ -6,7 +6,6 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
@@ -35,8 +34,8 @@ public class NutricionalProfileAllergen implements Serializable {
         //for ORM
     }
 
-    public String id() {
-        return id.getId();
+    public NutricionalProfileAllergenId id() {
+        return id;
     }
 
     public NutricionalProfile nutricionalProfile() {
