@@ -46,6 +46,8 @@ public class BookingUI extends AbstractUI implements Observer {
     	
 		final Iterable<MealType> mealTypes = this.controller.listMealTypes();
 
+                
+                
 		final Calendar date = Console.readCalendar("Insert meal date: (dd-MM-yyyy)");
 
 		final SelectWidget<MealType> mealTypeSelector = new SelectWidget<>("xpto", mealTypes, new MealTypePrinter());
