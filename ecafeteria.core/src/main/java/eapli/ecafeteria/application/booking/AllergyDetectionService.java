@@ -83,7 +83,10 @@ public class AllergyDetectionService extends Observable{
             for(DishAllergen dishAllergen : iterableDishAllergen){
                 for(Allergen allergen : iterableAllergen){
                     if(dishAllergen.is(dish, allergen)){
-                        if(allergen.isActive() && dishAllergen.isActive()){
+                        if(allergen.isActive() &&
+                                dishAllergen.isActive() &&
+                                !listaAllergenicos.contains(allergen)//Hack que garante que não aparecem alergenicos repetidos. FIX ME TODO todo fixme
+                                ){
                             listaAllergenicos.add(allergen);
                         }
                     }
