@@ -6,6 +6,8 @@
 package eapli.ecafeteria.application.booking;
 
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
+import eapli.ecafeteria.domain.cafeteria.NutricionalProfile;
+import eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen;
 import eapli.ecafeteria.domain.meals.Allergen;
 import eapli.ecafeteria.domain.meals.Dish;
 import eapli.ecafeteria.domain.meals.DishAllergen;
@@ -13,6 +15,8 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.DishAllergenRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -109,10 +113,29 @@ public class AllergyDetectionService extends Observable{
         List<Allergen> listaAllergenicos = new ArrayList();
         if (cafeteriaUser == null)  return listaAllergenicos;
         
-        //TODO
-        // Obter uma lista com todos os AllergenProfile do CafeteriaUser
-        // Obter os Allergen do AllergenProfiles e adicionar a lista.         
-        System.out.println("FALTA IMPLEMENTAR listAllergen(CafeteriaUser cafeteriaUser) Hugo & Pedro");
+        //Codigo de obter os alegenicos do nutricional profile:
+        NutricionalProfile nutricionalProfileCafeteriaUser = null;
+        nutricionalProfileCafeteriaUser = PersistenceContext.repositories().nutricionalProfiles().findByCafeteriaUser(cafeteriaUser);
+        
+        Iterable<NutricionalProfileAllergen> listaNutricionalProfileAllergen = null;
+        //listaNutricionalProfileAllergen = PersistenceContext.repositories().nutricionalProfileAllergens().findNutricionalProfileAllergenByNutricionalProfile(nutricionalProfileCafeteriaUser);
+        
+        // query acima não funciona, vamos usar o FINDALL() Hack          FIXME FIX ME TODO TO DO
+        {
+            Iterable<NutricionalProfileAllergen> listaTodos = PersistenceContext.repositories().nutricionalProfileAllergens().findAll();
+            for(NutricionalProfileAllergen nutricionalProfileAllergen : listaTodos){
+                if ( nutricionalProfileAllergen.nutricionalProfile().equals(nutricionalProfileCafeteriaUser) ) {
+                    listaAllergenicos.add(nutricionalProfileAllergen.allergen());
+                }
+            }
+            if (listaNutricionalProfileAllergen == null) return listaAllergenicos;
+        }
+        // Fim do hack.
+        
+            //Iteracao da lista, obtencao dos alegenicos e passagem para a lista a devolver.
+        for(NutricionalProfileAllergen nutricionalProfileAllergen : listaNutricionalProfileAllergen){
+            listaAllergenicos.add(nutricionalProfileAllergen.allergen());
+        }
         
         return listaAllergenicos;
     }
