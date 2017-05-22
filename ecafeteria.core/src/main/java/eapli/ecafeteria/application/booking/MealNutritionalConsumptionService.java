@@ -6,11 +6,15 @@
 package eapli.ecafeteria.application.booking;
 
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
+import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.util.DateTime;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Logger;
+import javax.persistence.PersistenceException;
 
 /**
  *  Classe que permite obter informacao de consumos nutricionais
@@ -65,13 +69,20 @@ public class MealNutritionalConsumptionService {
         NutricionalInfo nutricionalInfoTotal = this.createEmptyNutricionalInfo();
         if (cafeteriaUser == null || day == null) return nutricionalInfoTotal;      //Zeros.
         
-        /*  Falta o repositorio de Booking 
-        List <Booking> bookedMealsForDay;// = PersistenceContext.repositories().BOOKING( cateteriaUser ,  day) ??????
-        for(Booking booking : bookedMealsForDay){
-            nutricionalInfoTotal = nutricionalInfoTotal.sumNutricionalInfo(booking.meal().dish().nutricionalInfo());
+        
+        
+        try{
+            Iterable<Booking> bookedMealsForDay = PersistenceContext.repositories().reserves().findNextReserves(day, day, cafeteriaUser);
+        
+            for(Booking booking : bookedMealsForDay){
+                nutricionalInfoTotal = nutricionalInfoTotal.sumNutricionalInfo(booking.meal().dish().nutricionalInfo());
+            }
         }
-        */
-        System.out.println("FALTA IMPLEMENTAR plannedDayConsumption(CafeteriaUser cafeteriaUser, Calendar day) Hugo & Pedro");
+        catch(PersistenceException ex){
+            String error = "MealNutritionalConsumptionService: Error interacting with BookingRepository() -    " + ex;
+            Logger.getGlobal().severe(error);
+        }
+        
                 
         return nutricionalInfoTotal;
     }
