@@ -18,6 +18,7 @@ public class ECafeteriaBootstraper implements Action {
     public boolean execute() {
         // declare bootstrap actions
         final Action[] actions = {new UsersBootstraper(),
+            new CashRegisterBootstraper(),
             new DishTypesBootstraper(),
             new OrganicUnitBootstraper(),
             new CafeteriaUserBootstraper(),
