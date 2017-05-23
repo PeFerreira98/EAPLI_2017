@@ -9,7 +9,7 @@ import eapli.cafeteria.consoleapp.presentation.ExitWithMessageAction;
 import eapli.cafeteria.consoleapp.presentation.MyUserMenu;
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.cafeteria.ListOrganicUnitsController;
-import eapli.ecafeteria.application.cafeteria.OpenCashRegisterAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.cafeteria.OpenCashRegisterAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.authz.AcceptRefuseSignupRequestAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.authz.AddUserUI;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.authz.DeactivateUserAction;
