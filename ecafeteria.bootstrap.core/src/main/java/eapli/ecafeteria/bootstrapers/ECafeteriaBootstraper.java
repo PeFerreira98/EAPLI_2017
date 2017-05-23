@@ -17,7 +17,8 @@ public class ECafeteriaBootstraper implements Action {
     @Override
     public boolean execute() {
         // declare bootstrap actions
-        final Action[] actions = {new UsersBootstraper(),
+        final Action[] actions = {
+        	new UsersBootstraper(),
             new CashRegisterBootstraper(),
             new DishTypesBootstraper(),
             new OrganicUnitBootstraper(),
@@ -33,7 +34,8 @@ public class ECafeteriaBootstraper implements Action {
             new BookingBootstraper(),
             new CafeteriaAccountBootstraper(),
             new NutricionalProfileBootstraper(),
-            new NutricionalProfileAllergenBootsraper(),};
+            new NutricionalProfileAllergenBootsraper(),
+        };
 
         // authenticate a super user to be able to register new users, ...
         // in this case we will inject the session but we shouldn't do this

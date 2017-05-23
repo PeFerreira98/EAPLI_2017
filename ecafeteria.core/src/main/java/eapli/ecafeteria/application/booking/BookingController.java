@@ -34,7 +34,11 @@ public class BookingController implements Controller {
 	public Booking bookingMeal(CafeteriaUser cafeteriaUser, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
 
 		Booking booking = new Booking(cafeteriaUser, meal);
-		
+		this.bookingRepository.save(booking);
+		return booking;
+
+		//FIXME: Money verifications still not working! (Please TEST before commit!)
+/*
 		//Check if user has enough balance to reserve meal
 		if (cafeteriaUser.hasSufficientBalance(meal.dish().currentPrice())) {
 			
@@ -56,7 +60,7 @@ public class BookingController implements Controller {
 		}
 		
 		return null;
-                
+*/                
 	}
 	
 	public CafeteriaUser returnActiveCafeteriaUser(){
