@@ -7,6 +7,7 @@ package eapli.ecafeteria.bootstrapers;
 
 import eapli.ecafeteria.application.cafeteria.CafeteriaUserService;
 import eapli.ecafeteria.application.rating.MealRatingController;
+import eapli.ecafeteria.application.rating.MealRatingService;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
@@ -42,13 +43,15 @@ public class RatingBootstraper implements Action {
                 break;
             }
         }
-        //this.getActiveCafeteriaUser()
-        //Menu menu = menuRepository.findByName("MenuSemanaAbril");
-        //Meal mealTest = mealRepo.mealsByMenu(menu);
+        
+        System.out.println("\nRATINGS BOOTSTRAP:");
+        
           CafeteriaUserService service = new CafeteriaUserService();
           CafeteriaUser cafeteriaUser = service.findCafeteriaUserByUsername(new Username("900330"));
           
+          if(! new MealRatingService().userRatedMeals(cafeteriaUser).contains(meal)) // Se ainda nao existir, fazemos a injecao, senao nao.
           register(cafeteriaUser, meal, 2, "Muito salgado");
+          
           
           int expected = 1;
           int found = 0;
@@ -60,7 +63,7 @@ public class RatingBootstraper implements Action {
                   found++;
               }
           }
-          System.out.println("\nRATINGS found in database: " + found + " / "+ expected);
+          System.out.println("   Ratings found in database: " + found + " / "+ expected);
           
           if(found > 0){
               Rating r = itRating.iterator().next();

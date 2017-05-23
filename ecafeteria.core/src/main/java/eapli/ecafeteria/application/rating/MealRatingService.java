@@ -45,7 +45,7 @@ public class MealRatingService {
         }
         
         c = new Comment(comment, cafeteriaUser);
-        this.commentRepository.save(c);
+        //this.commentRepository.save(c);
         
         Rating newRating = new Rating(rate, cafeteriaUser, meal, c);
         

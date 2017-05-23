@@ -8,18 +8,29 @@ package eapli.ecafeteria.domain.rating;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
 /**
  *
  * @author Pedro Pereira
+ * 
+ *   WARNING: Se o objecto Meal ou dish mudar, o nome destas tabelas do UniqueConstrains tambem teem de mudar.
+ * 
  */
+@Table(
+    uniqueConstraints=
+        @UniqueConstraint(columnNames={"NUMBER", "MEALTYPE", "CALENDAR" , "DISH" , "MENU"})   
+)
 @Entity
 public class Rating implements Serializable {
 
@@ -31,9 +42,11 @@ public class Rating implements Serializable {
     private Long version;
     
     
+    
     private int rate;   
     @ManyToOne
     private CafeteriaUser cafeteriaUser;
+    
     @ManyToOne
     private Meal meal;
     
@@ -51,7 +64,7 @@ public class Rating implements Serializable {
     }
 
     public Rating(int rate, CafeteriaUser cafeteriaUser, Meal meal, Comment comment){
-        if(rate < MIN_VALUE || rate > MAX_VALUE){
+        if(rate < MIN_VALUE || rate > MAX_VALUE || meal == null || cafeteriaUser == null){
             throw new IllegalArgumentException();
         }
         this.rate = rate;
