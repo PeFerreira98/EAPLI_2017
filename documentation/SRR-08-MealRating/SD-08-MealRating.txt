@@ -1,11 +1,14 @@
-title SD-SRR-08-Meal-Rating-Rating-de-uma-refeicao-v3
+title SD-SRR-08-Meal-Rating-Rating-de-uma-refeicao-v4
 
 CafeteriaUser->>UIMealRating: run...
 UIMealRating->>*MealRatingController: create()
 UIMealRating->MealRatingController: listMeals()
 
-MealRatingController->>*MealRepository : 
-MealRatingController->MealRepository : getall()
+MealRatingController->>MealRatingController: getActiveCafeteriaUser()
+MealRatingController->MealRatingService: userRatableMeals(cafeteriaUser)
+MealRatingService->BookingRepository : findByCafeteriaUser()
+MealRatingService->MealRatingService: userRatedMeals(cafeteriaUser)
+MealRatingService->RatingRepository : findByCafeteriaUser()
 
 
 MealRatingController-->>UIMealRating: mealList

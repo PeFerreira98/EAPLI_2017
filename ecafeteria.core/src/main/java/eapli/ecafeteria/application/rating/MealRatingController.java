@@ -7,9 +7,12 @@ package eapli.ecafeteria.application.rating;
 
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.cafeteria.CafeteriaUserService;
+import eapli.ecafeteria.application.meals.ListMealService;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
+import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.rating.Rating;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
@@ -28,17 +31,11 @@ public class MealRatingController {
      * @return 
      */
     public List<Meal> listMeals(){
-        List<Meal> mealList = new ArrayList();
+        CafeteriaUser cafeteriaUser = null;
+        cafeteriaUser = getActiveCafeteriaUser();
         
-        Iterable <Meal> iterable = null;
-        
-        //iterable = new ListMealService().allMeals(); // Nao funciona porque está bloqueado por permisoes.
-        //TODO substituir todas as meals por todas as meals referentes ao utilizador????
-        
-        Iterable<Meal> it = PersistenceContext.repositories().meals().findAll();
-        for(Meal meal : it) mealList.add(meal);
-        
-        return mealList;
+        // Se cafeteriaUser null, a lista vem vazia pelo userRatableMeals();
+        return new MealRatingService().userRatableMeals(cafeteriaUser);
     }
     
     

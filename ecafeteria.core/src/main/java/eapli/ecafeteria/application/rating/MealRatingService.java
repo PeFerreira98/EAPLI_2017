@@ -6,6 +6,7 @@
 package eapli.ecafeteria.application.rating;
 
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
+import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.rating.Comment;
 import eapli.ecafeteria.domain.rating.Rating;
@@ -14,6 +15,8 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.RatingRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Serviço de lida com operacoes relacionadas com Ratings.
  *
@@ -49,6 +52,50 @@ public class MealRatingService {
         this.ratingRepository.save(newRating);
         
         return true;
+    }
+    
+    /**
+     * Devolve as meals que um cafeteriaUser pode fazer rating
+     * @param cafeteriaUser o cafeteriaUser em questao
+     * @return uma lista das meals que um cafeteriaUser pode fazer rating
+     */
+    public List<Meal> userRatableMeals(CafeteriaUser cafeteriaUser){
+        List<Meal> mealList = new ArrayList();
+        if (cafeteriaUser == null) return mealList;
+        
+        //Obtencao das bookings do utilizador.
+        Iterable<Booking> allBookings = PersistenceContext.repositories().reserves().findAll();
+        
+        // Obtencao das meals ja com rating do utilizador.
+        List<Meal> userRatedMeals = userRatedMeals(cafeteriaUser);
+                
+        for(Booking b : allBookings){
+            if(
+                b.user().equals(cafeteriaUser) &&  // Se o utilizador for o nosso.
+                !userRatedMeals.contains(b.meal()) // E a meal ainda nao tiver sido rated pelo user
+                // && b.isNoEstado que deve estar para poder ser comentado, Não existindo estados no booking ignoramos isto.  
+              ){
+                mealList.add(b.meal());             // entao adicionamos a lista.
+            }
+        }
+        
+        return mealList;
+    }
+    
+    
+    /**
+     * Devolve uma lista com as meals que ja foram feitas ratings do user.
+     * @param cafeteriaUser cafeteriaUser a inquirir
+     * @return lista com as meals que ja foram feitas ratings do user.
+     */
+    public List<Meal> userRatedMeals(CafeteriaUser cafeteriaUser){
+        List<Meal> userRatedMeals = new ArrayList<>();
+        if (cafeteriaUser == null) return userRatedMeals;
+        Iterable <Rating> listaRatings = PersistenceContext.repositories().ratings().findByCafeteriaUser(cafeteriaUser);
+        for(Rating r : listaRatings){
+            userRatedMeals.add(r.meal());
+        }
+        return userRatedMeals;
     }
     
     
