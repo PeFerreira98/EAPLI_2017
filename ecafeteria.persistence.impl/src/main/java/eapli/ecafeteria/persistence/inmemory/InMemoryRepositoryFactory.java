@@ -12,6 +12,7 @@ import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealBatchRepository;
+import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MealTypeRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
@@ -146,5 +147,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public CommentRepository comments() {
         return new InMemoryCommentRepository();
+    }
+
+    @Override
+    public MealPlanRepository mealPlans() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

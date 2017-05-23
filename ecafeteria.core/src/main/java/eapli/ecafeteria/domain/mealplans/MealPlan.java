@@ -6,6 +6,7 @@
 package eapli.ecafeteria.domain.mealplans;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  *
@@ -44,4 +45,30 @@ public class MealPlan {
     public Calendar getPeriodEnd() {
         return periodEnd;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MealPlan other = (MealPlan) obj;
+        if (!Objects.equals(this.periodStart, other.periodStart)) {
+            return false;
+        }
+        if (!Objects.equals(this.periodEnd, other.periodEnd)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

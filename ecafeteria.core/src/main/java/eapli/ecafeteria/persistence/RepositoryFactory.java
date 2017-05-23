@@ -56,6 +56,8 @@ public interface RepositoryFactory {
     MenuRepository menus();
 
     MealTypeRepository mealTypes();
+    
+    MealPlanRepository mealPlans();
 
     MealRepository meals();
 
