@@ -11,6 +11,7 @@
     <class>eapli.ecafeteria.domain.cafeteria.CafeteriaUser</class>
     <class>eapli.ecafeteria.domain.mealbooking.Account</class>
     <class>eapli.ecafeteria.domain.cashregister.CashRegister</class>
+	<class>eapli.ecafeteria.domain.cashregister.Shift</class>
     <class>eapli.ecafeteria.domain.cafeteria.SignupRequest</class>
     <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfile</class>
     <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen</class>

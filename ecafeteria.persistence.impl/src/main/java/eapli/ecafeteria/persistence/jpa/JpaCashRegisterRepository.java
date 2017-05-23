@@ -20,7 +20,7 @@ public class JpaCashRegisterRepository extends CafeteriaJpaRepositoryBase<CashRe
         final Query q = entityManager().
                 createQuery("select cr from CashRegister cr where cr.number=:number", CashRegister.class);
         q.setParameter("number", number);
-        return (CashRegister) q.getSingleResult();
+        return (CashRegister) q.getResultList().iterator().next();
     }
 
 }
