@@ -24,20 +24,20 @@ import java.util.Calendar;
  * @author Alexandra Ferreira 1140388 - Nuno Costa 1131106
  */
 public class BookingController implements Controller {
-	
-	private final ListMealTypeService mealTypeSvc = new ListMealTypeService();
-	private final ListMealService mealSvc = new ListMealService();
-	
-	private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(PersistenceContext.repositories().buildTransactionalContext());
-	private final BookingRepository bookingRepository = PersistenceContext.repositories().reserves();
 
-	public Booking bookingMeal(CafeteriaUser cafeteriaUser, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
+    private final ListMealTypeService mealTypeSvc = new ListMealTypeService();
+    private final ListMealService mealSvc = new ListMealService();
 
-		Booking booking = new Booking(cafeteriaUser, meal);
-		this.bookingRepository.save(booking);
-		return booking;
+    private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(PersistenceContext.repositories().buildTransactionalContext());
+    private final BookingRepository bookingRepository = PersistenceContext.repositories().reserves();
 
-		//FIXME: Money verifications still not working! (Please TEST before commit!)
+    public Booking bookingMeal(CafeteriaUser cafeteriaUser, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
+
+        Booking booking = new Booking(cafeteriaUser, meal);
+        this.bookingRepository.save(booking);
+        return booking;
+
+        //FIXME: Money verifications still not working! (Please TEST before commit!)
 /*
 		//Check if user has enough balance to reserve meal
 		if (cafeteriaUser.hasSufficientBalance(meal.dish().currentPrice())) {
@@ -60,18 +60,22 @@ public class BookingController implements Controller {
 		}
 		
 		return null;
-*/                
-	}
-	
-	public CafeteriaUser returnActiveCafeteriaUser(){
-		return this.cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
-	}
+         */
+    }
 
-	public Iterable<MealType> listMealTypes() {
-		return this.mealTypeSvc.activeMealTypes();
-	}
+    public CafeteriaUser returnActiveCafeteriaUser() {
+        return this.cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
+    }
 
-	public Iterable<Meal> listMealsByDateAndMealType(Calendar date, MealType mealType) {
-		return this.mealSvc.mealsByDateAndMealType(date, mealType);
-	}
+    public Iterable<MealType> listMealTypes() {
+        return this.mealTypeSvc.activeMealTypes();
+    }
+
+    public Iterable<Meal> listMealsByDateAndMealType(Calendar date, MealType mealType) {
+        return this.mealSvc.mealsByDateAndMealType(date, mealType);
+    }
+
+    public Iterable<Meal> getMeals() {
+        return PersistenceContext.repositories().meals().findAll();
+    }
 }

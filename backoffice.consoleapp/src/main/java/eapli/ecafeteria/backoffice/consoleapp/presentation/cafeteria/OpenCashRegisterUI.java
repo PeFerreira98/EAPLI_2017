@@ -6,11 +6,16 @@
 package eapli.ecafeteria.backoffice.consoleapp.presentation.cafeteria;
 
 import eapli.ecafeteria.application.cafeteria.OpenCashRegisterController;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.MealPrinter;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.MealTypePrinter;
 import eapli.ecafeteria.domain.cashregister.CashRegister;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.persistence.NoResultException;
 
@@ -29,7 +34,6 @@ public class OpenCashRegisterUI extends AbstractUI {
 //        for (CashRegister cashR : controller.getCashRegisters()) {
 //            System.out.println(cashR);
 //        }
-
         final String number = eapli.util.io.Console.readLine("Insert cash register number");
 
         System.out.println("Choose option");
@@ -38,7 +42,7 @@ public class OpenCashRegisterUI extends AbstractUI {
 
         final SelectWidget<MealType> mealTypeSelector
                 = new SelectWidget<>("xpto", mealTypes, new MealTypePrinter());
-                //null;
+        //null;
         mealTypeSelector.show();
 
         if (mealTypeSelector.selectedOption() == 0) {
@@ -66,6 +70,12 @@ public class OpenCashRegisterUI extends AbstractUI {
             try {
 
                 final MealType mealType = mealTypeSelector.selectedElement();
+
+                Iterable<Meal> mealsDate = controller.getMeals(mealType);
+                System.out.println("Available dates of meals\n");
+                for (Meal meal : mealsDate) {
+                    System.out.println("Date: " + meal.date().getTime().toString());
+                }
 
                 Calendar date = eapli.util.io.Console.readCalendar("Insert meal date: (dd-MM-yyyy)");
 

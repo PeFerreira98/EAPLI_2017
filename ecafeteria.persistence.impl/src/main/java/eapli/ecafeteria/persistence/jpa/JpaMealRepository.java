@@ -35,4 +35,8 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Composit
                 "' AND e.mealType.acronym='" + mealType.id() + "'");
     }
 
+    @Override
+    public Iterable<Meal> mealsByMealType(MealType mealType) {
+        return match("e.mealType.acronym='" + mealType.id() + "'");
+    }
 }

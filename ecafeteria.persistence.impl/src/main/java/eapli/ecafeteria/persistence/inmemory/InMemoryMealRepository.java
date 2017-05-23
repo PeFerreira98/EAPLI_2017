@@ -38,4 +38,9 @@ public class InMemoryMealRepository extends InMemoryRepository<Meal, CompositeId
 	public Iterable<Meal> mealsByDateAndMealType(Calendar date, MealType mealType) {
 		return match(e -> (e.date().equals(date) && (e.mealType().id().equals(mealType.id()))));
 	}
+
+    @Override
+    public Iterable<Meal> mealsByMealType(MealType mealType) {
+        return match(e -> e.mealType().id().equals(mealType.id()));
+    }
 }

@@ -8,6 +8,7 @@ package eapli.ecafeteria.application.cafeteria;
 import eapli.ecafeteria.domain.cashregister.CashRegister;
 import eapli.ecafeteria.domain.cashregister.CashRegisterState;
 import eapli.ecafeteria.domain.cashregister.Shift;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.CashRegisterRepository;
@@ -91,6 +92,10 @@ public class OpenCashRegisterController {
                 = PersistenceContext.repositories().cashRegisters();
 
         return (LinkedList) cashRegisterRepository.findAll();
+    }
+    
+    public Iterable<Meal> getMeals(MealType mealType) {
+        return PersistenceContext.repositories().meals().mealsByMealType(mealType);
     }
 
 }
