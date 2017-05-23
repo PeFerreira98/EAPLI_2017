@@ -1,5 +1,6 @@
 package eapli.ecafeteria.bootstrapers;
 
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 import eapli.ecafeteria.application.booking.BookingController;
@@ -20,10 +21,11 @@ public class BookingBootstraper implements Action {
 		final MealRepository mealRepository = PersistenceContext.repositories().meals();
 		final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(PersistenceContext.repositories().buildTransactionalContext());
 		
-		Meal meal = mealRepository.findAll().iterator().next();
 		CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findAll().iterator().next();
-		
-		register(cafeteriaUser, meal);
+		final Iterator<Meal> meals = mealRepository.findAll().iterator();
+
+		register(cafeteriaUser, meals.next());
+		register(cafeteriaUser, meals.next());
 		
 		return false;
 	}

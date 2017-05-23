@@ -11,6 +11,8 @@ import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -33,6 +35,9 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
     @ManyToOne
     private CafeteriaUser cafeteriaUser;
+    
+    @Enumerated(EnumType.STRING)
+    private BookingState state;
 
     protected Booking() {
     	// ORM
@@ -46,6 +51,7 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
         this.cafeteriaUser = user;
         this.meal = meal;
+        this.state = BookingState.BOOKED;
     }
 
     public CafeteriaUser user() {
@@ -54,6 +60,14 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
     public Meal meal() {
         return meal;
+    }
+    
+    public boolean cancelBooking(){
+    	if(state.canCancel()){
+    		this.state = BookingState.CANCELLED;
+    		return true;
+    	}
+    	return false;
     }
 
     @Override
@@ -66,25 +80,6 @@ public class Booking implements AggregateRoot<String>, Serializable {
         }
 
         final Booking other = (Booking) o;
-        if (!Objects.equals(this.meal, other.meal)) {
-            return false;
-        }
-        if (!Objects.equals(this.cafeteriaUser, other.cafeteriaUser)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public boolean equals(Booking booking) {
-        if (this == booking) {
-            return true;
-        }
-        if (!(booking instanceof Booking)) {
-            return false;
-        }
-
-        final Booking other = (Booking) booking;
         if (!Objects.equals(this.meal, other.meal)) {
             return false;
         }
