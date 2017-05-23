@@ -32,15 +32,13 @@ public class JpaMealTypeRepository extends CafeteriaJpaRepositoryBase<MealType, 
                 || (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 15 && Calendar.
                 getInstance().get(Calendar.MINUTE) == 0)) {
             final Query q = entityManager().
-                    createQuery("select mt from MealType mt "
-                            + "where mt.designation.mealTypeName like 'lunch'", MealType.class);
+                    createQuery("select mt from MealType mt where mt.acronym like 'lunch'", MealType.class);
 
             return (MealType) q.getSingleResult();
             
         } else {
             final Query q = entityManager().
-                    createQuery("select mt from MealType mt "
-                            + "where mt.designation.mealTypeName like 'dinner'", MealType.class);
+                    createQuery("select mt from MealType mt where mt.acronym like 'dinner'", MealType.class);
           
             return (MealType) q.getSingleResult();
         }
