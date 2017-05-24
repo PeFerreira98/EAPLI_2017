@@ -18,8 +18,7 @@ public class ListMenusUI extends AbstractUI {
 	
 	@Override
 	protected boolean doShow() {
-		final Iterable<Menu> menus = this.controller.allMenus();
-		//final Iterable<Menu> menus = this.controller.publishedMenus();
+		final Iterable<Menu> menus = this.controller.publishedMenus();
 		
 		System.out.println("\nChoose a Menu:");
 		final SelectWidget<Menu> menuSelector = new SelectWidget<>("Menus", menus, new MenuPrinter());

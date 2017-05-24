@@ -33,6 +33,7 @@ import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListMealAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.ListMealTypeAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterAllergenAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.ListMenuAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.PublishMenuAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterDishAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterDishAllergenAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterDishTypeAction;
@@ -293,7 +294,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(MEAL_TYPE_REGISTER_OPTION, "Register new Meal Type", new RegisterMealTypeAction()));
         menu.add(new MenuItem(MEAL_TYPE_LIST_OPTION, "List all Meal Type", new ListMealTypeAction()));
         menu.add(new MenuItem(MEAL_TYPE_CHANGE_OPTION, "Change Meal Type description", new ChangeMealTypeAction()));
-        //menu.add(new MenuItem(MEAL_TYPE_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Meal Type", new ActivateDeactivateMealTypeAction()));
+        menu.add(new MenuItem(MEAL_TYPE_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Meal Type", new ShowMessageAction("Not implemented yet")));
         menu.add(new MenuItem(MEAL_REGISTER_OPTION, "Register new Meal", new RegisterMealAction()));
         menu.add(new MenuItem(MEAL_LIST_OPTION, "List all Meal", new ListMealAction()));
 
@@ -306,8 +307,8 @@ public class MainMenu extends AbstractUI {
 
         menu.add(new MenuItem(MENU_REGISTER_OPTION, "Register new Menu", new RegisterMenuAction()));
         menu.add(new MenuItem(MENU_LIST_OPTION, "List all Menus", new ListMenuAction()));
-        //menu.add(new MenuItem(MENU_CHANGE_OPTION, "Change Menu period", new ChangeMenuAction()));
-        //menu.add(new MenuItem(MENU_PUBLISH_OPTION, "Publish Menu", new PublishMenuAction()));
+        menu.add(new MenuItem(MENU_CHANGE_OPTION, "Change Menu period", new ShowMessageAction("Not implemented yet")));
+        menu.add(new MenuItem(MENU_PUBLISH_OPTION, "Publish Menu", new PublishMenuAction()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
