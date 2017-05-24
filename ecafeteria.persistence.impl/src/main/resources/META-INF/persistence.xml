@@ -11,7 +11,7 @@
     <class>eapli.ecafeteria.domain.cafeteria.CafeteriaUser</class>
     <class>eapli.ecafeteria.domain.mealbooking.Account</class>
     <class>eapli.ecafeteria.domain.cashregister.CashRegister</class>
-	<class>eapli.ecafeteria.domain.cashregister.Shift</class>
+    <class>eapli.ecafeteria.domain.cashregister.Shift</class>
     <class>eapli.ecafeteria.domain.cafeteria.SignupRequest</class>
     <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfile</class>
     <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen</class>
@@ -27,6 +27,7 @@
     <class>eapli.ecafeteria.domain.rating.Comment</class>
     <class>eapli.ecafeteria.domain.kitchen.Batch</class>
     <class>eapli.ecafeteria.domain.kitchen.MealBatch</class>
+    <class>eapli.ecafeteria.domain.menus.MenuPlan</class>
     <properties>
       <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\ecafeteria;MV_STORE=FALSE"/>-->
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>

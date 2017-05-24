@@ -40,6 +40,7 @@ import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterDishTyp
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterMealAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterMealTypeAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.RegisterMenuAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.RegisterMenuPlanAction;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.AbstractUI;
@@ -111,6 +112,7 @@ public class MainMenu extends AbstractUI {
     private static final int MENU_LIST_OPTION = 2;
     private static final int MENU_CHANGE_OPTION = 3;
     private static final int MENU_PUBLISH_OPTION = 4;
+    private static final int MENU_REGISTER_MEALPLAN_OPTION = 5;
     
     // MEAL TYPES
     private static final int MEAL_TYPE_REGISTER_OPTION = 1;
@@ -309,6 +311,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(MENU_LIST_OPTION, "List all Menus", new ListMenuAction()));
         menu.add(new MenuItem(MENU_CHANGE_OPTION, "Change Menu period", new ShowMessageAction("Not implemented yet")));
         menu.add(new MenuItem(MENU_PUBLISH_OPTION, "Publish Menu", new PublishMenuAction()));
+        menu.add(new MenuItem(MENU_REGISTER_MEALPLAN_OPTION, "Register Menu Plan", new RegisterMenuPlanAction()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;

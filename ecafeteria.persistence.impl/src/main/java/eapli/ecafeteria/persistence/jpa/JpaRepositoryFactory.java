@@ -14,6 +14,7 @@ import eapli.ecafeteria.persistence.MealBatchRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MealTypeRepository;
+import eapli.ecafeteria.persistence.MenuPlanRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.NutricionalProfileAllergenRepository;
 import eapli.ecafeteria.persistence.NutricionalProfileRepository;
@@ -145,5 +146,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public MealPlanRepository mealPlans() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public MenuPlanRepository menuPlans() {
+        return new JpaMenuPlanRepository();
     }
 }

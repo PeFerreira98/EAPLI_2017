@@ -3,6 +3,7 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.menus.MenuPlan;
 import eapli.framework.persistence.repositories.TransactionalContext;
 
 /**
@@ -82,4 +83,6 @@ public interface RepositoryFactory {
     RatingRepository ratings();
 
     CommentRepository comments();
+    
+    MenuPlanRepository menuPlans();
 }
