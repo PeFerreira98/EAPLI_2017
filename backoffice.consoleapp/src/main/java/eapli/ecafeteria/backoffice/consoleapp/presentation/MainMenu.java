@@ -110,17 +110,17 @@ public class MainMenu extends AbstractUI {
     private static final int MENU_LIST_OPTION = 2;
     private static final int MENU_CHANGE_OPTION = 3;
     private static final int MENU_PUBLISH_OPTION = 4;
-
-    // MEALS
-    private static final int MEAL_TYPE_OPTION = 1;
-    private static final int MEAL_REGISTER_OPTION = 2;
-    private static final int MEAL_LIST_OPTION = 3;
-
+    
     // MEAL TYPES
     private static final int MEAL_TYPE_REGISTER_OPTION = 1;
     private static final int MEAL_TYPE_LIST_OPTION = 2;
     private static final int MEAL_TYPE_CHANGE_OPTION = 3;
     private static final int MEAL_TYPE_ACTIVATE_DEACTIVATE_OPTION = 4;
+
+    // MEALS
+    private static final int MEAL_REGISTER_OPTION = 5;
+    private static final int MEAL_LIST_OPTION = 6;
+
 
     //SALES
     private static final int OPEN_CASH_REGISTER = 1;
@@ -290,9 +290,10 @@ public class MainMenu extends AbstractUI {
     private Menu buildMealMenu() {
         final Menu menu = new Menu("Meals >");
 
-        final Menu mealTypeMenu = buildMealTypeMenu();
-        menu.add(new MenuItem(MEAL_TYPE_OPTION, "Meal Type Information", new ShowVerticalSubMenuAction(mealTypeMenu)));
-
+        menu.add(new MenuItem(MEAL_TYPE_REGISTER_OPTION, "Register new Meal Type", new RegisterMealTypeAction()));
+        menu.add(new MenuItem(MEAL_TYPE_LIST_OPTION, "List all Meal Type", new ListMealTypeAction()));
+        menu.add(new MenuItem(MEAL_TYPE_CHANGE_OPTION, "Change Meal Type description", new ChangeMealTypeAction()));
+        //menu.add(new MenuItem(MEAL_TYPE_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Meal Type", new ActivateDeactivateMealTypeAction()));
         menu.add(new MenuItem(MEAL_REGISTER_OPTION, "Register new Meal", new RegisterMealAction()));
         menu.add(new MenuItem(MEAL_LIST_OPTION, "List all Meal", new ListMealAction()));
 
@@ -319,18 +320,6 @@ public class MainMenu extends AbstractUI {
                 new ChangeDishNutricionalInfoAction()));
         menu.add(new MenuItem(CHANGE_DISH_PRICE_OPTION, "Change Price",
                 new ChangeDishPriceAction()));
-
-        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-        return menu;
-    }
-
-    private Menu buildMealTypeMenu() {
-        final Menu menu = new Menu("Meal Type >");
-
-        menu.add(new MenuItem(MEAL_TYPE_REGISTER_OPTION, "Register new Meal Type", new RegisterMealTypeAction()));
-        menu.add(new MenuItem(MEAL_TYPE_LIST_OPTION, "List all Meal Type", new ListMealTypeAction()));
-        menu.add(new MenuItem(MEAL_TYPE_CHANGE_OPTION, "Change Meal Type description", new ChangeMealTypeAction()));
-        //menu.add(new MenuItem(MEAL_TYPE_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Meal Type", new ActivateDeactivateMealTypeAction()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;

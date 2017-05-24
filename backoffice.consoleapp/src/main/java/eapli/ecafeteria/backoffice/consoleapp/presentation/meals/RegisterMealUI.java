@@ -1,6 +1,8 @@
 package eapli.ecafeteria.backoffice.consoleapp.presentation.meals;
 
 import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.MenuPrinter;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import eapli.ecafeteria.application.meals.RegisterMealController;
 import eapli.ecafeteria.domain.meals.Dish;
@@ -41,7 +43,9 @@ public class RegisterMealUI extends AbstractUI {
 		
 		final String desc = Console.readLine("Description");
 		
-		final Calendar date = Console.readCalendar("Meal Date (dd-mm-aaaa)");
+		final Calendar date = Console.readCalendar("Meal Date from " 
+			+ printDate(menu.beginningDate()) + " to " 
+			+ printDate(menu.endingDate()) + " (dd-mm-aaaa)");
 		
 		try {			
 			this.theController.registerMeal(dish, mealType, menu, date, desc);
@@ -51,6 +55,11 @@ public class RegisterMealUI extends AbstractUI {
         }
 		
 		return false;
+	}
+	
+	private String printDate(Calendar calendar){
+		SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+		return format1.format(calendar.getTime());
 	}
 
 	@Override
