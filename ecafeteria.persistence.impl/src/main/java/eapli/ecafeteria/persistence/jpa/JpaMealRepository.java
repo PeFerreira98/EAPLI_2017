@@ -21,7 +21,7 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Composit
 
     @Override
     public Iterable<Meal> mealsByMenu(Menu menu) {
-        return match("e.menu='" + menu + "'");
+        return match("e.menu.name='" + menu.id() + "'");
     }
 
     @Override

@@ -21,8 +21,9 @@ public class ListMenuService {
     private final MenuRepository menuRepository = PersistenceContext.repositories().menus();
 
     public Iterable<Menu> allMenus() {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-
+    	//TODO: Remove Comment after publishMenu Issue
+        //Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+    	
         return this.menuRepository.findAll();
     }
 
