@@ -17,5 +17,7 @@ import java.util.Calendar;
 public interface BookingRepository extends DataRepository<Booking, Long> {
 
     Iterable<Booking> findNextReserves(Calendar dateInitial, Calendar dateFinal, CafeteriaUser user);
+
+	Iterable<Booking> listPayedUserBookings(CafeteriaUser user);
     
 }

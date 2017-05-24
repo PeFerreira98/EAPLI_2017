@@ -62,6 +62,10 @@ public class Booking implements AggregateRoot<String>, Serializable {
         return meal;
     }
     
+    public BookingState state(){
+    	return this.state;
+    }
+    
     public boolean cancelBooking(){
     	if(state.canCancel()){
     		this.state = BookingState.CANCELLED;

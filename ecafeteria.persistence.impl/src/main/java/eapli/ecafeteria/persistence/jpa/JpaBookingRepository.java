@@ -7,7 +7,10 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.mealbooking.Booking;
+import eapli.ecafeteria.domain.mealbooking.BookingState;
 import eapli.ecafeteria.persistence.BookingRepository;
+
+import java.awt.print.Book;
 import java.util.Calendar;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
@@ -27,5 +30,15 @@ public class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Lo
         
         return createQuery.getResultList();
     }
+
+	@Override
+	public Iterable<Booking> listPayedUserBookings(CafeteriaUser user) {
+		
+		Query createQuery = entityManager().createQuery("SELECT r FROM Booking r WHERE r.cafeteriaUser=:user AND r.state=:state");
+        createQuery.setParameter("user", user);
+        createQuery.setParameter("state", BookingState.BOOKED);
+        
+        return createQuery.getResultList();
+	}
 
 }

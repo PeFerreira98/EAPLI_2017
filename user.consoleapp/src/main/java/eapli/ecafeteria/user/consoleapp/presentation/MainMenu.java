@@ -9,6 +9,7 @@ import eapli.cafeteria.consoleapp.presentation.ExitWithMessageAction;
 import eapli.cafeteria.consoleapp.presentation.MyUserMenu;
 import eapli.ecafeteria.application.CafeteriaUserBaseController;
 import eapli.ecafeteria.user.consoleapp.presentation.meals.BookingAction;
+import eapli.ecafeteria.user.consoleapp.presentation.meals.CancelBookingAction;
 import eapli.ecafeteria.user.consoleapp.presentation.meals.ConsultReservesAction;
 import eapli.ecafeteria.user.consoleapp.presentation.rating.MealRatingAction;
 import eapli.framework.actions.ReturnAction;
@@ -38,6 +39,7 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int LIST_MENUS_OPTION = 1;
     private static final int BOOK_A_MEAL_OPTION = 2;
     private static final int CONSULT_RESERVES_OPTION = 3;
+    private static final int CANCEL_BOOKING_OPTION = 4;
 
     // ACCOUNT MENU
     private static final int LIST_MOVEMENTS_OPTION = 1;
@@ -100,11 +102,9 @@ class MainMenu extends CafeteriaUserBaseUI {
     private Menu buildBookingsMenu() {
         final Menu menu = new Menu("Bookings");
         menu.add(new MenuItem(LIST_MENUS_OPTION, "List menus", new ShowMessageAction("Not implemented yet")));
-        //menu.add(new MenuItem(BOOK_A_MEAL_OPTION, "Book a meal", new ShowMessageAction("Not implemented yet")));
         menu.add(new MenuItem(BOOK_A_MEAL_OPTION, "Book a meal", new BookingAction() ) );
-        
         menu.add(new MenuItem(CONSULT_RESERVES_OPTION, "Consult reserves in next n days", new ConsultReservesAction() ) );
-        
+        menu.add(new MenuItem(CANCEL_BOOKING_OPTION, "Cancel Bookings", new CancelBookingAction() ) );
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }
