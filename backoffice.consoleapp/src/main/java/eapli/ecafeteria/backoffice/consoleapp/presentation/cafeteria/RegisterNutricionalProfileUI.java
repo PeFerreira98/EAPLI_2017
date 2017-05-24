@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.backoffice.consoleapp.presentation.cafeteria;
 
+import eapli.ecafeteria.application.cafeteria.CafeteriaUserService;
 import eapli.ecafeteria.application.cafeteria.RegisterNutricionalProfileController;
 import eapli.ecafeteria.domain.cafeteria.NutricionalProfile;
 import eapli.framework.application.Controller;
@@ -36,7 +37,7 @@ public class RegisterNutricionalProfileUI extends AbstractUI{
 
          
         try {
-            NutricionalProfile newNutricionalProfile = this.theController.registerNutricionalProfile(this.theController.obtainCurrentCafeteriaUser(), dailyCalories, dailySalt, weeklyCalories, weeklySalt);
+            NutricionalProfile newNutricionalProfile = this.theController.registerNutricionalProfile(new CafeteriaUserService().obtainCurrentCafeteriaUser(), dailyCalories, dailySalt, weeklyCalories, weeklySalt);
             System.out.println("Nutricional Profile Successfully Registered");
             return true;
         } catch (DataIntegrityViolationException | DataConcurrencyException ex) {

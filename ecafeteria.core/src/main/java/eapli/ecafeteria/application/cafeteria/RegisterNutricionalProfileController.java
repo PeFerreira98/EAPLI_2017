@@ -2,7 +2,6 @@ package eapli.ecafeteria.application.cafeteria;
 
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.authz.ActionRight;
-import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteria.NutricionalProfile;
 import eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen;
@@ -13,7 +12,6 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.util.logging.Logger;
 
 /**
  *
@@ -28,36 +26,42 @@ public class RegisterNutricionalProfileController implements Controller {
             throws DataIntegrityViolationException, DataConcurrencyException {
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_PROFILE);
 
+        if (new NutricionalProfileService().findCurrentUserNutricionalProfile() != null) {
+            throw new IllegalStateException("User already has a profile");
+        }
+
         final NutricionalProfile newNutricionalProfile = new NutricionalProfile(user, dailyCalories, dailySalt, weeklyCalories, weeklySalt);
         return this.repository.save(newNutricionalProfile);
     }
-    
+
+    public NutricionalProfile registerNutricionalProfile(Integer dailyCalories, Integer dailySalt, Integer weeklyCalories, Integer weeklySalt)
+            throws DataIntegrityViolationException, DataConcurrencyException {
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_PROFILE);
+
+        if (new NutricionalProfileService().findCurrentUserNutricionalProfile() != null) {
+            throw new IllegalStateException("User already has a profile");
+        }
+
+        return this.registerNutricionalProfile(new CafeteriaUserService().obtainCurrentCafeteriaUser(), dailyCalories, dailySalt, weeklyCalories, weeklySalt);
+    }
+
     public NutricionalProfileAllergen registerNutricionalProfileAllergen(NutricionalProfile profile, Allergen allergen)
             throws DataIntegrityViolationException, DataConcurrencyException {
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_PROFILE);
+
+        if (new NutricionalProfileService().findCurrentUserNutricionalProfile() != null) {
+            throw new IllegalStateException("User already has a profile");
+        }
 
         final NutricionalProfileAllergen newNutricionalProfileAllergen = new NutricionalProfileAllergen(profile, allergen);
         return this.repositoryAllergen.save(newNutricionalProfileAllergen);
     }
 
-    /**
-     * Obtem o cafeteriauser que esta actualmente logado. Se nao existir,
-     * devolve null.
-     *
-     * @return o cafeteria user que esta actualmente logado. Se nao existir,
-     * devolve null.
-     */
-    public CafeteriaUser obtainCurrentCafeteriaUser() {
-        CafeteriaUser activeCafeteriaUser = null;
-        try {
-            Username username = Application.session().session().authenticatedUser().username();
-            activeCafeteriaUser = new CafeteriaUserService().findCafeteriaUserByUsername(username);
-        } catch (javax.persistence.PersistenceException ex) {
-            String error = "Error getting the CafeteriaUser of logged SystemUser.   " + ex;
-            Logger.getGlobal().severe(error);
+    public void registerNutricionalProfileAllergens(NutricionalProfile profile, Iterable<Allergen> allergens)
+            throws DataIntegrityViolationException, DataConcurrencyException {
+        for (Allergen a : allergens) {
+            registerNutricionalProfileAllergen(profile, a);
         }
-
-        return activeCafeteriaUser;
     }
 
 }

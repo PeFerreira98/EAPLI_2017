@@ -5,11 +5,13 @@
  */
 package eapli.ecafeteria.application.cafeteria;
 
+import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteria.MecanographicNumber;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,5 +27,25 @@ public class CafeteriaUserService {
 
     public CafeteriaUser findCafeteriaUserByUsername(Username user) {
         return this.repo.findByUsername(user);
+    }
+
+    /**
+     * Obtem o cafeteriauser que esta actualmente logado. Se nao existir,
+     * devolve null.
+     *
+     * @return o cafeteria user que esta actualmente logado. Se nao existir,
+     * devolve null.
+     */
+    public CafeteriaUser obtainCurrentCafeteriaUser() {
+        CafeteriaUser activeCafeteriaUser = null;
+        try {
+            Username username = Application.session().session().authenticatedUser().username();
+            activeCafeteriaUser = findCafeteriaUserByUsername(username);
+        } catch (javax.persistence.PersistenceException ex) {
+            String error = "Error getting the CafeteriaUser of logged CafeteriaUser.   " + ex;
+            Logger.getGlobal().severe(error);
+        }
+
+        return activeCafeteriaUser;
     }
 }
