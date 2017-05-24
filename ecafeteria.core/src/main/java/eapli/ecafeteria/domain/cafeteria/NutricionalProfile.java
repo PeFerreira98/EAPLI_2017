@@ -73,6 +73,11 @@ public class NutricionalProfile implements Serializable {
         return weeklyNutritionalInfo;
     }
 
+    public void edit(Integer dailyCalories, Integer dailySalt, Integer weeklyCalories, Integer weeklySalt) {
+        this.dailyNutritionalInfo = new NutricionalInfo(dailyCalories, dailySalt);
+        this.weeklyNutritionalInfo = new NutricionalInfo(weeklyCalories, weeklySalt);
+    }
+
     @Override
     public int hashCode() {
         return this.id.hashCode();

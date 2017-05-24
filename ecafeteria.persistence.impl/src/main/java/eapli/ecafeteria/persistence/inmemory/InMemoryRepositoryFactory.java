@@ -3,6 +3,7 @@ package eapli.ecafeteria.persistence.inmemory;
 import eapli.ecafeteria.bootstrapers.ECafeteriaBootstraper;
 import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.BatchRepository;
+import eapli.ecafeteria.persistence.BookingAlertRepository;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.CashRegisterRepository;
@@ -158,5 +159,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public MenuPlanRepository menuPlans() {
         return new InMemoryMenuPlanRepository();
+    }
+
+    @Override
+    public BookingAlertRepository bookingAlerts() {
+        return new InMemoryBookingAlertRepository();
     }
 }

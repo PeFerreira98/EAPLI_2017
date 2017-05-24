@@ -1,17 +1,14 @@
- /**
+/**
  *
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafeteria.domain.menus.MenuPlan;
 import eapli.framework.persistence.repositories.TransactionalContext;
 
 /**
  * @author Paulo Gandra Sousa
  *
  */
-
-
 public interface RepositoryFactory {
 
     /**
@@ -57,7 +54,7 @@ public interface RepositoryFactory {
     MenuRepository menus();
 
     MealTypeRepository mealTypes();
-    
+
     MealPlanRepository mealPlans();
 
     MealRepository meals();
@@ -83,6 +80,8 @@ public interface RepositoryFactory {
     RatingRepository ratings();
 
     CommentRepository comments();
-    
+
     MenuPlanRepository menuPlans();
+
+    BookingAlertRepository bookingAlerts();
 }

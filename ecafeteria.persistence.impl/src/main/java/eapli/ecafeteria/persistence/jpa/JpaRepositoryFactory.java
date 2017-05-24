@@ -3,6 +3,7 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.BatchRepository;
+import eapli.ecafeteria.persistence.BookingAlertRepository;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CashRegisterRepository;
 import eapli.ecafeteria.persistence.CommentRepository;
@@ -140,7 +141,7 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public CommentRepository comments() {
-       return new JpaCommentRepository();
+        return new JpaCommentRepository();
     }
 
     @Override
@@ -151,5 +152,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public MenuPlanRepository menuPlans() {
         return new JpaMenuPlanRepository();
+    }
+
+    @Override
+    public BookingAlertRepository bookingAlerts() {
+        return new JpaBookingAlertRepository();
     }
 }

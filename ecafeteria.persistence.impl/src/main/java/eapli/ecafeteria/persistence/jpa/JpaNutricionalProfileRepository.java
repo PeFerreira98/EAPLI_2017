@@ -13,7 +13,6 @@ public class JpaNutricionalProfileRepository extends CafeteriaJpaRepositoryBase<
 
     @Override
     public NutricionalProfile findByCafeteriaUser(CafeteriaUser user) {
-        // TODO use parameters instead of string concatenation
         return findByMecNumber(user.id());
     }
 

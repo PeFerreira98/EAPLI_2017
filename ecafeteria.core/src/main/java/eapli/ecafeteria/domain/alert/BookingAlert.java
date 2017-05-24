@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
@@ -18,29 +17,27 @@ public class BookingAlert implements Observer, Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private Alert id;
     @Version
     private Long version;
 
-    private Integer redAlert;
-    private Integer yellowAlert;
+    private Integer alertLevel;
 
     public BookingAlert() {
         // for ORM
     }
 
-    public BookingAlert(Integer redAlert, Integer yellowAlert) {
-        this.redAlert = redAlert;
-        this.yellowAlert = yellowAlert;
+    public BookingAlert(Alert alert, Integer alertLevel) {
+        this.id = alert;
+        this.alertLevel = alertLevel;
     }
 
-    public Integer redAlert() {
-        return redAlert;
+    public Alert id() {
+        return id;
     }
 
-    public Integer yellowAlert() {
-        return yellowAlert;
+    public Integer alertLevel() {
+        return alertLevel;
     }
 
     @Override
@@ -71,7 +68,13 @@ public class BookingAlert implements Observer, Serializable {
     @Override
     public void update(Observable o, Object o1) {
         if (o != null && o1 != null) {
-            //TODO
+            //TODO get the reserved and planned quantity
+            Integer reservedQty = 3;
+            Integer maxQty = 4;
+
+            if ((reservedQty / maxQty) * 100 > alertLevel) {
+                System.out.println(id.toString() + " alert! " + alertLevel + "% of reservations reached");
+            }
         }
     }
 
