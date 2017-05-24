@@ -1,0 +1,92 @@
+Teste funcional do UC SRR-08 Meal Rating.
+
+Estado inicial:
+
+ De forma a garantir que não existe corrupção na base de dados
+ criada pela intervenção de outros casos de uso, a base de dados deve ser apagada,
+e de seguida corrido o bootstrap de forma a termos uma base limpa para testar 
+isoladamente o caso de uso.
+
+Teste:
+
+O utente deve fazer log in na applicação, com o username 900330 e password Password1 
+ , apos selecionar a opção 1 de log in no menu inicial da applicação.
+De seguida deve ser selecionadas as seguintes opções, 
+4. Rating/Calories
+1. Rate a meal
+de forma a aceder a caso de uso de fazer rating de uma meal.
+De seguida é pedido para selecionar uma meal, selecionemos a primeira [1].
+Seguidamente é nos pedido um rating de 1-5, selecionemos 3.
+O proximo passo questiona o comentario, basta escrever " um comentario".
+O sucesso sera indicado pelo seguinte output: "Rating created with sucess."
+
+
+Exemplo de corrida:
+
+------------------------------------------------------------------------
+Building ecafeteria.user.consoleapp 1.0-SNAPSHOT
+------------------------------------------------------------------------
+
+--- exec-maven-plugin:1.2.1:exec (default-cli) @ user.consoleapp ---
+
++= eCAFETERIA =================================================================+
+
+1. Login
+2. Sign up
+0. Exit
+
+Please choose an option
+1
+mai 24, 2017 2:52:37 PM eapli.framework.persistence.repositories.impl.jpa.JpaTransactionalContext entityManagerFactory
+INFO: Not runing in container mode.
+900330
+[EL Info]: 2017-05-24 14:52:41.888--ServerSession(836614448)--EclipseLink, version: Eclipse Persistence Services - 2.6.2.v20151217-774c696
+[EL Info]: connection: 2017-05-24 14:52:42.606--ServerSession(836614448)--/file:/C:/enginfo/BitBucket repo/eapli-ecafeteria-base-2dl/ecafeteria.persistence.impl/target/classes/_eapli.eCafeteriaPU login successful
+
++= Login ======================================================================+
+
+Username:
+Password:
+Password1
+Authentication Successful
++==============================================================================+
+
+
++= eCAFETERIA [@900330]   CURRENT BALANCE OF YOUR USERCARD: 0.0 EUR
++==============================================================================+
+
+
+1. My account >
+------------------
+2. Bookings
+------------------
+3. Account
+------------------
+4. Rating/Calories
+------------------
+0. Exit
+
+Please choose an option
+4
+
+>> Rating/Calories
+1. Rate a meal
+0. Return 
+
+Please choose an option
+1
+
++= Rate Meal ==================================================================+
+
+Avaiable meals:
+[1] --- 2017/04/11   vegetarian dish   tofu grelhado   lunch meal
+Select a  meal [1-1] or 0 to exit:
+Select an option: 
+1
+Select a rating for the meal [1-5] or 0 to exit:
+Select an option: 
+3
+Please comment the meal. Empty line for no comment.
+ola
+Rating created with sucess.
++==============================================================================+
