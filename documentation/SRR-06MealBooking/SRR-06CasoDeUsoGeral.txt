@@ -5,9 +5,9 @@ Case de uso, formato breve.
 03 O utilizador indica a data.
 04 O sistema pergunta o tipo de refeicao.
 05 O utilizador indica o tipo de refeicao.
-06 O sistema mostra os pratos disponiveis para aquela date e tipo de refeicao.
-07 O ulizador indica um prato.
-08 O sistema mosta os alergenicos e informa se alergico.
+06 O sistema mostra as refeições disponiveis para aquela data e tipo de refeicao.
+07 O ulizador indica uma refeição.
+08 O sistema mosta os alergenicos do prato que constitui a refeição e informa se alergico.
 09 O sistema mostra a informacao nutricional e consumo calorico semanal.
 10 O sistema pede para confirmar.
 11 O utilizador confirma.
@@ -20,14 +20,15 @@ O sistema actualiza o numero de refeicoes disponiveis.
 
 Controller 1  Selecao
 
-pede data e tipo de refeicao, mostra pratos e pede para escolher o prato. Devolve um prato.
+Pede a data e tipo de refeicao, mostra as refeições e pede para escolher a refeição. Devolve uma refeição (meal).
 
 Controller 2 Visualização. Hugo+Pedro
 
-Recebe o prato, mostra a informacao do prato. Alergenicos e info nutricional.
+Recebe a refeição, mostra a informacao do prato. Alergenicos e info nutricional.
 
 Controller 3 reserva.
 
-Recebe prato, pede confirmacao, reserva prato e actualiza saldo.
+Recebe a refeição, pede confirmacao, reserva refeição e actualiza saldo.
+
 
 

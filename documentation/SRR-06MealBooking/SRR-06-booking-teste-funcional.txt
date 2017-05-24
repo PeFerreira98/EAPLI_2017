@@ -1,0 +1,169 @@
+Teste funcional do UC SRR-06 Meal Booking.
+
+Estado inicial:
+
+ De forma a garantir que não existe corrupção na base de dados
+ criada pela intervenção de outros casos de uso, a base de dados deve ser apagada,
+e de seguida corrido o bootstrap de forma a termos uma base limpa para testar 
+isoladamente o caso de uso.
+
+Teste I:
+
+O utente deve fazer log in na applicação, com o username 900330 e password Password1 
+ , apos selecionar a opção 1 de log in no menu inicial da applicação.
+De seguida deve ser selecionadas as seguintes opções, 
+2. Bookings
+2. Book a meal
+de forma aceder ao caso de use pretendido.
+De seguida deve ser indicado o dia: 
+27-05-2017
+e selecionado o meal type:
+ 1. lunch meal .
+e como meal a:
+1. 2017/05/27   vegetarian dish   tofu grelhado   lunch meal
+O output esperado sera o seguinte:
+
+"Meal Nutritional info: 
+Calorias: 10 cal  Sal: 1 g
+
+Allergen present in the meal:
+  - glúten                        
+  - marisco                       
+  - lactose                       
+  - sésamo                        
+
+Checking if user is allergic...
+WARNING: You are allergic to this meal.
+
+Planed week nutricional consumption:
+Calorias: 10 cal  Sal: 1 g
+Reserve registerd."
+Indicativo que tudo correu bem.
+
+Apos está corrida deve ser efectuado outro booking para o mesmo dia, tornando a fazer log in com o mesmo utilizador, selecionando:
+1
+900330
+Password1
+2 
+2
+De volta ao menu do caso de uso de meal booking, devemos tornar a selecionar o mesmo dia;
+27-05-2017
+e selecionado o meal type:
+ 2. dinner meal 
+e como meal a:
+1. 2017/05/27   vegetarian dish   tofu grelhado   dinner meal
+O output esperado sera o seguinte:
+
+"Meal Nutritional info: 
+Calorias: 10 cal  Sal: 1 g
+
+Allergen present in the meal:
+  - glúten                        
+  - marisco                       
+  - lactose                       
+  - sésamo                        
+
+Checking if user is allergic...
+WARNING: You are allergic to this meal.
+
+Planed week nutricional consumption:
+Calorias: 20 cal  Sal: 2 g
+Reserve registerd."
+
+Deve-se confirmar que agora o  Planed week nutricional consumption: alterou para um somatorio das 2 meals, visto agora existirem meals planeadas para essa semana.
+
+
+Exemplo de corrida:
+
++= eCAFETERIA =================================================================+
+
+1. Login
+2. Sign up
+0. Exit
+
+Please choose an option
+1
+mai 24, 2017 3:24:04 PM eapli.framework.persistence.repositories.impl.jpa.JpaTransactionalContext entityManagerFactory
+INFO: Not runing in container mode.
+900330
+[EL Info]: 2017-05-24 15:24:08.838--ServerSession(836614448)--EclipseLink, version: Eclipse Persistence Services - 2.6.2.v20151217-774c696
+[EL Info]: connection: 2017-05-24 15:24:10.055--ServerSession(836614448)--/file:/C:/enginfo/BitBucket repo/eapli-ecafeteria-base-2dl/ecafeteria.persistence.impl/target/classes/_eapli.eCafeteriaPU login successful
+
++= Login ======================================================================+
+
+Username:
+Password:
+Password1
+Authentication Successful
++==============================================================================+
+
+
++= eCAFETERIA [@900330]   CURRENT BALANCE OF YOUR USERCARD: 0.0 EUR
++==============================================================================+
+
+
+1. My account >
+------------------
+2. Bookings
+------------------
+3. Account
+------------------
+4. Rating/Calories
+------------------
+0. Exit
+
+Please choose an option
+2
+
+>> Bookings
+1. List menus
+2. Book a meal
+3. Consult reserves in next n days
+4. Cancel Bookings
+0. Return 
+
+Please choose an option
+2
+
++= Booking Process  ===========================================================+
+
+Available dates of meals
+
+Date: Mon Apr 10 00:00:00 BST 2017
+Date: Tue Apr 11 00:00:00 BST 2017
+Date: Thu Apr 13 00:00:00 BST 2017
+Date: Sat May 27 00:00:00 BST 2017
+Date: Sat May 27 00:00:00 BST 2017
+Insert meal date: (dd-MM-yyyy)
+27-05-2017
+
+Choose a meal type:
+xpto
+1. lunch meal                    
+2. dinner meal                   
+0. Exit
+Select an option: 
+1
+
+Choose a meal:
+xpto
+1. 2017/05/27   vegetarian dish   tofu grelhado   lunch meal
+0. Exit
+Select an option: 
+1
+Meal Nutritional info: 
+Calorias: 10 cal  Sal: 1 g
+
+Allergen present in the meal:
+  - glúten                        
+  - marisco                       
+  - lactose                       
+  - sésamo                        
+
+Checking if user is allergic...
+WARNING: You are allergic to this meal.
+
+Planed week nutricional consumption:
+Calorias: 10 cal  Sal: 1 g
+Reserve registerd.
++==============================================================================+
