@@ -41,6 +41,7 @@ import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterMealAct
 import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.RegisterMealTypeAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.RegisterMenuAction;
 import eapli.ecafeteria.backoffice.consoleapp.presentation.menus.RegisterMenuPlanAction;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.sales.LoadBalanceAction;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.AbstractUI;
@@ -97,7 +98,7 @@ public class MainMenu extends AbstractUI {
     // ALLERGENS
     private static final int ALLERGEN_REGISTER_OPTION = 6;
     private static final int DISHALLERGEN_REGISTER_OPTION = 7;
-    
+
     // MATERIALS
     private static final int MATERIAL_REGISTER_OPTION = 1;
     private static final int MATERIAL_LIST_OPTION = 2;
@@ -113,7 +114,7 @@ public class MainMenu extends AbstractUI {
     private static final int MENU_CHANGE_OPTION = 3;
     private static final int MENU_PUBLISH_OPTION = 4;
     private static final int MENU_REGISTER_MEALPLAN_OPTION = 5;
-    
+
     // MEAL TYPES
     private static final int MEAL_TYPE_REGISTER_OPTION = 1;
     private static final int MEAL_TYPE_LIST_OPTION = 2;
@@ -124,9 +125,9 @@ public class MainMenu extends AbstractUI {
     private static final int MEAL_REGISTER_OPTION = 5;
     private static final int MEAL_LIST_OPTION = 6;
 
-
     //SALES
     private static final int OPEN_CASH_REGISTER = 1;
+    private static final int ADD_BALANCE_TO_ACCOUNT = 2;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -285,7 +286,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(SEARCH_BY_BATCH_CODE_OPTION, "Search by Batch Code", new ListMealByBatchCodeAction()));
         menu.add(new MenuItem(ALLERGEN_REGISTER_OPTION, "Register new Allergen", new RegisterAllergenAction()));
         menu.add(new MenuItem(DISHALLERGEN_REGISTER_OPTION, "Register new Dish Allergen", new RegisterDishAllergenAction()));
-        
+
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }
@@ -332,6 +333,7 @@ public class MainMenu extends AbstractUI {
     private Menu buildSalesMenu() {
         final Menu menu = new Menu("Sales >");
         menu.add(new MenuItem(OPEN_CASH_REGISTER, "Open Cash Register", new OpenCashRegisterAction()));
+        menu.add(new MenuItem(ADD_BALANCE_TO_ACCOUNT, "Add Balance To An Account", new LoadBalanceAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;

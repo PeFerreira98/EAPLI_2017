@@ -114,7 +114,7 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     public OrganicUnit organicUnit() {
         return this.organicUnit;
     }
-    
+
     public Account account() {
         return this.account;
     }
@@ -129,5 +129,9 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
 
     public boolean registerExpense(BigDecimal value) {
         return this.account.addAccountDebt(value);
+    }
+
+    public boolean registerLoad(BigDecimal value) {
+        return this.account.addAccountLoad(value);
     }
 }

@@ -43,10 +43,10 @@ public class BookingController extends Observable implements Controller {
         
         this.notifyObservers(book);
 
-        return booking;
+        //return booking;
 
         //FIXME: Money verifications still not working! (Please TEST before commit!)
-/*
+
 		//Check if user has enough balance to reserve meal
 		if (cafeteriaUser.hasSufficientBalance(meal.dish().currentPrice())) {
 			
@@ -68,7 +68,7 @@ public class BookingController extends Observable implements Controller {
 		}
 		
 		return null;
-         */
+         
     }
 
     public CafeteriaUser returnActiveCafeteriaUser() {

@@ -139,16 +139,6 @@ public class BookingUI extends AbstractUI implements Observer {
         return false;   //Nao identifiquei uso, pelo consegui constatar. Alguns retornam falso, outros true. O return true if this "scope" should end(HugoB)
     }
 
-    public CafeteriaUser obtainCurrentCafeteriaUser() {
-        CafeteriaUser activeCafeteriaUser;
-
-        //  FIXME: implementar um servico para isto.        
-        CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(PersistenceContext.repositories().buildTransactionalContext());
-        CafeteriaUser cafeteriaUser = cafeteriaUserRepository.findByUsername(Application.session().session().authenticatedUser().username());
-
-        return cafeteriaUser;
-    }
-
     @Override
     public String headline() {
         return "Booking Process ";
