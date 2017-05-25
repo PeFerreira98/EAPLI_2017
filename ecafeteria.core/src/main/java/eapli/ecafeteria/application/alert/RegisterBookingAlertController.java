@@ -18,7 +18,7 @@ public class RegisterBookingAlertController implements Controller {
 
     private final BookingAlertRepository repo = PersistenceContext.repositories().bookingAlerts();
 
-    public BookingAlert registerNutricionalProfile(Alert alert, Integer value)
+    public BookingAlert registerBookingAlert(Alert alert, Integer value)
             throws DataIntegrityViolationException, DataConcurrencyException {
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 

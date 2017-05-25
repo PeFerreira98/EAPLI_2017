@@ -8,6 +8,7 @@ package eapli.ecafeteria.application.booking;
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.meals.ListMealService;
 import eapli.ecafeteria.application.meals.ListMealTypeService;
+import eapli.ecafeteria.domain.alert.BookingAlert;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.mealbooking.Booking;
 import eapli.ecafeteria.domain.meals.*;
@@ -18,12 +19,13 @@ import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Calendar;
+import java.util.Observable;
 
 /**
  *
  * @author Alexandra Ferreira 1140388 - Nuno Costa 1131106
  */
-public class BookingController implements Controller {
+public class BookingController extends Observable implements Controller {
 
     private final ListMealTypeService mealTypeSvc = new ListMealTypeService();
     private final ListMealService mealSvc = new ListMealService();
@@ -31,10 +33,16 @@ public class BookingController implements Controller {
     private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers(PersistenceContext.repositories().buildTransactionalContext());
     private final BookingRepository bookingRepository = PersistenceContext.repositories().reserves();
 
-    public Booking bookingMeal(CafeteriaUser cafeteriaUser, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
+    public Booking bookingMeal(CafeteriaUser cafeteriaUser, Meal meal)
+            throws DataConcurrencyException, DataIntegrityViolationException {
+
+        addObservers();
 
         Booking booking = new Booking(cafeteriaUser, meal);
-        this.bookingRepository.save(booking);
+        Booking book = this.bookingRepository.save(booking);
+        
+        this.notifyObservers(book);
+
         return booking;
 
         //FIXME: Money verifications still not working! (Please TEST before commit!)
@@ -77,5 +85,11 @@ public class BookingController implements Controller {
 
     public Iterable<Meal> getMeals() {
         return PersistenceContext.repositories().meals().findAll();
+    }
+
+    private void addObservers() {
+        for (BookingAlert ba : PersistenceContext.repositories().bookingAlerts().findAll()) {
+            this.addObserver(ba);
+        }
     }
 }

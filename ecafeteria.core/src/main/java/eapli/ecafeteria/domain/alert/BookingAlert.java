@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.alert;
 
+import eapli.ecafeteria.domain.mealbooking.Booking;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
@@ -68,12 +69,14 @@ public class BookingAlert implements Observer, Serializable {
     @Override
     public void update(Observable o, Object o1) {
         if (o != null && o1 != null) {
-            //TODO get the reserved and planned quantity
-            Integer reservedQty = 3;
-            Integer maxQty = 4;
+            if (o1 instanceof Booking) {
+                //TODO get the reserved and planned quantity
+                Integer reservedQty = 3;
+                Integer maxQty = 4;
 
-            if ((reservedQty / maxQty) * 100 > alertLevel) {
-                System.out.println(id.toString() + " alert! " + alertLevel + "% of reservations reached");
+                if ((reservedQty / maxQty) * 100 > alertLevel) {
+                    System.out.println(id.toString() + " alert! " + alertLevel + "% of reservations reached");
+                }
             }
         }
     }
