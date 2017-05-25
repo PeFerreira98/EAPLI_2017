@@ -5,8 +5,12 @@
  */
 package eapli.ecafeteria.user.consoleapp.presentation.meals;
 
+import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.booking.ConsultReservesController;
+import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.mealbooking.Booking;
+import eapli.ecafeteria.persistence.CafeteriaUserRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.util.io.Console;
 import java.text.SimpleDateFormat;
@@ -23,13 +27,15 @@ public class ConsultReservesUI extends AbstractUI {
     @Override
     protected boolean doShow() {
 
+        final CafeteriaUser cafeteriaUser = this.controller.returnActiveCafeteriaUser();
+        
         try {
             Calendar dateInitial = Calendar.getInstance();
             Calendar dateFinal = Console.
                     readCalendar(" Please insert final date (dd-MM-yyyy):", "dd-MM-yyyy");
 
             final Iterable<Booking> reserves = controller.
-                    getReservesBetweenDates(null, dateInitial, dateFinal);
+                    getReservesBetweenDates(cafeteriaUser, dateInitial, dateFinal);
 
             System.out.println("\nReserves: ");
             for (final Booking r : reserves) {
