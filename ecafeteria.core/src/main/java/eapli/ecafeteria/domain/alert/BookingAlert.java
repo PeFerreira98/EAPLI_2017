@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
@@ -18,6 +20,7 @@ public class BookingAlert implements Observer, Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Enumerated(EnumType.STRING)
     private Alert id;
     @Version
     private Long version;
@@ -70,11 +73,12 @@ public class BookingAlert implements Observer, Serializable {
     public void update(Observable o, Object o1) {
         if (o != null && o1 != null) {
             if (o1 instanceof Booking) {
-                //TODO get the reserved and planned quantity
-                Integer reservedQty = 3;
+                //FIXME not possible to get the reserved quantity
+                // MealPlan and MealPlanItem not found in database
+                Integer reservedQty = 4; // values just to test alerts
                 Integer maxQty = 4;
 
-                if ((reservedQty / maxQty) * 100 > alertLevel) {
+                if ((1.0 * reservedQty / maxQty) * 100 >= alertLevel) {
                     System.out.println(id.toString() + " alert! " + alertLevel + "% of reservations reached");
                 }
             }

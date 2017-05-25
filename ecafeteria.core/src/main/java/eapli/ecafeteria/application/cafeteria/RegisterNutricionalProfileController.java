@@ -26,10 +26,6 @@ public class RegisterNutricionalProfileController implements Controller {
             throws DataIntegrityViolationException, DataConcurrencyException {
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_PROFILE);
 
-        if (new NutricionalProfileService().findCurrentUserNutricionalProfile() != null) {
-            throw new IllegalStateException("User already has a profile");
-        }
-
         final NutricionalProfile newNutricionalProfile = new NutricionalProfile(user, dailyCalories, dailySalt, weeklyCalories, weeklySalt);
         return this.repository.save(newNutricionalProfile);
     }
@@ -38,20 +34,12 @@ public class RegisterNutricionalProfileController implements Controller {
             throws DataIntegrityViolationException, DataConcurrencyException {
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_PROFILE);
 
-        if (new NutricionalProfileService().findCurrentUserNutricionalProfile() != null) {
-            throw new IllegalStateException("User already has a profile");
-        }
-
         return this.registerNutricionalProfile(new CafeteriaUserService().obtainCurrentCafeteriaUser(), dailyCalories, dailySalt, weeklyCalories, weeklySalt);
     }
 
     public NutricionalProfileAllergen registerNutricionalProfileAllergen(NutricionalProfile profile, Allergen allergen)
             throws DataIntegrityViolationException, DataConcurrencyException {
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_PROFILE);
-
-        if (new NutricionalProfileService().findCurrentUserNutricionalProfile() != null) {
-            throw new IllegalStateException("User already has a profile");
-        }
 
         final NutricionalProfileAllergen newNutricionalProfileAllergen = new NutricionalProfileAllergen(profile, allergen);
         return this.repositoryAllergen.save(newNutricionalProfileAllergen);

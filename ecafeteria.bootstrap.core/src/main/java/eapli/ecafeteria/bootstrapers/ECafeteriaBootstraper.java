@@ -18,7 +18,7 @@ public class ECafeteriaBootstraper implements Action {
     public boolean execute() {
         // declare bootstrap actions
         final Action[] actions = {
-        	new UsersBootstraper(),
+            new UsersBootstraper(),
             new CashRegisterBootstraper(),
             new DishTypesBootstraper(),
             new OrganicUnitBootstraper(),
@@ -35,6 +35,7 @@ public class ECafeteriaBootstraper implements Action {
             new CafeteriaAccountBootstraper(),
             new NutricionalProfileBootstraper(),
             new NutricionalProfileAllergenBootsraper(),
+            new BookingAlertBoostraper()
         };
 
         // authenticate a super user to be able to register new users, ...

@@ -49,7 +49,7 @@ public class NutricionalProfile implements Serializable {
     }
 
     public NutricionalProfile(CafeteriaUser user, Integer dailyCalories, Integer dailySalt, Integer weeklyCalories, Integer weeklySalt) {
-        if (user == null) {
+        if (user == null || dailyCalories == null || dailySalt == null || weeklyCalories == null || weeklySalt == null) {
             throw new IllegalStateException();
         }
 //        this.cafeteriaUser = user;

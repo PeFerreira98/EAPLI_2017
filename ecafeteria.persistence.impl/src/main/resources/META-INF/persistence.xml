@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
-  <persistence-unit name="eapli.eCafeteriaPU">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>eapli.ecafeteria.domain.meals.DishType</class>
-    <class>eapli.ecafeteria.domain.cafeteria.OrganicUnit</class>
-    <class>eapli.ecafeteria.domain.authz.SystemUser</class>
-    <class>eapli.ecafeteria.domain.authz.Role</class>
-    <class>eapli.ecafeteria.domain.authz.RoleSet</class>
-    <class>eapli.ecafeteria.domain.cafeteria.Cafeteria</class>
-    <class>eapli.ecafeteria.domain.cafeteria.CafeteriaUser</class>
-    <class>eapli.ecafeteria.domain.mealbooking.Account</class>
-    <class>eapli.ecafeteria.domain.cashregister.CashRegister</class>
-    <class>eapli.ecafeteria.domain.cashregister.Shift</class>
-    <class>eapli.ecafeteria.domain.cafeteria.SignupRequest</class>
-    <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfile</class>
-    <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen</class>
-    <class>eapli.ecafeteria.domain.meals.Dish</class>
-    <class>eapli.ecafeteria.domain.meals.MealType</class>
-    <class>eapli.ecafeteria.domain.meals.Meal</class>
-    <class>eapli.ecafeteria.domain.meals.Allergen</class>
-    <class>eapli.ecafeteria.domain.meals.DishAllergen</class>
-    <class>eapli.ecafeteria.domain.menus.Menu</class>
-    <class>eapli.ecafeteria.domain.mealbooking.Booking</class>
-    <class>eapli.ecafeteria.domain.kitchen.Material</class>
-    <class>eapli.ecafeteria.domain.rating.Rating</class>
-    <class>eapli.ecafeteria.domain.rating.Comment</class>
-    <class>eapli.ecafeteria.domain.kitchen.Batch</class>
-    <class>eapli.ecafeteria.domain.kitchen.MealBatch</class>
-    <class>eapli.ecafeteria.domain.menus.MenuPlan</class>
-    <properties>
-      <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\ecafeteria;MV_STORE=FALSE"/>-->
-      <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
-      <property name="javax.persistence.jdbc.password" value=""/>
-      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-      <property name="javax.persistence.jdbc.user" value=""/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
-      <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
-      <!-- <property name="eclipselink.logging.level" value="FINE"/> -->
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="eapli.eCafeteriaPU">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>eapli.ecafeteria.domain.meals.DishType</class>
+        <class>eapli.ecafeteria.domain.cafeteria.OrganicUnit</class>
+        <class>eapli.ecafeteria.domain.authz.SystemUser</class>
+        <class>eapli.ecafeteria.domain.authz.Role</class>
+        <class>eapli.ecafeteria.domain.authz.RoleSet</class>
+        <class>eapli.ecafeteria.domain.cafeteria.Cafeteria</class>
+        <class>eapli.ecafeteria.domain.cafeteria.CafeteriaUser</class>
+        <class>eapli.ecafeteria.domain.mealbooking.Account</class>
+        <class>eapli.ecafeteria.domain.cashregister.CashRegister</class>
+        <class>eapli.ecafeteria.domain.cashregister.Shift</class>
+        <class>eapli.ecafeteria.domain.cafeteria.SignupRequest</class>
+        <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfile</class>
+        <class>eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen</class>
+        <class>eapli.ecafeteria.domain.meals.Dish</class>
+        <class>eapli.ecafeteria.domain.meals.MealType</class>
+        <class>eapli.ecafeteria.domain.meals.Meal</class>
+        <class>eapli.ecafeteria.domain.meals.Allergen</class>
+        <class>eapli.ecafeteria.domain.meals.DishAllergen</class>
+        <class>eapli.ecafeteria.domain.menus.Menu</class>
+        <class>eapli.ecafeteria.domain.mealbooking.Booking</class>
+        <class>eapli.ecafeteria.domain.kitchen.Material</class>
+        <class>eapli.ecafeteria.domain.rating.Rating</class>
+        <class>eapli.ecafeteria.domain.rating.Comment</class>
+        <class>eapli.ecafeteria.domain.kitchen.Batch</class>
+        <class>eapli.ecafeteria.domain.kitchen.MealBatch</class>
+        <class>eapli.ecafeteria.domain.menus.MenuPlan</class>
+        <class>eapli.ecafeteria.domain.alert.BookingAlert</class>
+        <properties>
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\ecafeteria;MV_STORE=FALSE"/>-->
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.user" value=""/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+            <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
+            <!-- <property name="eclipselink.logging.level" value="FINE"/> -->
+        </properties>
+    </persistence-unit>
 </persistence>

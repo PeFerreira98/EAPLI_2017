@@ -20,24 +20,24 @@ public enum ActionRight {
      * @return
      */
     public boolean canBePerformedBy(Collection<RoleType> roles) {
-	if (this == ADMINISTER && roles.contains(RoleType.ADMIN)) {
-	    return true;
-	}
-	if (this == SELECT_MEAL && roles.contains(RoleType.CAFETERIA_USER)) {
-	    return true;
-	}
-	if (this == MANAGE_KITCHEN && roles.contains(RoleType.KITCHEN_MANAGER)) {
-	    return true;
-	}
-	if (this == MANAGE_MENUS && roles.contains(RoleType.MENU_MANAGER)) {
-	    return true;
-	}
-	if (this == SALE && roles.contains(RoleType.CASHIER)) {
-	    return true;
-	}
-	if (this == MANAGE_DELIVERY && roles.contains(RoleType.CASHIER)) {
-		return true;
-	};
-	return this == MANAGE_PROFILE && roles.contains(RoleType.CAFETERIA_USER);
+        if (this == ADMINISTER && roles.contains(RoleType.ADMIN)) {
+            return true;
+        }
+        if (this == SELECT_MEAL && roles.contains(RoleType.CAFETERIA_USER)) {
+            return true;
+        }
+        if (this == MANAGE_KITCHEN && roles.contains(RoleType.KITCHEN_MANAGER)) {
+            return true;
+        }
+        if (this == MANAGE_MENUS && roles.contains(RoleType.MENU_MANAGER)) {
+            return true;
+        }
+        if (this == SALE && roles.contains(RoleType.CASHIER)) {
+            return true;
+        }
+        if (this == MANAGE_DELIVERY && roles.contains(RoleType.CASHIER)) {
+            return true;
+        }
+        return this == MANAGE_PROFILE && roles.contains(RoleType.CAFETERIA_USER);
     }
 }
