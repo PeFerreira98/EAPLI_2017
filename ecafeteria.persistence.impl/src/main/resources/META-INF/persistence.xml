@@ -28,6 +28,7 @@
         <class>eapli.ecafeteria.domain.kitchen.Batch</class>
         <class>eapli.ecafeteria.domain.kitchen.MealBatch</class>
         <class>eapli.ecafeteria.domain.menus.MenuPlan</class>
+        <class>eapli.ecafeteria.domain.menus.MealPlan</class>
         <class>eapli.ecafeteria.domain.alert.BookingAlert</class>
         <properties>
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\ecafeteria;MV_STORE=FALSE"/>-->

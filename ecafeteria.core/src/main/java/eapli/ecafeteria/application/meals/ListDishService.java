@@ -14,7 +14,7 @@ public class ListDishService {
     private DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
     public Iterable<Dish> allDishes() {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+	Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS, ActionRight.MANAGE_KITCHEN);
 
 	return this.dishRepository.findAll();
     }

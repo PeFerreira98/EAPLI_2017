@@ -40,6 +40,10 @@ public class CancelBookingController extends Observable implements Controller {
         if (booking.cancelBooking()) {
 
             Booking book = this.bookingRepository.save(booking);
+            
+            if(book != null){
+            	this.setChanged();
+            }
 
             this.notifyObservers(book);
             return book;

@@ -19,7 +19,7 @@ public class ListAllergenService {
     private AllergenRepository dishAllergenRepository = PersistenceContext.repositories().allergens();
 
     public Iterable<Allergen> allDishAllergens() {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 
         return this.dishAllergenRepository.findAll();
     }

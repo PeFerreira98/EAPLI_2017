@@ -23,7 +23,7 @@ public class RegisterAllergenController implements Controller {
 
     public Allergen registerAllergen(String name, String description)
             throws DataIntegrityViolationException, DataConcurrencyException {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 
         final Allergen newAllergen = new Allergen(name, description);
         return this.repository.save(newAllergen);

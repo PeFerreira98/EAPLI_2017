@@ -32,7 +32,7 @@ public class RegisterDishAllergenController implements Controller {
     
     public DishAllergen registerDishAllergen(Dish dish, Allergen allergen)
             throws DataIntegrityViolationException, DataConcurrencyException {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 
         final DishAllergen newAllergen = new DishAllergen(dish, allergen);
         return this.repository.save(newAllergen);
