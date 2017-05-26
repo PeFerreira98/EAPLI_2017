@@ -56,7 +56,6 @@ public class RegisterNutricionalProfileUI extends AbstractUI {
         try {
             NutricionalProfile newNutricionalProfile = this.theController.registerNutricionalProfile(new CafeteriaUserService().obtainCurrentCafeteriaUser(), dailyCalories, dailySalt, weeklyCalories, weeklySalt);
             this.theController.registerNutricionalProfileAllergens(newNutricionalProfile, allergens);
-            this.theController.registerNutricionalProfileAllergens(newNutricionalProfile, allergens);
             System.out.println("Nutricional Profile Successfully Registered");
             return true;
         } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
