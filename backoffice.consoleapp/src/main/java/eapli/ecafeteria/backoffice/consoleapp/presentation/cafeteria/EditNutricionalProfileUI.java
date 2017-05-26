@@ -5,11 +5,8 @@
  */
 package eapli.ecafeteria.backoffice.consoleapp.presentation.cafeteria;
 
-import eapli.ecafeteria.application.cafeteria.CafeteriaUserService;
-import eapli.ecafeteria.application.cafeteria.RegisterNutricionalProfileController;
+import eapli.ecafeteria.application.cafeteria.EditNutricionalProfileController;
 import eapli.ecafeteria.application.meals.ListAllergenService;
-import eapli.ecafeteria.domain.cafeteria.NutricionalProfile;
-import eapli.ecafeteria.domain.cafeteria.NutricionalProfileAllergen;
 import eapli.ecafeteria.domain.meals.Allergen;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
@@ -25,9 +22,9 @@ import java.util.logging.Logger;
  *
  * @author Tiago Silvestre
  */
-public class RegisterNutricionalProfileUI extends AbstractUI {
+public class EditNutricionalProfileUI extends AbstractUI {
 
-    private final RegisterNutricionalProfileController theController = new RegisterNutricionalProfileController();
+    private final EditNutricionalProfileController theController = new EditNutricionalProfileController();
 
     protected Controller controller() {
         return this.theController;
@@ -40,25 +37,37 @@ public class RegisterNutricionalProfileUI extends AbstractUI {
         final int weeklyCalories = Console.readInteger("Weekly Calories:");
         final int weeklySalt = Console.readInteger("Weekly Salt:");
 
-        String option;
+        try {
+            this.theController.editProfile(dailyCalories, dailySalt, weeklyCalories, weeklySalt);
 
-        Iterable<Allergen> availableAllergens = new ListAllergenService().allDishAllergens();
-        List<Allergen> allergens = new ArrayList<>();
-        while (!(option = Console.readLine("Choose Allergen: (exit to end)")).equalsIgnoreCase("exit")) {
-            System.out.println("Allergen List: ");
-            for (Allergen a : availableAllergens) {
-                System.out.println(a.getName());
-            }
-            for (Allergen a : availableAllergens) {
-                if (option.equalsIgnoreCase(a.getName()) && !allergens.contains(a)) {
-                    allergens.add(a);
+            String option;
+            int op;
+            Iterable<Allergen> availableAllergens = new ListAllergenService().allDishAllergens();
+            while ((op = Console.readInteger("1 - Add Allergen\n2 - Remove Allergen\n0- Exit")) != 0) {
+                System.out.println("Allergen List: ");
+                for (Allergen a : availableAllergens) {
+                    System.out.println(a.getName());
+                }
+                option = Console.readLine("Choose Allergen: (exit to end)");
+                if (op == 1) {
+
+                    for (Allergen a : availableAllergens) {
+                        if (option.equalsIgnoreCase(a.getName())) {
+                            this.theController.addAllergen(a);
+                        }
+                    }
+                }
+
+                if (op == 2) {
+
+                    for (Allergen a : availableAllergens) {
+                        if (option.equalsIgnoreCase(a.getName())) {
+                            this.theController.removeAllergen(a);
+                        }
+                    }
+
                 }
             }
-        }
-
-        try {
-            NutricionalProfile newNutricionalProfile = this.theController.registerNutricionalProfile(new CafeteriaUserService().obtainCurrentCafeteriaUser(), dailyCalories, dailySalt, weeklyCalories, weeklySalt);
-            this.theController.registerNutricionalProfileAllergens(newNutricionalProfile, allergens);
             System.out.println("Nutricional Profile Successfully Registered");
             return true;
         } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
@@ -69,6 +78,6 @@ public class RegisterNutricionalProfileUI extends AbstractUI {
 
     @Override
     public String headline() {
-        return "Regist Nutricional Profile";
+        return "Edit Nutricional Profile";
     }
 }
