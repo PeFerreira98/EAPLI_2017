@@ -16,11 +16,15 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
  */
 public class InMemoryMenuPlanRepository extends InMemoryRepository<MenuPlan, CompositeIdMenuPlan> implements MenuPlanRepository {
 
+
+
+////    @Override
+////    public Iterable<MenuPlan> menuPlanByMenu(String idMenuPlan) {
+////        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+////    }
+
     @Override
     protected CompositeIdMenuPlan newPK(MenuPlan entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
 }

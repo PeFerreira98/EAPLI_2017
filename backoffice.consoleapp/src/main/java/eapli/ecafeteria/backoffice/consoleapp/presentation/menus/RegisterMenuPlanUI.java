@@ -5,8 +5,8 @@
  */
 package eapli.ecafeteria.backoffice.consoleapp.presentation.menus;
 
-import eapli.ecafeteria.application.meals.ListMealService;
 import eapli.ecafeteria.application.menus.RegisterMenuPlanController;
+import eapli.ecafeteria.backoffice.consoleapp.presentation.meals.MealPrinter;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.application.Controller;
@@ -15,46 +15,58 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.util.io.Console;
+import java.util.Iterator;
 
-/**
- *
- * @author Fernando
- */
-public class RegisterMenuPlanUI extends AbstractUI{
+public class RegisterMenuPlanUI extends AbstractUI {
+
     private final RegisterMenuPlanController theController = new RegisterMenuPlanController();
     private Menu selectMenu = null;
     private Meal selectMeal = null;
 
-        
-    protected Controller controller(){
+    protected Controller controller() {
         return this.theController;
     }
 
     @Override
     protected boolean doShow() {
-        SelectWidget<Menu> swMenu = new SelectWidget("Choose a menu:", theController.getPublishedMenus() );
+        final Iterable<Menu> menus = theController.getPublishedMenus();
+
+        SelectWidget<Menu> swMenu = new SelectWidget<>("Choose a menu:", menus, new MenuPrinter());
         swMenu.show();
-        
+
         selectMenu = swMenu.selectedElement();
-        
-        // falta testar se desisteu.
-        
-        
-        SelectWidget<Meal> swMeal = new SelectWidget("Choose a Meal:", theController.getMealByMenu(selectMenu));
-        
-        
-        swMeal.show();
-        
-        selectMeal = swMeal.selectedElement();
-        
-        final int quantidade = Console.readInteger("Quantity:");
-        try{
-            this.theController.CreateMenuPlan( selectMenu, selectMeal, quantidade );
-        }catch( final DataIntegrityViolationException | DataConcurrencyException e ){
-            System.out.println( "You tried to enter a meal plan which already exists in the data base");
+        if (selectMenu == null) {
+            return false;
         }
 
-        
+        /*
+        final Iterable<MenuPlan> mpl =  theController.menuPlanByMenu(selectMenu.id());
+        if( mpl != null )
+            System.out.println("mpl != null");
+        else
+            System.out.println("mpl == null");*/
+        final Iterable<Meal> meals = theController.getMealByMenu(selectMenu);
+        Iterator<Meal> iteratorMeal = meals.iterator();
+        while (iteratorMeal.hasNext()) {
+
+            SelectWidget<Meal> swMeal = new SelectWidget("Choose a Meal:", meals, new MealPrinter());
+
+            swMeal.show();
+
+            selectMeal = swMeal.selectedElement();
+
+            if (swMeal.selectedOption() == 0) {
+                break;
+            }
+
+            final int quantidade = Console.readInteger("Quantity:");
+            try {
+                this.theController.CreateMenuPlan(selectMenu, selectMeal, quantidade);
+            } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
+                System.out.println("You tried to enter a meal plan which already exists in the data base");
+            }
+        }
+
         return false;
     }
 
@@ -62,5 +74,5 @@ public class RegisterMenuPlanUI extends AbstractUI{
     public String headline() {
         return "Menu Plan";
     }
-    
+
 }

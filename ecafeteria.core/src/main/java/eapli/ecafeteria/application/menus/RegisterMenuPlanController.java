@@ -46,4 +46,12 @@ public class RegisterMenuPlanController implements Controller{
         
         return result;
     }
+    
+//     public Iterable<MenuPlan> menuPlanByMenu( String idMenuPlan){
+//        return menuPlanRepository.menuPlanByMenu(idMenuPlan);
+//    }
+
+    
+    
+    
 }

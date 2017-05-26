@@ -66,4 +66,9 @@ public class CompositeIdMenuPlan implements ValueObject, Serializable{
     public String toString() {
         return "CompositeIdMealPlan{" + "mealId=" + mealId + ", menuId=" + menuId + '}';
     }
+    
+    public String getMenuId(){
+        return menuId;
+    }
+    
 }

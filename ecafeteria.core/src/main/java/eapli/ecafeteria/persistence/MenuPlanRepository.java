@@ -9,12 +9,9 @@ import eapli.ecafeteria.domain.menus.CompositeIdMenuPlan;
 import eapli.ecafeteria.domain.menus.MenuPlan;
 import eapli.framework.persistence.repositories.DataRepository;
 
-/**
- *
- * @author Fernando
- */
+
 public interface MenuPlanRepository extends DataRepository <MenuPlan, CompositeIdMenuPlan>{
     
-    
-    
+     //Iterable<MenuPlan> menuPlanByMenu(String idMenuPlan);
+
 }

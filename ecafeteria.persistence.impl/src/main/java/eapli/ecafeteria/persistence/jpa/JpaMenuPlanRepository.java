@@ -14,5 +14,10 @@ import eapli.ecafeteria.persistence.MenuPlanRepository;
  * @author Fernando
  */
 public class JpaMenuPlanRepository extends CafeteriaJpaRepositoryBase<MenuPlan, CompositeIdMenuPlan> implements MenuPlanRepository{
+
+//    @Override
+//    public Iterable<MenuPlan> menuPlanByMenu(String idMenuPlan) {
+//        return match("e.id.menuId='" + idMenuPlan + "'");   
+//    }
     
 }
